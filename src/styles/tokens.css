@@ -1,59 +1,94 @@
-/**
- * tokens.css — Bodegol Design Tokens (Visual Identity System)
- *
- * Three layers:
- *   1. RAW palette      → the official brand colors, named by what they are.
- *   2. SEMANTIC tokens  → named by their ROLE (background, surface, primary…).
- *                          Components & Tailwind should consume THESE.
- *   3. LEGACY aliases   → old variable names repointed at the semantic layer,
- *                          so existing components inherit the new identity with
- *                          zero class renames.
- *
- * To re-skin the whole site: change the RAW palette only.
+﻿/**
+ * Bodegol design tokens.
+ * Keep this file ASCII-safe so it survives editor encoding changes.
  */
 
 :root {
-  /* ═══════════════════════════════════════════════════════════════════
-     1 · RAW BRAND PALETTE  (official)
-     ═══════════════════════════════════════════════════════════════════ */
-  --navy-primary:  #071B3A;   /* Primary Navy   */
-  --navy-dark:     #031126;   /* Dark Navy      */
-  --navy-raised:   #0E2A52;   /* Derived: one step lighter than primary navy */
-  --orange:        #FF690F;   /* Primary Orange */
-  --orange-hover:  #FF8A3D;   /* Orange Hover   */
-  --white:         #FFFFFF;   /* White          */
-  --light:         #F5F7FA;   /* Light Background */
-  --muted:         #CBD5E1;   /* Muted Text     */
-  --success-raw:   #22C55E;   /* Success        */
-  --warning-raw:   #F59E0B;   /* Warning        */
-  --danger-raw:    #EF4444;   /* Danger         */
+  --navy-primary: #071B3A;
+  --navy-dark: #031126;
+  --navy-raised: #0E2A52;
+  --orange: #FF690F;
+  --orange-hover: #FF8A3D;
+  --white: #FFFFFF;
+  --light: #F5F7FA;
+  --muted: #CBD5E1;
+  --success-raw: #22C55E;
+  --warning-raw: #F59E0B;
+  --danger-raw: #EF4444;
 
-  /* ═══════════════════════════════════════════════════════════════════
-     2 · SEMANTIC TOKENS  (consume these)
-     ═══════════════════════════════════════════════════════════════════ */
-  --background:         var(--navy-dark);     /* page background            */
-  --surface:            var(--navy-primary);  /* cards, panels, header      */
-  --surface-secondary:  var(--navy-raised);   /* hover / nested surfaces    */
-  --surface-overlay:    rgba(3, 17, 38, 0.82);/* modal / drawer scrim       */
+  --background: var(--navy-dark);
+  --surface: var(--navy-primary);
+  --surface-secondary: var(--navy-raised);
+  --surface-overlay: rgba(3, 17, 38, 0.82);
+  --surface-base: var(--background);
+  --surface-elevated: var(--surface);
+  --surface-raised: var(--surface-secondary);
 
-  --primary:            var(--orange);        /* primary action / accent    */
-  --primary-hover:      var(--orange-hover);  /* primary action hover       */
-  --accent:             var(--orange);        /* brand accent (= primary)   */
+  --primary: var(--orange);
+  --primary-hover: var(--orange-hover);
+  --accent: var(--orange);
 
-  --text-primary:       var(--white);         /* headings & key text        */
-  --text-secondary:     var(--muted);         /* supporting text            */
-  --text-muted:         #8DA0BD;              /* placeholders, timestamps   */
-  --text-inverse:       var(--navy-dark);     /* text on light surfaces     */
+  --text-primary: var(--white);
+  --text-secondary: var(--muted);
+  --text-muted: #8DA0BD;
+  --text-inverse: var(--navy-dark);
 
-  --border:             #16335C;              /* default border (navy tint) */
-  --border-strong-c:    #244B82;              /* stronger divider           */
-  --border-glow-c:      rgba(255, 105, 15, 0.45); /* orange focus glow      */
+  --border: #16335C;
+  --border-strong-c: #244B82;
+  --border-glow-c: rgba(255, 105, 15, 0.45);
+  --border-default: var(--border);
+  --border-strong: var(--border-strong-c);
+  --border-glow: var(--border-glow-c);
 
-  --success:            var(--success-raw);
-  --warning:            var(--warning-raw);
-  --danger:             var(--danger-raw);
-  --info:               #3B82F6;
+  --success: var(--success-raw);
+  --warning: var(--warning-raw);
+  --danger: var(--danger-raw);
+  --info: #3B82F6;
+  --status-success: var(--success);
+  --status-warning: var(--warning);
+  --status-error: var(--danger);
+  --status-info: var(--info);
 
-  /* Brand shadows / glows */
-  --shadow-card:    0 1px 12px rgba(3, 17, 38, 0.45);
-  --shadow-card-
+  --color-primary: var(--primary);
+  --color-primary-dark: #D94F08;
+  --color-primary-light: var(--primary-hover);
+  --color-accent: var(--accent);
+  --color-accent-dark: #C84305;
+  --color-dark: var(--navy-dark);
+  --color-light: var(--light);
+  --color-muted: var(--muted);
+
+  --font-display: 'Bebas Neue', Impact, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-ui: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --fs-hero: clamp(3.5rem, 11vw, 8rem);
+  --fs-section: clamp(2.25rem, 5vw, 4.5rem);
+  --fs-card-title: clamp(1.375rem, 2vw, 1.875rem);
+  --fs-lead: clamp(1rem, 1.8vw, 1.25rem);
+  --fs-body: 1rem;
+  --fs-body-sm: 0.9375rem;
+  --fs-button: 0.9375rem;
+  --fs-nav: 0.875rem;
+  --fs-label: 0.75rem;
+  --fs-caption: 0.8125rem;
+  --fs-small: 0.75rem;
+
+  --lh-hero: 0.9;
+  --lh-heading: 1.05;
+  --lh-body: 1.65;
+  --lh-relaxed: 1.8;
+  --tracking-display: 0.02em;
+  --tracking-heading: 0.015em;
+  --tracking-label: 0.08em;
+
+  --section-padding-y: clamp(4rem, 9vw, 7.5rem);
+  --section-padding-x: clamp(1rem, 4vw, 2rem);
+
+  --shadow-card: 0 1px 12px rgba(3, 17, 38, 0.45);
+  --shadow-card-lg: 0 24px 70px rgba(0, 0, 0, 0.35);
+  --shadow-glow: 0 0 28px rgba(255, 105, 15, 0.28);
+  --shadow-glow-primary: 0 0 34px rgba(255, 105, 15, 0.34);
+  --shadow-glow-accent: 0 0 40px rgba(255, 138, 61, 0.32);
+  --shadow-glow-green: 0 0 30px rgba(34, 197, 94, 0.25);
+}

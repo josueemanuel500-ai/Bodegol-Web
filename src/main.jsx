@@ -1,7 +1,6 @@
-/**
- * main.jsx — React entry point
- * BrowserRouter is now inside App.jsx so it wraps the AnalyticsProvider
- * which uses useLocation() from react-router-dom.
+﻿/**
+ * main.jsx - React entry point
+ * BrowserRouter lives inside App.jsx so it can wrap providers that use router hooks.
  */
 
 import React from 'react'
@@ -10,7 +9,11 @@ import App from './App.jsx'
 
 import './styles/tokens.css'
 import './styles/global.css'
-import './styles/typography.css'  // role classes — before Tailwind so utilities can override
+import './styles/typography.css'
 import './styles/index.css'
 
-ReactDOM.createRoot(doc
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)
