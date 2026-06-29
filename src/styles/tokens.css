@@ -1,0 +1,59 @@
+/**
+ * tokens.css — Bodegol Design Tokens (Visual Identity System)
+ *
+ * Three layers:
+ *   1. RAW palette      → the official brand colors, named by what they are.
+ *   2. SEMANTIC tokens  → named by their ROLE (background, surface, primary…).
+ *                          Components & Tailwind should consume THESE.
+ *   3. LEGACY aliases   → old variable names repointed at the semantic layer,
+ *                          so existing components inherit the new identity with
+ *                          zero class renames.
+ *
+ * To re-skin the whole site: change the RAW palette only.
+ */
+
+:root {
+  /* ═══════════════════════════════════════════════════════════════════
+     1 · RAW BRAND PALETTE  (official)
+     ═══════════════════════════════════════════════════════════════════ */
+  --navy-primary:  #071B3A;   /* Primary Navy   */
+  --navy-dark:     #031126;   /* Dark Navy      */
+  --navy-raised:   #0E2A52;   /* Derived: one step lighter than primary navy */
+  --orange:        #FF690F;   /* Primary Orange */
+  --orange-hover:  #FF8A3D;   /* Orange Hover   */
+  --white:         #FFFFFF;   /* White          */
+  --light:         #F5F7FA;   /* Light Background */
+  --muted:         #CBD5E1;   /* Muted Text     */
+  --success-raw:   #22C55E;   /* Success        */
+  --warning-raw:   #F59E0B;   /* Warning        */
+  --danger-raw:    #EF4444;   /* Danger         */
+
+  /* ═══════════════════════════════════════════════════════════════════
+     2 · SEMANTIC TOKENS  (consume these)
+     ═══════════════════════════════════════════════════════════════════ */
+  --background:         var(--navy-dark);     /* page background            */
+  --surface:            var(--navy-primary);  /* cards, panels, header      */
+  --surface-secondary:  var(--navy-raised);   /* hover / nested surfaces    */
+  --surface-overlay:    rgba(3, 17, 38, 0.82);/* modal / drawer scrim       */
+
+  --primary:            var(--orange);        /* primary action / accent    */
+  --primary-hover:      var(--orange-hover);  /* primary action hover       */
+  --accent:             var(--orange);        /* brand accent (= primary)   */
+
+  --text-primary:       var(--white);         /* headings & key text        */
+  --text-secondary:     var(--muted);         /* supporting text            */
+  --text-muted:         #8DA0BD;              /* placeholders, timestamps   */
+  --text-inverse:       var(--navy-dark);     /* text on light surfaces     */
+
+  --border:             #16335C;              /* default border (navy tint) */
+  --border-strong-c:    #244B82;              /* stronger divider           */
+  --border-glow-c:      rgba(255, 105, 15, 0.45); /* orange focus glow      */
+
+  --success:            var(--success-raw);
+  --warning:            var(--warning-raw);
+  --danger:             var(--danger-raw);
+  --info:               #3B82F6;
+
+  /* Brand shadows / glows */
+  --shadow-card:    0 1px 12px rgba(3, 17, 38, 0.45);
+  --shadow-card-
