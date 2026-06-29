@@ -1,0 +1,48 @@
+/**
+ * index.css — Tailwind CSS Entry Point
+ *
+ * Order:
+ *   @tailwind base      → Preflight (resets)
+ *   @tailwind components → Component classes (can add custom here with @layer)
+ *   @tailwind utilities  → Utility classes
+ *
+ * Custom component classes go in their own files under src/styles/
+ * and are imported after this file — never add them here.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Custom Base Overrides ──────────────────────────────────────────────── */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ─── Custom Component Classes ───────────────────────────────────────────── */
+@layer components {
+  /* Reusable visually-hidden utility for accessibility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  /* Skip to main content link (appears on focus for keyboard users) */
+  .skip-link {
+    @apply absolute -top-full left-4 z-[500] bg-brand-primary text-white px-4 py-2 rounded-b-lg font-ui text-sm font-semibold;
+    transition: top 0.2s;
+  }
+
+  .skip-link:focus {
+    @apply top-0;
+  }
+}
