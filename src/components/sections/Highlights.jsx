@@ -17,7 +17,7 @@ import { useBusiness } from '@/context/BusinessContext'
 import { ANIMATION } from '@/constants'
 
 const pillars = [
-  { icon: Goal, title: 'El juego, en serio', desc: '6 canchas de fútbol 7 con pasto sintético profesional.' },
+  { icon: Goal, title: 'El juego, en serio', desc: '6 canchas de futbol 5x5 con pasto sintetico profesional.' },
   { icon: Tv2, title: 'Cada partido, en vivo', desc: 'Pantallas gigantes para no perderte ni un gol.' },
   { icon: UtensilsCrossed, title: 'Comida que une', desc: 'Cocina, bar y cervezas frías para antes y después.' },
   { icon: PartyPopper, title: 'Tu mejor festejo', desc: 'Cumpleaños, despedidas y eventos privados.' },
@@ -27,10 +27,10 @@ export default function Highlights() {
   const { business } = useBusiness()
   const sp = business.socialProof
   const stats = [
-    { value: sp.fields, label: 'Canchas F7' },
+    { value: sp.fields, label: 'Canchas 5x5' },
     { value: `${sp.rating}★`, label: 'En Google' },
-    { value: sp.reviews, label: 'Reseñas' },
-    { value: `${sp.yearsOpen}+`, label: 'Años en Mérida' },
+    { value: sp.reviews, label: 'Resenas' },
+    { value: `${sp.yearsOpen}+`, label: 'Anios en Merida' },
   ]
 
   return (
@@ -42,13 +42,13 @@ export default function Highlights() {
             variants={ANIMATION.STAGGER} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}
             className="flex flex-col gap-6"
           >
-            <motion.span variants={ANIMATION.FADE_UP} className="t-label text-primary">Por qué Bodegol</motion.span>
+            <motion.span variants={ANIMATION.FADE_UP} className="t-label text-primary">Por que Bodegol</motion.span>
             <motion.h2 variants={ANIMATION.FADE_UP} id="highlights-heading" className="t-section-title">
               No es una cancha. Es tu lugar.
             </motion.h2>
             <motion.p variants={ANIMATION.FADE_UP} className="t-section-desc">
-              Bodegol nació para los que viven el fútbol diferente: jugar con los tuyos, gritar cada gol en
-              pantalla gigante y cerrar la noche con buena comida. Todo en un mismo lugar, en el corazón de Mérida.
+              Bodegol nacio para los que viven el futbol diferente: jugar con los tuyos, gritar cada gol en
+              pantalla gigante y cerrar la noche con buena comida. Todo en un mismo lugar, en el corazón de Merida.
             </motion.p>
 
             <motion.div variants={ANIMATION.STAGGER} className="mt-2 grid gap-5 sm:grid-cols-2">
@@ -77,7 +77,7 @@ export default function Highlights() {
             <div
               className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl border border-line bg-cover bg-center"
               style={{ backgroundImage: "url('/images/about/venue.jpg')", backgroundColor: 'var(--surface)' }}
-              role="img" aria-label="El ambiente nocturno de Bodegol en Mérida"
+              role="img" aria-label="El ambiente nocturno de Bodegol en Merida"
             >
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 50%, rgba(3,17,38,0.85) 100%)' }} />
             </div>

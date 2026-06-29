@@ -1,6 +1,5 @@
 /**
- * social.js — Social Media Links
- * ✏️  Update hrefs with real social profiles.
+ * social.js - Social Media Links
  */
 
 export const socialLinks = [
@@ -8,7 +7,7 @@ export const socialLinks = [
     id:       'instagram',
     platform: 'Instagram',
     label:    'Bodegol en Instagram',
-    href:     'https://instagram.com/bodegol.mx',
+    href:     'https://www.instagram.com/bodegol_merida',
     icon:     'Instagram',
     active:   true,
   },
@@ -16,7 +15,7 @@ export const socialLinks = [
     id:       'facebook',
     platform: 'Facebook',
     label:    'Bodegol en Facebook',
-    href:     'https://facebook.com/bodegol.mx',
+    href:     'https://www.facebook.com/bodegolmerida',
     icon:     'Facebook',
     active:   true,
   },
@@ -24,9 +23,9 @@ export const socialLinks = [
     id:       'tiktok',
     platform: 'TikTok',
     label:    'Bodegol en TikTok',
-    href:     'https://tiktok.com/@bodegol.mx',
+    href:     '',
     icon:     'Music2',
-    active:   true,
+    active:   false,
   },
 ]
 
