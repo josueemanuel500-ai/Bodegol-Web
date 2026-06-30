@@ -1,25 +1,30 @@
 /**
- * contact.js - Contact Section Configuration
+ * contact.js — Contact Section Configuration
+ *
+ * Controls the content displayed in the Contact section: cards, form fields, CTAs.
+ * The actual business phone/email/address come from business.js.
+ * This file controls HOW the contact section is displayed.
  */
 
+// Contact method cards (visible alongside the form)
 export const contactMethods = [
   {
     id:      'whatsapp',
     icon:    'MessageCircle',
     title:   'WhatsApp',
-    value:   '+52 999 566 8248',
+    value:   '+52 999 123 4567',
     action:  'Enviar mensaje',
-    href:    null,
+    href:    null,   // null = build dynamically from business.contact.whatsapp
     type:    'whatsapp',
     primary: true,
   },
   {
     id:      'phone',
     icon:    'Phone',
-    title:   'Telefono',
-    value:   '+52 999 566 8248',
+    title:   'Teléfono',
+    value:   '+52 999 123 4567',
     action:  'Llamar ahora',
-    href:    null,
+    href:    null,   // built from business.contact.phoneTel
     type:    'tel',
     primary: false,
   },
@@ -27,24 +32,25 @@ export const contactMethods = [
     id:      'email',
     icon:    'Mail',
     title:   'Correo',
-    value:   'reservaciones@bodegol.mx',
+    value:   'contacto@bodegol.mx',
     action:  'Enviar correo',
-    href:    null,
+    href:    null,   // built from business.contact.email
     type:    'email',
     primary: false,
   },
   {
     id:      'location',
     icon:    'MapPin',
-    title:   'Ubicacion',
-    value:   'Merida, Yucatan',
+    title:   'Ubicación',
+    value:   'Calle 60 Norte #123, Mérida',
     action:  'Ver en mapa',
-    href:    null,
+    href:    null,   // built from business.location.mapsUrl
     type:    'maps',
     primary: false,
   },
 ]
 
+// Contact form fields configuration
 export const contactFormFields = [
   {
     id:          'name',
@@ -57,15 +63,15 @@ export const contactFormFields = [
   {
     id:          'phone',
     type:        'tel',
-    label:       'Telefono / WhatsApp',
-    placeholder: '999 566 8248',
+    label:       'Teléfono / WhatsApp',
+    placeholder: '999 123 4567',
     required:    true,
     autoComplete:'tel',
   },
   {
     id:          'email',
     type:        'email',
-    label:       'Correo electronico',
+    label:       'Correo electrónico',
     placeholder: 'tu@correo.com',
     required:    false,
     autoComplete:'email',
@@ -74,7 +80,7 @@ export const contactFormFields = [
     id:          'message',
     type:        'textarea',
     label:       'Mensaje',
-    placeholder: 'En que podemos ayudarte?',
+    placeholder: '¿En qué podemos ayudarte?',
     required:    true,
     rows:        4,
   },

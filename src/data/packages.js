@@ -1,11 +1,12 @@
 /**
- * packages.js - Birthday & Event Packages
+ * packages.js — Birthday & Event Packages
+ * ✏️  Edit package names, prices, features, images, WhatsApp messages.
  */
 
 export const packagesHeading = {
-  eyebrow:  'Paquetes',
+  eyebrow:  '🎉 Paquetes',
   title:    'Celebra con todo en Bodegol',
-  subtitle: 'Cumpleanos, despedidas, reuniones de empresa o simplemente querer pasarla increible. Tenemos el paquete para ti.',
+  subtitle: 'Cumpleaños, despedidas, reuniones de empresa o simplemente querer pasarla increíble. Tenemos el paquete para ti.',
 }
 
 export const packages = [
@@ -19,29 +20,29 @@ export const packages = [
     priceLabel:  'Desde $600 / hora',
     priceNote:   'Por cancha completa',
     minGuests:   10,
-    maxGuests:   10,
-    duration:    '1 hora minimo',
+    maxGuests:   14,
+    duration:    '1 hora mínimo',
     image:       '/images/packages/paquete-cancha.jpg',
     features: [
-      'Cancha de futbol 5x5',
-      'Balon oficial incluido',
+      'Cancha de fútbol 7 (7 vs 7)',
+      'Balón oficial incluido',
       'Vestidores y regaderas',
-      'Marcacion para futbol 5x5',
-      'Cronometro digital',
+      'Marcación reglamentaria',
+      'Cronómetro digital',
     ],
-    notIncluded: ['Comida y bebidas (pagar por separado)', 'Decoracion'],
+    notIncluded: ['Comida y bebidas (pagar por separado)', 'Decoración'],
     cta: {
       label:   'Reservar cancha',
-      message: 'Hola, quiero reservar una cancha 5x5 en Bodegol. Que disponibilidad tienen?',
+      message: '¡Hola! Quiero reservar una cancha en Bodegol. ¿Qué disponibilidad tienen?',
     },
   },
   {
     id:          'cumpleanos',
-    name:        'Paquete Cumpleanos',
+    name:        'Paquete Cumpleaños',
     subtitle:    'La fiesta perfecta',
     emoji:       '🎂',
     highlighted: true,
-    badge:       'Mas Popular',
+    badge:       '⭐ Más Popular',
     priceLabel:  'Desde $2,500',
     priceNote:   'Para 15 personas',
     minGuests:   15,
@@ -49,18 +50,18 @@ export const packages = [
     duration:    '3 horas',
     image:       '/images/packages/paquete-cumpleanos.jpg',
     features: [
-      '1 hora de cancha de futbol 5x5',
+      '1 hora de cancha de fútbol 7',
       'Mesa reservada por 2 horas',
-      'Decoracion basica incluida',
-      'Pastel de cumpleanos (1 kg)',
+      'Decoración básica incluida',
+      'Pastel de cumpleaños (1 kg)',
       'Mesero exclusivo para el grupo',
-      'Carta de menu completa',
+      'Carta de menú completa',
       '10% de descuento en bebidas',
     ],
-    notIncluded: ['Bebidas (pago por separado)', 'Decoracion extra'],
+    notIncluded: ['Bebidas (pago por separado)', 'Decoración extra'],
     cta: {
       label:   'Reservar este paquete',
-      message: 'Hola, me interesa el Paquete Cumpleanos. Tienen disponibilidad?',
+      message: '¡Hola! Me interesa el Paquete Cumpleaños. ¿Tienen disponibilidad?',
     },
   },
   {
@@ -77,19 +78,19 @@ export const packages = [
     duration:    '4+ horas',
     image:       '/images/packages/paquete-grupal.jpg',
     features: [
-      '2 canchas de futbol 5x5 para torneo',
-      'Area privada reservada',
-      'Menu buffet personalizable',
+      '2 canchas de fútbol 7 (torneo)',
+      'Área privada reservada',
+      'Menú buffet personalizable',
       'Barra de bebidas por consumo',
-      'Decoracion tematica',
+      'Decoración temática',
       'Staff dedicado de servicio',
       'Sistema de sonido exclusivo',
       'Coordinador de evento incluido',
     ],
     notIncluded: [],
     cta: {
-      label:   'Solicitar cotizacion',
-      message: 'Hola, quiero informacion sobre el Paquete Grupal para un evento. Podemos hablar?',
+      label:   'Solicitar cotización',
+      message: '¡Hola! Quiero información sobre el Paquete Grupal para un evento. ¿Podemos hablar?',
     },
   },
 ]

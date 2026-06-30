@@ -1,9 +1,10 @@
 /**
- * footer.js - Footer Content
+ * footer.js — Footer Content
+ * ✏️  Edit tagline, nav columns, legal links, badges, madeBy attribution.
  */
 
 export const footerConfig = {
-  tagline: 'Canchas de futbol 5x5, comida de calidad, pantallas gigantes y la mejor vibra en Merida.',
+  tagline: 'Canchas de fútbol 7, comida de calidad, pantallas gigantes y la mejor vibra en Mérida.',
   copyrightName: 'Deportivo Bodegol S.A. de C.V.',
   showNewsletter: false,
 
@@ -11,44 +12,49 @@ export const footerConfig = {
     {
       heading: 'Bodegol',
       links: [
-        { label: 'Canchas de Futbol',  href: '/#canchas'    },
-        { label: 'Menu',               href: '/#menu'       },
+        { label: 'Canchas de Fútbol',  href: '/#canchas'    },
+        { label: 'Menú',               href: '/#menu'       },
         { label: 'Promociones',        href: '/#promotions' },
         { label: 'Paquetes y Eventos', href: '/#packages'   },
-        { label: 'Galeria',            href: '/#gallery'    },
+        { label: 'Galería',            href: '/#gallery'    },
       ],
     },
     {
       heading: 'Reservaciones',
       links: [
-        { label: 'Reservar Cancha',      href: '/#canchas'  },
-        { label: 'Paquete Cumpleanos',   href: '/#packages' },
-        { label: 'Evento Privado',       href: '/#packages' },
-        { label: 'Preguntas Frecuentes', href: '/#faq'      },
-        { label: 'Contacto',             href: '/#contact'  },
+        { label: 'Reservar Cancha',    href: '/#canchas'  },
+        { label: 'Paquete Cumpleaños', href: '/#packages' },
+        { label: 'Evento Privado',     href: '/#packages' },
+        { label: 'Preguntas Frecuentes', href: '/#faq'   },
+        { label: 'Contacto',           href: '/#contact'  },
       ],
     },
     {
       heading: 'Legal',
       links: [
-        { label: 'Aviso de Privacidad',      href: '/privacidad' },
-        { label: 'Terminos y Condiciones',   href: '/terminos'   },
+        { label: 'Aviso de Privacidad',    href: '/privacidad' },
+        { label: 'Términos y Condiciones', href: '/terminos'   },
       ],
     },
   ],
 
   bottomLinks: [
     { label: 'Privacidad', href: '/privacidad' },
-    { label: 'Terminos',   href: '/terminos'   },
+    { label: 'Términos',   href: '/terminos'   },
   ],
 
   badges: [
-    { label: 'Pagos seguros' },
-    { label: 'Facturacion CFDI 4.0' },
+    { label: 'Pagos seguros'          },
+    { label: 'Facturación CFDI 4.0'   },
     { label: 'Establecimiento verificado' },
   ],
 
-  madeBy: null,
+  // ✏️  Set null to hide attribution
+  madeBy: {
+    label: 'Hecho con ♥ por',
+    name:  'Rave Studio',
+    href:  'https://rave.studio',
+  },
 }
 
 export default footerConfig

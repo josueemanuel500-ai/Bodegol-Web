@@ -1,105 +1,12 @@
-﻿/**
- * Bodegol typography role classes.
- */
-
-.t-hero-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--fs-hero);
-  line-height: var(--lh-hero);
-  letter-spacing: var(--tracking-display);
-  text-transform: uppercase;
-}
-
-.t-hero-subtitle {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: var(--fs-lead);
-  line-height: var(--lh-body);
-  color: var(--text-secondary);
-}
-
-.t-section-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--fs-section);
-  line-height: var(--lh-heading);
-  letter-spacing: var(--tracking-heading);
-  text-transform: uppercase;
-  color: var(--text-primary);
-}
-
-.t-section-desc {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: var(--fs-lead);
-  line-height: var(--lh-body);
-  color: var(--text-secondary);
-}
-
-.t-card-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--fs-card-title);
-  line-height: var(--lh-heading);
-  letter-spacing: var(--tracking-heading);
-  text-transform: uppercase;
-  color: var(--text-primary);
-}
-
-.t-card-body {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  color: var(--text-secondary);
-}
-
-.t-button {
-  font-family: var(--font-ui);
-  font-weight: 600;
-  font-size: var(--fs-button);
-  letter-spacing: var(--tracking-display);
-  line-height: 1;
-}
-
-.t-nav {
-  font-family: var(--font-ui);
-  font-weight: 500;
-  font-size: var(--fs-nav);
-  letter-spacing: var(--tracking-display);
-  line-height: 1;
-}
-
-.t-label {
-  font-family: var(--font-ui);
-  font-weight: 600;
-  font-size: var(--fs-label);
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  line-height: 1.2;
-  color: var(--text-secondary);
-}
-
-.t-caption {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: var(--fs-caption);
-  line-height: 1.5;
-  color: var(--text-muted);
-}
-
-.t-small {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: var(--fs-small);
-  line-height: 1.5;
-}
-
-.t-footer {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: var(--fs-body-sm);
-  line-height: var(--lh-relaxed);
-  color: var(--text-secondary);
-}
+.t-hero-title { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-hero); line-height: var(--lh-hero); letter-spacing: var(--tracking-display); text-transform: uppercase; }
+.t-hero-subtitle { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-lead); line-height: var(--lh-body); color: var(--text-secondary); }
+.t-section-title { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-section); line-height: var(--lh-heading); letter-spacing: var(--tracking-heading); text-transform: uppercase; color: var(--text-primary); }
+.t-section-desc { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-lead); line-height: var(--lh-body); color: var(--text-secondary); }
+.t-card-title { font-family: var(--font-display); font-weight: 400; font-size: var(--fs-card-title); line-height: var(--lh-heading); letter-spacing: var(--tracking-heading); text-transform: uppercase; color: var(--text-primary); }
+.t-card-body { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-body); line-height: var(--lh-body); color: var(--text-secondary); }
+.t-button { font-family: var(--font-ui); font-weight: 600; font-size: var(--fs-button); letter-spacing: var(--tracking-display); line-height: 1; }
+.t-nav { font-family: var(--font-ui); font-weight: 500; font-size: var(--fs-nav); letter-spacing: var(--tracking-display); line-height: 1; }
+.t-label { font-family: var(--font-ui); font-weight: 600; font-size: var(--fs-label); letter-spacing: var(--tracking-label); text-transform: uppercase; line-height: 1.2; color: var(--text-secondary); }
+.t-caption { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-caption); line-height: 1.5; color: var(--text-muted); }
+.t-small { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-small); line-height: 1.5; }
+.t-footer { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-body-sm); line-height: var(--lh-relaxed); color: var(--text-secondary); }

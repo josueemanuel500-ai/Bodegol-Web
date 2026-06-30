@@ -1,5 +1,8 @@
 /**
- * business.js - Bodegol Business Information
+ * business.js — Bodegol Business Information
+ *
+ * ✏️  EDIT HERE: name, address, phone, WhatsApp, email, hours, logo paths.
+ * No component file needs to be touched — all UI reads from this file.
  */
 
 export const business = {
@@ -7,47 +10,50 @@ export const business = {
   name:        'Bodegol',
   legalName:   'Deportivo Bodegol S.A. de C.V.',
   tagline:     'Canchas, comida y la mejor vibra',
-  description: 'El lugar donde el futbol se vive diferente. Canchas de futbol 5x5, pantallas gigantes, comida deliciosa y el ambiente perfecto para tus reuniones y eventos.',
+  description: 'El lugar donde el fútbol se vive diferente. Canchas de fútbol 7, pantallas gigantes, comida deliciosa y el ambiente perfecto para tus reuniones y eventos.',
   founding:    2021,
   rfc:         'DBD210101XXX',
 
   logo: {
+    // ✏️  Replace with real logo paths
     main:    '/images/logo/bodegol-logo.svg',
     white:   '/images/logo/bodegol-logo-white.svg',
     icon:    '/images/logo/bodegol-icon.svg',
-    alt:     'Bodegol - Canchas, Comida y Eventos',
+    alt:     'Bodegol — Canchas, Comida y Eventos',
     width:   160,
     height:  52,
   },
 
   contact: {
-    whatsapp:        '529995668248',
-    whatsappMessage: 'Hola Bodegol, me gustaria hacer una reservacion.',
-    phone:           '+52 999 566 8248',
-    phoneTel:        '+529995668248',
+    // ✏️  UPDATE: your real WhatsApp number (country code + number, no +)
+    whatsapp:        '529991234567',
+    whatsappMessage: '¡Hola Bodegol! Me gustaría hacer una reservación.',
+    phone:           '+52 999 123 4567',
+    phoneTel:        '+529991234567',
     email:           'reservaciones@bodegol.mx',
   },
 
   location: {
     address:     'Calle 60 Norte #408, Col. Centro',
-    city:        'Merida',
-    state:       'Yucatan',
-    country:     'Mexico',
+    city:        'Mérida',
+    state:       'Yucatán',
+    country:     'México',
     zip:         '97000',
-    fullAddress: 'Calle 60 Norte #408, Col. Centro, Merida, Yucatan',
+    fullAddress: 'Calle 60 Norte #408, Col. Centro, Mérida, Yucatán',
     mapsUrl:     'https://maps.google.com/?q=Bodegol+Merida+Yucatan',
-    mapsEmbed:   '',
+    mapsEmbed:   '', // ✏️  Paste your Google Maps embed URL here
   },
 
   hours: [
-    { days: 'Lunes a viernes', time: '10:00 AM - 11:00 PM' },
-    { days: 'Sabado',          time: '9:00 AM - 7:00 PM'  },
-    { days: 'Domingo',         time: '9:00 AM - 3:00 PM'  },
+    { days: 'Lunes – Jueves', time: '3:00 PM – 11:00 PM' },
+    { days: 'Viernes',        time: '3:00 PM – 1:00 AM'  },
+    { days: 'Sábado',         time: '12:00 PM – 1:00 AM' },
+    { days: 'Domingo',        time: '12:00 PM – 10:00 PM'},
   ],
 
   socialProof: {
-    fields:     6,
-    capacity:   300,
+    fields:     6,      // number of soccer fields
+    capacity:   300,    // max people
     yearsOpen:  4,
     rating:     4.9,
     reviews:    '+500',
