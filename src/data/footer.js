@@ -4,7 +4,7 @@
  */
 
 export const footerConfig = {
-  tagline: 'Canchas de fútbol 7, comida de calidad, pantallas gigantes y la mejor vibra en Mérida.',
+  tagline: 'Canchas de fútbol 5v5, comida de calidad, pantallas gigantes y la mejor vibra en Mérida.',
   copyrightName: 'Deportivo Bodegol S.A. de C.V.',
   showNewsletter: false,
 

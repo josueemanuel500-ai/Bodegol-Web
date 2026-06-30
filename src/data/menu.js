@@ -8,6 +8,7 @@
  *   price      → display string (e.g. '$120 MXN')
  *   image      → path under public/images/food/ or public/images/drinks/
  */
+// IMAGE (item.image): 1200×900 WebP horizontal, máx 300 KB → public/images/food/ | drinks/
 
 export const menuCategories = [
   { id: 'all',        label: 'Todo' },

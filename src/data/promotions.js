@@ -3,6 +3,7 @@
  * ✏️  Edit promos, toggle active, change schedule/description.
  *     Set active: false to hide a promo without deleting it.
  */
+// IMAGE (promo.image): 1080×1080 WebP cuadrada, máx 300 KB → public/images/promotions/
 
 export const promotionsHeading = {
   eyebrow:  '🔥 Promociones',

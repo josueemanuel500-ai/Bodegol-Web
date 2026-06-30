@@ -1,19 +1,14 @@
 /**
  * seo.config.js — Default SEO Configuration
- *
- * Default meta values used by the SEO component.
- * Individual pages override these via props to the <SEO /> component.
  */
-
 export const seoDefaults = {
   titleTemplate: '%s | Bodegol',
-  defaultTitle:  'Bodegol — Deportivo & Gastronómico',
-  description:   'El mejor lugar en Mérida para vivir el fútbol, disfrutar comida de calidad y celebrar con amigos. Reservaciones, eventos y más.',
-  siteUrl:       'https://bodegol.mx',
+  defaultTitle:  'Bodegol — Fútbol 5v5, Canchas y Eventos en Mérida',
+  description:   '5 canchas profesionales de fútbol 5v5 con pasto sintético e iluminación nocturna en Mérida. Renta de canchas, comida y bebidas, eventos y cumpleaños. Reserva por WhatsApp.',
+  siteUrl:       'https://bodegol.com.mx',
   ogImage:       '/images/logos/og-image.jpg',
   twitterCard:   'summary_large_image',
   locale:        'es_MX',
   type:          'website',
 }
-
 export default seoDefaults

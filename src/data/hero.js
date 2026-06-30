@@ -1,35 +1,34 @@
 /**
  * hero.js — Hero Section Content
- * ✏️  Edit headline, subheadline, badge, background image.
  */
-
 export const heroContent = {
-  // ✏️  Small pill shown above headline — set null to hide
-  badge: '⚽ Abierto hoy · 3:00 PM – 11:00 PM',
+  badge: null,
 
-  headline:    'El campo es tuyo.\nLa comida, también.',
-  subheadline: 'Canchas de fútbol 7, pantallas gigantes, bar con todo y la mejor comida en Mérida. Para los que juegan y para los que animan.',
+  headline:    'DONDE EL FÚTBOL SE VIVE.',
+  subheadline: 'Disfruta fútbol 5 vs 5 en nuestras cinco canchas, acompaña cada partido con excelente comida y bebidas, y vive el mejor ambiente deportivo de Mérida.',
 
-  // ✏️  Path: public/images/hero/hero-bg.jpg  (or .webp)
-  backgroundImage: '/images/hero/hero-bg.jpg',
-  backgroundAlt:   'Cancha de fútbol 7 iluminada en Bodegol, Mérida',
+  // IMAGE — football stadium / match. Recommended: 2400 × 1350 px (16:9), .webp < 500 KB.
+  // Desktop 1920×1080 (16:9) WebP, máx 450 KB → public/images/hero/hero-stadium.jpg
+  backgroundImage: '/images/hero/hero-stadium.jpg',
+  // Mobile 1080×1350 (4:5) WebP, máx 350 KB → public/images/hero/hero-stadium-mobile.jpg
+  backgroundImageMobile: '/images/hero/hero-stadium-mobile.jpg',
+  backgroundAlt:   'Estadio de fútbol iluminado de noche — Bodegol, Mérida',
 
-  // Stats strip shown inside the hero
   stats: [
-    { value: '6',    label: 'Canchas de fútbol 7', icon: 'goal' },
-    { value: '300+', label: 'Personas de capacidad', icon: 'people' },
+    { value: '5',    label: 'Canchas profesionales', icon: 'goal' },
+    { value: '5v5',  label: 'Fútbol rápido', icon: 'people' },
     { value: '4.9★', label: 'Calificación Google', icon: 'star' },
     { value: '4+',   label: 'Años en Mérida', icon: 'calendar' },
   ],
 
   cta: {
     primary: {
-      label:   '¡Reserva tu Cancha!',
+      label:   'Reserva tu cancha',
       message: '¡Hola! Quiero reservar una cancha en Bodegol.',
     },
     secondary: {
-      label:   'Ver menú y precios',
-      href:    '/#menu',
+      label: 'Ver promociones',
+      href:  '/#promotions',
     },
   },
 }

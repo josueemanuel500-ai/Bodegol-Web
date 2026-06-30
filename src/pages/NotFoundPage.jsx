@@ -11,7 +11,7 @@ import Button from '@/components/buttons/Button'
 export default function NotFoundPage() {
   return (
     <>
-      <SEO title="Página no encontrada" />
+      <SEO title="Página no encontrada" noIndex />
       <section className="min-h-screen flex items-center justify-center px-6">
         <div className="text-center max-w-md">
           <p className="text-8xl font-display font-bold text-brand-primary mb-4" aria-hidden="true">

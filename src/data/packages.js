@@ -2,11 +2,12 @@
  * packages.js — Birthday & Event Packages
  * ✏️  Edit package names, prices, features, images, WhatsApp messages.
  */
+// IMAGE (pkg.image): 1200×900 WebP horizontal, máx 300 KB → public/images/packages/
 
 export const packagesHeading = {
-  eyebrow:  '🎉 Paquetes',
-  title:    'Celebra con todo en Bodegol',
-  subtitle: 'Cumpleaños, despedidas, reuniones de empresa o simplemente querer pasarla increíble. Tenemos el paquete para ti.',
+  eyebrow:  'Eventos',
+  title:    'Cumpleaños, empresas y torneos',
+  subtitle: 'Festeja tu cumpleaños, organiza tu evento corporativo o arma tu torneo de fútbol. Ponemos la cancha, la comida y el ambiente.',
 }
 
 export const packages = [
@@ -24,7 +25,7 @@ export const packages = [
     duration:    '1 hora mínimo',
     image:       '/images/packages/paquete-cancha.jpg',
     features: [
-      'Cancha de fútbol 7 (7 vs 7)',
+      'Cancha de fútbol 5v5 (5 vs 5)',
       'Balón oficial incluido',
       'Vestidores y regaderas',
       'Marcación reglamentaria',
@@ -50,7 +51,7 @@ export const packages = [
     duration:    '3 horas',
     image:       '/images/packages/paquete-cumpleanos.jpg',
     features: [
-      '1 hora de cancha de fútbol 7',
+      '1 hora de cancha de fútbol 5v5',
       'Mesa reservada por 2 horas',
       'Decoración básica incluida',
       'Pastel de cumpleaños (1 kg)',
@@ -78,7 +79,7 @@ export const packages = [
     duration:    '4+ horas',
     image:       '/images/packages/paquete-grupal.jpg',
     features: [
-      '2 canchas de fútbol 7 (torneo)',
+      '2 canchas de fútbol 5v5 (torneo)',
       'Área privada reservada',
       'Menú buffet personalizable',
       'Barra de bebidas por consumo',

@@ -1,0 +1,29 @@
+/**
+ * generate-sitemap.mjs — writes public/sitemap.xml
+ * Run: npm run sitemap   (also safe to run before build)
+ */
+import { writeFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
+import { dirname, resolve } from 'node:path'
+
+const SITE = 'https://bodegol.com.mx'
+const routes = [
+  { path: '/',           priority: '1.0', changefreq: 'weekly'  },
+  { path: '/privacidad', priority: '0.3', changefreq: 'yearly'  },
+  { path: '/terminos',   priority: '0.3', changefreq: 'yearly'  },
+]
+
+const today = new Date().toISOString().slice(0, 10)
+const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${routes.map((r) => `  <url>
+    <loc>${SITE}${r.path}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${r.changefreq}</changefreq>
+    <priority>${r.priority}</priority>
+  </url>`).join('\n')}
+</urlset>
+`
+const out = resolve(dirname(fileURLToPath(import.meta.url)), '../public/sitemap.xml')
+writeFileSync(out, xml)
+console.log('sitemap.xml generated →', out)

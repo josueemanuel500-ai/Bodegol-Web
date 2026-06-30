@@ -3,6 +3,7 @@
  * ✏️  Add/remove images. Each image needs: src, alt, category.
  *     Images live in public/images/gallery/
  */
+// IMAGE (img.src): 1200×800 WebP horizontal, máx 350 KB → public/images/gallery/
 
 export const galleryCategories = [
   { id: 'all',      label: 'Todo' },
@@ -19,7 +20,7 @@ export const galleryHeading = {
 }
 
 export const galleryImages = [
-  { id: 'g1',  src: '/images/gallery/cancha-noche.jpg',    alt: 'Cancha de fútbol 7 iluminada de noche en Bodegol',          category: 'canchas',  featured: true  },
+  { id: 'g1',  src: '/images/gallery/cancha-noche.jpg',    alt: 'Cancha de fútbol 5v5 iluminada de noche en Bodegol',          category: 'canchas',  featured: true  },
   { id: 'g2',  src: '/images/gallery/alitas-bbq.jpg',      alt: 'Alitas BBQ recién servidas en Bodegol',                     category: 'comida',   featured: true  },
   { id: 'g3',  src: '/images/gallery/ambiente-bar.jpg',    alt: 'Ambiente del bar y pantallas gigantes en Bodegol',           category: 'ambiente', featured: true  },
   { id: 'g4',  src: '/images/gallery/cumpleanos.jpg',      alt: 'Celebración de cumpleaños con decoración en Bodegol',       category: 'eventos',  featured: false },

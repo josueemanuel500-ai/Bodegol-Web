@@ -1,64 +1,41 @@
 /**
- * SEO.jsx — Document Head Manager
+ * SEO.jsx — Per-page document head via react-helmet-async.
+ * Sets title, description, canonical, robots, Open Graph and Twitter Card.
  *
- * Sets page title, meta description, and Open Graph tags.
- * Uses the native document API directly (no external dependency).
- * Falls back to seoDefaults for any unspecified prop.
- *
- * Usage:
- *   <SEO
- *     title="Paquetes de Reservación"
- *     description="Encuentra el paquete ideal para tu evento en Bodegol."
- *   />
+ * Props: title, description, image, path, type, noIndex
  */
-
-import { useEffect } from 'react'
+import React from 'react'
+import { Helmet } from 'react-helmet-async'
 import seoDefaults from '@/config/seo.config'
 
-export default function SEO({
-  title,
-  description,
-  image,
-  url,
-  type = 'website',
-  noIndex = false,
-}) {
-  const resolvedTitle = title
-    ? seoDefaults.titleTemplate.replace('%s', title)
-    : seoDefaults.defaultTitle
+export default function SEO({ title, description, image, path, type = 'website', noIndex = false }) {
+  const fullTitle = title ? seoDefaults.titleTemplate.replace('%s', title) : seoDefaults.defaultTitle
+  const desc = description || seoDefaults.description
+  const url = `${seoDefaults.siteUrl}${path || (typeof window !== 'undefined' ? window.location.pathname : '/')}`
+  const img = `${seoDefaults.siteUrl}${image || seoDefaults.ogImage}`
 
-  const resolvedDescription = description || seoDefaults.description
-  const resolvedImage = image || seoDefaults.ogImage
-  const resolvedUrl   = url   || (typeof window !== 'undefined' ? window.location.href : seoDefaults.siteUrl)
+  return (
+    <Helmet prioritizeSeoTags>
+      <html lang="es" />
+      <title>{fullTitle}</title>
+      <meta name="description" content={desc} />
+      <link rel="canonical" href={url} />
+      <meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
 
-  useEffect(() => {
-    // Title
-    document.title = resolvedTitle
+      {/* Open Graph */}
+      <meta property="og:type" content={type} />
+      <meta property="og:site_name" content="Bodegol" />
+      <meta property="og:title" content={fullTitle} />
+      <meta property="og:description" content={desc} />
+      <meta property="og:url" content={url} />
+      <meta property="og:image" content={img} />
+      <meta property="og:locale" content={seoDefaults.locale} />
 
-    // Helper to set/create a meta tag
-    const setMeta = (selector, content) => {
-      let el = document.querySelector(selector)
-      if (!el) {
-        el = document.createElement('meta')
-        const attr = selector.includes('[name=') ? 'name' : 'property'
-        const value = selector.match(/["'](.+?)["']/)?.[1]
-        if (attr && value) el.setAttribute(attr, value)
-        document.head.appendChild(el)
-      }
-      el.setAttribute('content', content)
-    }
-
-    setMeta('[name="description"]', resolvedDescription)
-    setMeta('[name="robots"]', noIndex ? 'noindex, nofollow' : 'index, follow')
-    setMeta('[property="og:title"]', resolvedTitle)
-    setMeta('[property="og:description"]', resolvedDescription)
-    setMeta('[property="og:image"]', resolvedImage)
-    setMeta('[property="og:url"]', resolvedUrl)
-    setMeta('[property="og:type"]', type)
-    setMeta('[property="twitter:title"]', resolvedTitle)
-    setMeta('[property="twitter:description"]', resolvedDescription)
-    setMeta('[property="twitter:image"]', resolvedImage)
-  }, [resolvedTitle, resolvedDescription, resolvedImage, resolvedUrl, type, noIndex])
-
-  return null // renders nothing — operates via side effects on document.head
+      {/* Twitter */}
+      <meta name="twitter:card" content={seoDefaults.twitterCard} />
+      <meta name="twitter:title" content={fullTitle} />
+      <meta name="twitter:description" content={desc} />
+      <meta name="twitter:image" content={img} />
+    </Helmet>
+  )
 }

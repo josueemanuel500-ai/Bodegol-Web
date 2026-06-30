@@ -21,6 +21,7 @@
  *   file) or a promise-resolved array with the same shape.
  * ──────────────────────────────────────────────────────────────────────────
  */
+// IMAGE (event.image): 1200×900 WebP horizontal, máx 300 KB → public/images/events/
 
 export const upcomingEvents = [
   {
