@@ -31,7 +31,7 @@ export default function Footer() {
           <div className="flex flex-col gap-5">
             <a href="/" aria-label={`${business.name} — Inicio`}
               className="w-fit rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-              <img src="/images/logo/bodegol-logo-header.png" alt="Bodegol" draggable={false} className="h-12 w-auto select-none" />
+              <img src="/images/logo/bodegol-logo-footer.png" alt="Deportivo Bodegol" draggable={false} className="h-11 w-auto select-none" />
             </a>
             <p className="max-w-xs text-sm leading-relaxed text-content-secondary">{footerConfig.tagline}</p>
             <div className="flex flex-col gap-2.5">

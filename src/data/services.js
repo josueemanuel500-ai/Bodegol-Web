@@ -19,7 +19,7 @@ export const services = [
     id:          'gastronomia',
     icon:        'UtensilsCrossed',
     title:       'Gastronomía de Calidad',
-    description: 'Desde alitas y nachos hasta platillos gourmet. Nuestra cocina trabaja con ingredientes frescos para que la comida sea tan memorable como el partido.',
+    description: 'Desde boneless y botana hasta hamburguesas. Nuestra cocina trabaja con ingredientes frescos para que la comida sea tan memorable como el partido.',
     image:       '/images/services/gastronomia.webp',
     highlight:   true,    // true → visually emphasized card
   },

@@ -13,8 +13,8 @@ export const business = {
 
   logo: {
     main:    '/images/logo/bodegol-logo.png',        // escudo (vertical)
-    header:  '/images/logo/bodegol-logo-header.png',  // horizontal
-    white:   '/images/logo/bodegol-logo-header.png',
+    header:  '/images/logo/bodegol-logo-footer.png',  // horizontal (footer, blanco)
+    white:   '/images/logo/bodegol-logo-footer.png',
     icon:    '/images/logo/bodegol-logo.png',
     alt:     'Bodegol — Futbolito 5x5 Indoor',
     width:   1331,

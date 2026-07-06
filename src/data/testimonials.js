@@ -20,7 +20,7 @@ export const testimonials = [
     role:     'Cliente frecuente',
     avatar:   null,
     rating:   5,
-    text:     'El mejor lugar para ver fútbol en Mérida, sin duda. Las pantallas son enormes, el sonido increíble y la comida está deliciosa. ¡Las alitas son un must!',
+    text:     'El mejor lugar para ver fútbol en Mérida, sin duda. Las pantallas son enormes, el sonido increíble y la comida está deliciosa. ¡La botana es un must!',
     date:     'Junio 2025',
     source:   'google',
     featured: true,
