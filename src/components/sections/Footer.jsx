@@ -30,12 +30,8 @@ export default function Footer() {
           {/* Brand */}
           <div className="flex flex-col gap-5">
             <a href="/" aria-label={`${business.name} — Inicio`}
-              className="flex w-fit items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl"
-                style={{ background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%)' }}>
-                <span className="font-display text-xl font-black text-white">B</span>
-              </span>
-              <span className="font-display text-2xl font-black uppercase tracking-[0.18em] text-content-primary">Bodegol</span>
+              className="w-fit rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
+              <img src="/images/logo/bodegol-logo-header.png" alt="Bodegol" draggable={false} className="h-12 w-auto select-none" />
             </a>
             <p className="max-w-xs text-sm leading-relaxed text-content-secondary">{footerConfig.tagline}</p>
             <div className="flex flex-col gap-2.5">

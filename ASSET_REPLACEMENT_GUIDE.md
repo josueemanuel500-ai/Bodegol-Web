@@ -52,15 +52,13 @@ Todas las fotos se muestran con recorte centrado (`object-fit: cover`): centra e
 ## 6. Comida — `public/images/food/`  · edita en `src/data/menu.js`  · 1200×900 (4:3), ≤300 KB
 | Archivo |
 |---|
-| `nachos.jpg` · `papas.jpg` · `deditos.jpg` · `boneless.jpg` |
-| `alitas-bbq.jpg` · `alitas-buffalo.jpg` · `alitas-mango.jpg` |
-| `hamburguesa.jpg` · `hotdog.jpg` |
+| `boneless.jpg` · `hamburguesa.jpg` · `hot-dog.jpg` · `dedos-queso.jpg` |
+| `aros-cebolla.jpg` · `plato-botanero.jpg` · `totitos-preparados.jpg` |
 
 ## 7. Bebidas — `public/images/drinks/`  · edita en `src/data/menu.js`  · 1200×900 (4:3), ≤300 KB
 | Archivo |
 |---|
-| `michelada.jpg` · `modelo.jpg` · `heineken.jpg` · `xx-lager.jpg` |
-| `frappe.jpg` · `aguas.jpg` |
+| `frappes.jpg` · `micheladas.jpg` · `cocteles.jpg` |
 
 ## 8. Galería — `public/images/gallery/`  · edita en `src/data/gallery.js`  · 1200×800 (3:2), ≤350 KB
 | Archivo |

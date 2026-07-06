@@ -12,12 +12,13 @@ export const business = {
   rfc:         'DBD210101XXX',
 
   logo: {
-    main:    '/images/logo/bodegol-logo.svg',
-    white:   '/images/logo/bodegol-logo-white.svg',
-    icon:    '/images/logo/bodegol-icon.svg',
-    alt:     'Bodegol — Fútbol 5v5 en Mérida',
-    width:   160,
-    height:  52,
+    main:    '/images/logo/bodegol-logo.png',        // escudo (vertical)
+    header:  '/images/logo/bodegol-logo-header.png',  // horizontal
+    white:   '/images/logo/bodegol-logo-header.png',
+    icon:    '/images/logo/bodegol-logo.png',
+    alt:     'Bodegol — Futbolito 5x5 Indoor',
+    width:   1331,
+    height:  1483,
   },
 
   contact: {

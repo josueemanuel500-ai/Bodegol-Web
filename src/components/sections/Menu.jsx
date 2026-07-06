@@ -42,9 +42,11 @@ function MenuItem({ item }) {
             <h3 className="t-card-title text-base text-white">{item.name}</h3>
             <p className="mt-0.5 line-clamp-1 text-xs text-white/60">{item.description}</p>
           </div>
-          <p className="flex-shrink-0 font-display text-2xl font-black text-primary">
-            {item.price}<span className="ml-0.5 font-ui text-[0.6rem] font-normal text-white/60">MXN</span>
-          </p>
+          {item.price && (
+            <p className="flex-shrink-0 font-display text-2xl font-black text-primary">
+              {item.price}<span className="ml-0.5 font-ui text-[0.6rem] font-normal text-white/60">MXN</span>
+            </p>
+          )}
         </div>
       </div>
     </motion.article>

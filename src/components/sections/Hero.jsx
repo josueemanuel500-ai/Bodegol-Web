@@ -59,12 +59,13 @@ export default function Hero() {
 
       {/* Content */}
       <motion.div variants={container} initial="hidden" animate="visible" className="relative z-10 flex w-full max-w-4xl flex-col items-center gap-7 px-6">
-        <motion.div variants={rise} className="flex flex-col items-center gap-3">
-          <span className="flex h-[4.5rem] w-[4.5rem] items-center justify-center rounded-2xl shadow-glow-primary"
-            style={{ background: 'linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%)' }} aria-hidden="true">
-            <span className="font-display text-5xl font-black leading-none text-white">B</span>
-          </span>
-          <span className="font-display text-2xl font-black uppercase tracking-[0.4em] text-white pl-[0.4em]">Bodegol</span>
+        <motion.div variants={rise}>
+          <img
+            src={business.logo.main}
+            alt={business.logo.alt}
+            draggable={false}
+            className="h-44 w-auto select-none drop-shadow-2xl md:h-56"
+          />
         </motion.div>
 
         <motion.h1 variants={rise} className="t-hero-title text-white">
