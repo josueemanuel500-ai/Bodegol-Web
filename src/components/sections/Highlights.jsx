@@ -20,7 +20,7 @@ export default function Highlights() {
   return (
     <SectionWrapper id="highlights" background="base">
       <SectionHeading id="highlights-heading" eyebrow="¿Por qué Bodegol?" title="Más que una cancha"
-        subtitle="Todo lo que necesitas para vivir el fútbol al máximo, en un solo lugar." />
+        subtitle="Canchas de fútbol en Mérida, buena comida y el mejor ambiente deportivo, todo en un mismo lugar." />
 
       <motion.div variants={ANIMATION.STAGGER} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}
         className="grid grid-cols-1 gap-6 md:grid-cols-3">

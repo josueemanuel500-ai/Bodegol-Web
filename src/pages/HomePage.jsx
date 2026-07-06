@@ -23,8 +23,8 @@ export default function HomePage() {
   return (
     <>
       <SEO
-        title="Fútbol 5v5, Canchas y Eventos en Mérida"
-        description="Bodegol: 5 canchas profesionales de fútbol 5v5 con pasto sintético, iluminación nocturna y comida en Mérida. Reserva tu cancha por WhatsApp al instante."
+        title="Canchas de Fútbol 5v5 en Mérida"
+        description="Renta de canchas de fútbol 5 vs 5 en Mérida. 5 canchas profesionales con pasto sintético, iluminación nocturna, comida y eventos. Reserva tu cancha por WhatsApp."
       />
       <Hero />
       <Highlights />

@@ -6,8 +6,8 @@
 // IMAGE (field.image): 1200×900 WebP horizontal, máx 300 KB → public/images/fields/
 export const fieldsHeading = {
   eyebrow:  'Nuestras Canchas',
-  title:    '5 canchas profesionales de fútbol 5v5',
-  subtitle: 'Pasto sintético de alta calidad, iluminación nocturna LED e instalaciones cómodas para vivir el fútbol 5 vs 5 en un ambiente profesional.',
+  title:    'Canchas de fútbol 5v5 en Mérida',
+  subtitle: 'Cinco canchas de fútbol en Mérida con pasto sintético de alta calidad, iluminación nocturna LED e instalaciones cómodas para tu partido 5 vs 5.',
 }
 
 const baseSpecs = {

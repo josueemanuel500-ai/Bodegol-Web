@@ -7,7 +7,7 @@
 export const packagesHeading = {
   eyebrow:  'Eventos',
   title:    'Cumpleaños, empresas y torneos',
-  subtitle: 'Festeja tu cumpleaños, organiza tu evento corporativo o arma tu torneo de fútbol. Ponemos la cancha, la comida y el ambiente.',
+  subtitle: 'Canchas para cumpleaños en Mérida, eventos de empresa y torneos de fútbol. Ponemos la cancha, la comida y el ambiente; tú solo llega a festejar.',
 }
 
 export const packages = [

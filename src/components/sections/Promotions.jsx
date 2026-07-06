@@ -34,7 +34,7 @@ export default function Promotions() {
               className="group relative block overflow-hidden rounded-2xl border border-line shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-card-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
               <div className="relative aspect-square overflow-hidden">
                 {/* IMAGE — 1080×1080 (1:1) WebP, máx 300 KB */}
-                <LazyImage src={promo.image} alt={promo.imageAlt} className="h-full w-full transition-transform duration-[600ms] group-hover:scale-[1.08]" />
+                <LazyImage src={promo.image} alt={promo.imageAlt} watermark className="h-full w-full transition-transform duration-[600ms] group-hover:scale-[1.08]" />
                 <div className="pointer-events-none absolute inset-0" style={{ background: 'linear-gradient(180deg, rgba(3,17,38,0.15) 0%, rgba(3,17,38,0.55) 45%, rgba(3,17,38,0.96) 100%)' }} />
                 <div className="absolute left-3 top-3"><Badge variant="dark">{promo.tag}</Badge></div>
                 <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 p-5">

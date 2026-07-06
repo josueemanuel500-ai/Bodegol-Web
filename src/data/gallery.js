@@ -16,7 +16,7 @@ export const galleryCategories = [
 export const galleryHeading = {
   eyebrow:  '📸 Galería',
   title:    'Una imagen vale más que mil palabras',
-  subtitle: 'Así se ve Bodegol. Así se vive.',
+  subtitle: 'Así se vive Bodegol Mérida: canchas, comida y el mejor ambiente deportivo.',
 }
 
 export const galleryImages = [

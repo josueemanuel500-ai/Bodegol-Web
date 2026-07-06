@@ -61,3 +61,12 @@ img { display: block; max-width: 100%; height: auto; }
   padding-left: var(--section-padding-x);
   padding-right: var(--section-padding-x);
 }
+
+/* Protección casual de imágenes (solo imágenes; NO bloquea el clic derecho global).
+   ⚠️ Ninguna protección frontend es 100% segura: se puede capturar por screenshot
+   o desde la red. Esto solo desalienta la copia casual. */
+img {
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  user-select: none;
+}

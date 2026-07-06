@@ -1,0 +1,7 @@
+# Cloudflare Pages — cabeceras de seguridad (si despliegas en Pages).
+# En Hostinger usa .htaccess; en Cloudflare (proxy) usa Transform Rules. Ver SECURITY.md.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=()
+  X-Frame-Options: SAMEORIGIN

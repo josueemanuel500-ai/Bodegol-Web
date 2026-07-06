@@ -4,7 +4,7 @@
 export const pricingHeading = {
   eyebrow:  'Precios',
   title:    'Renta tu cancha',
-  subtitle: 'Tarifas claras, sin sorpresas. Reserva por WhatsApp y confirma al instante.',
+  subtitle: 'Renta de canchas en Mérida con tarifas claras y sin sorpresas. Reserva por WhatsApp y confirma al instante.',
 }
 
 export const pricingPlans = [

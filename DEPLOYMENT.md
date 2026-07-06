@@ -1,89 +1,132 @@
 # 🚀 DEPLOYMENT — Bodegol
 
-## ✅ Configuración confirmada
+Sitio **Vite + React (SPA)**. Build: `npm run build` → carpeta **`dist/`** (lo que se publica).
+Fallback de routing SPA incluido: `public/_redirects` (Cloudflare) y `public/.htaccess` (Apache/Hostinger).
+
+---
+
+## 🌐 Entornos
+
+### Producción
 | Parámetro | Valor |
 |---|---|
-| Dominio canónico | **https://bodegol.com.mx** |
-| Hosting | **Hostinger** (conectado a **GitHub** `josueemanuel500-ai/Bodegol-Web`) |
-| Build command | **`npm run build`** |
-| Output directory | **`dist`** |
-| Node | **18+** (`.nvmrc` = 20 ; `engines.node >= 18`) |
-| Tipo | SPA (Vite + React) con fallback de routing incluido |
+| Dominio | **https://bodegol.com.mx** |
+| Rama | **`main`** |
+| Build command | `npm run build` |
+| Output directory | `dist` |
 
-> Tras el despliegue, reemplazarás manualmente: imágenes finales, favicon, logo, og-image y el embed de Google Maps.
+### Desarrollo (staging)
+| Parámetro | Valor |
+|---|---|
+| Dominio | **https://dev.bodegol.com.mx** |
+| Rama | **`development`** |
+| Build command | `npm run build` |
+| Output directory | `dist` |
 
----
-
-## 1. Despliegue en Hostinger (GitHub auto-deploy)
-1. En hPanel → **Sitio web → Deploy / Git**: conecta el repo `Bodegol-Web`, rama `main`.
-2. Configura el pipeline de build:
-   - **Install:** `npm ci` (usa `package-lock.json`) o `npm install`
-   - **Build:** `npm run build`
-   - **Output / publish dir:** `dist`
-3. Asegúrate de que el **document root** sirva el contenido de **`dist/`**.
-   - El `.htaccess` (incluido en `dist/` vía `public/.htaccess`) habilita el fallback SPA en Apache.
-4. Activa **SSL** (Let's Encrypt) y **Force HTTPS** en hPanel.
-
-> ⚠️ Si tu plan de Hostinger **no ejecuta un paso de build** (solo clona el repo a `public_html`),
-> tienes dos opciones:
-> - Construir localmente (`npm run build`) y subir el **contenido de `dist/`** a `public_html/`, **o**
-> - Quitar `dist/` de `.gitignore`, commitear `dist/` y apuntar el document root a esa carpeta.
-> El sitio **no** funciona sirviendo la raíz del repo sin build (el `index.html` de la raíz referencia `/src/main.jsx`).
-
-**Verificación post-deploy (rutas SPA):** abre y **recarga** `https://bodegol.com.mx/terminos` y `/privacidad`.
-Si cargan (no 404), el fallback funciona.
+> ⚠️ **El entorno dev NO debe indexarse** en Google (evita contenido duplicado).
+> Antes de publicar `dev.bodegol.com.mx`, aplica una de estas opciones **solo en dev**:
+> - Servir un `robots.txt` con `User-agent: * / Disallow: /`, **o**
+> - Añadir la cabecera `X-Robots-Tag: noindex` en Hostinger/Cloudflare para el subdominio dev, **o**
+> - Proteger el subdominio con contraseña (Basic Auth) en Hostinger.
+> Producción (`bodegol.com.mx`) mantiene el `robots.txt` normal (Allow).
 
 ---
 
-## 2. Dominio
-- [ ] Dominio `bodegol.com.mx` activo y apuntando a Hostinger.
-- [ ] Elegir canónico (apex `bodegol.com.mx`) y redirigir `www → apex` (301).
-- [ ] Forzar HTTPS (301 http→https).
-- [ ] El código ya usa `https://bodegol.com.mx` en: `seo.config.js`, `index.html` (canonical/OG/JSON-LD), `robots.txt`, `sitemap.xml`, `scripts/generate-sitemap.mjs`.
+## 🔀 Flujo de trabajo Git
 
-## 3. Cloudflare (si lo usas delante de Hostinger)
-- [ ] Nameservers de Cloudflare en el registrador.
-- [ ] `A`/`CNAME` al hosting con proxy activado.
-- [ ] SSL/TLS: **Full (strict)**; "Always Use HTTPS" ON.
-- [ ] Redirección www↔apex coherente con el canónico.
-- [ ] **Purgar caché** después de cada deploy.
+```
+development  ── rama de pruebas (staging)  → dev.bodegol.com.mx
+main         ── rama de producción         → bodegol.com.mx
+```
 
-## 4. Google Search Console
-- [ ] Propiedad de dominio **bodegol.com.mx** + verificación (TXT DNS).
-- [ ] Enviar sitemap: `https://bodegol.com.mx/sitemap.xml`.
-- [ ] Inspección de URL de la home → solicitar indexación.
-- [ ] Validar JSON-LD en "Resultados enriquecidos".
-- [ ] (Recomendado) Google Business Profile con la misma NAP.
-
-## 5. Google Maps (manual, post-deploy)
-- [ ] Maps → Bodegol → Compartir → **Insertar mapa** → copiar URL del `src`.
-- [ ] Pegar en `src/data/business.js → location.mapsEmbed` (Contacto muestra el mapa real automáticamente).
-- [ ] (SEO local) Añadir `geo` real al JSON-LD en `index.html` (no inventar coordenadas).
-
-## 6. Checklist final de producción
-**Manual (tú, post-deploy):**
-- [ ] Reemplazar imágenes según `IMAGE_GUIDE.md` (hero desktop+móvil, canchas, comida/bebidas, galería, promos, paquetes, eventos).
-- [ ] Reemplazar favicons + `apple-touch-icon` + `icon-192/512` + `og-image.jpg` con el logo final.
-- [ ] Logo real en `public/images/logo/`.
-- [ ] Pegar embed de Google Maps.
-- [ ] Confirmar correo/redes: hoy usan `bodegol.mx` (`reservaciones@bodegol.mx`, `@bodegol.mx`) — ajusta en `data/business.js`, `data/contact.js`, `data/social.js` si el dominio real difiere.
-
-**Técnico (ya verificado en este build):**
-- [x] `npm run build` → 0 errores.
-- [x] Favicons, manifest, robots, sitemap, OG, Twitter, JSON-LD, canonical presentes en `dist/`.
-- [x] `_redirects` (Cloudflare) y `.htaccess` (Apache/Hostinger) para SPA.
-- [x] Lazy loading, breakpoints responsive, alt texts, `lang="es"`, reduced-motion.
-- [ ] (Recomendado) `npm run preview` + revisión móvil/desktop + Lighthouse ≥ 90 antes de anunciar.
-
-**Limpieza local (opcional):**
-- [ ] Borrar en el Explorador de Windows la carpeta vacía con llaves en `public/images/` (no afecta a Git/producción).
-
----
-
-### Comandos
+**Crear la rama de desarrollo (una sola vez):**
 ```bash
-npm ci            # instala según package-lock
-npm run build     # genera dist/  (lo que se publica)
-npm run preview   # prueba local del build
-npm run sitemap   # regenera public/sitemap.xml si cambian rutas
+git checkout main
+git pull origin main
+git checkout -b development
+git push -u origin development
+```
+
+**Ciclo recomendado:**
+1. Trabaja siempre en **`development`**.
+2. Haz commit y `git push origin development`.
+3. Prueba en **https://dev.bodegol.com.mx**.
+4. Si se aprueba, fusiona a producción:
+   ```bash
+   git checkout main
+   git pull origin main
+   git merge --no-ff development
+   git push origin main
+   ```
+5. El push a `main` actualiza **https://bodegol.com.mx**.
+
+> Regla de oro: **nunca** hagas commits directos a `main`. Todo pasa primero por `development` + dev.bodegol.com.mx.
+
+---
+
+## 🟣 Checklist Hostinger (2 sitios: prod + dev)
+- [ ] **Sitio de producción**: dominio `bodegol.com.mx`, deploy desde GitHub rama **`main`**.
+- [ ] **Sitio de desarrollo**: subdominio `dev.bodegol.com.mx`, deploy desde GitHub rama **`development`**.
+- [ ] En ambos: Install `npm ci`, Build `npm run build`, Output/publish **`dist`**.
+- [ ] Confirmar que el document root de cada sitio sirve el **contenido de `dist/`** (con su `.htaccess`).
+- [ ] Node 18+ (ver `.nvmrc` = 20, `engines.node >= 18`).
+- [ ] En el subdominio dev: activar noindex/Basic Auth (ver aviso arriba).
+
+> Si tu plan de Hostinger **no ejecuta build** (solo clona a `public_html`): construye local (`npm run build`) y sube el contenido de `dist/`, o quita `dist/` de `.gitignore` y commitéalo. Servir la raíz del repo sin build **no** funciona.
+
+## 🌐 Checklist DNS
+- [ ] `bodegol.com.mx` (apex) → A/CNAME al hosting de producción.
+- [ ] `www.bodegol.com.mx` → redirección 301 al apex (o viceversa; uno canónico).
+- [ ] `dev.bodegol.com.mx` → registro **A/CNAME** apuntando al sitio de desarrollo en Hostinger.
+- [ ] Propagación DNS verificada (`dig`, `nslookup` o whatsmydns.net).
+- [ ] TTL bajo (300 s) mientras configuras; súbelo después.
+
+## 🔒 Checklist SSL
+- [ ] SSL (Let's Encrypt) emitido para **bodegol.com.mx** y **www**.
+- [ ] SSL emitido para **dev.bodegol.com.mx** (certificado propio del subdominio).
+- [ ] "Force HTTPS" activado en ambos.
+- [ ] Si usas Cloudflare: SSL/TLS **Full (strict)** + "Always Use HTTPS".
+- [ ] Sin contenido mixto (todo carga por https).
+
+## ⏪ Checklist de Rollback (revertir producción)
+Si un deploy a `main` rompe producción:
+- [ ] **Opción A — revertir el commit** (recomendado, deja historial limpio):
+  ```bash
+  git checkout main
+  git revert <hash-del-commit-malo>   # o: git revert HEAD
+  git push origin main
+  ```
+- [ ] **Opción B — volver a un commit estable conocido:**
+  ```bash
+  git checkout main
+  git reset --hard <hash-estable>
+  git push --force-with-lease origin main
+  ```
+  (Usar con cuidado; reescribe historial.)
+- [ ] **Opción C — Hostinger**: re-desplegar manualmente el commit/deploy anterior desde el panel (si guarda historial de despliegues).
+- [ ] Tras el rollback: **purgar caché de Cloudflare** y verificar `bodegol.com.mx`.
+- [ ] Antes de tocar `main`, **etiqueta** los releases estables para volver rápido:
+  ```bash
+  git tag -a v1.0.0 -m "Release estable" && git push origin v1.0.0
+  ```
+
+---
+
+## 🔎 Google Search Console
+- [ ] Propiedad **bodegol.com.mx** (dominio) + verificación TXT.
+- [ ] Enviar `https://bodegol.com.mx/sitemap.xml`.
+- [ ] **No** añadir dev.bodegol.com.mx a Search Console (o mantenerlo noindex).
+- [ ] Validar JSON-LD en "Resultados enriquecidos".
+
+## 🗺️ Google Maps (manual, post-deploy)
+- [ ] Maps → Bodegol → Compartir → Insertar mapa → copiar URL del `src`.
+- [ ] Pegar en `src/data/business.js → location.mapsEmbed`.
+- [ ] (SEO local) `geo` real en el JSON-LD de `index.html` (no inventar coordenadas).
+
+## Comandos
+```bash
+npm ci
+npm run build     # dist/  (verificado: 0 errores)
+npm run preview
+npm run sitemap
 ```

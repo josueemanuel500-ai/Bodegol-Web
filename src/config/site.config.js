@@ -43,6 +43,9 @@ export const siteConfig = {
     // Backoffice link in footer (show to staff only when auth is ready)
     backofficeLink: false,
 
+    // Marca de agua sutil "Bodegol" en galería/promos (protección casual). Off por defecto.
+    imageWatermark: false,
+
     // Dark mode toggle in navbar (currently site is always dark)
     darkModeToggle: false,
 

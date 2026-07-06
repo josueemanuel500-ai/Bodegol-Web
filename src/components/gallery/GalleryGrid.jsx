@@ -21,7 +21,7 @@ function Lightbox({ image, onClose }) {
           </button>
           <motion.div initial={{ scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.92, opacity: 0 }}
             transition={{ duration: 0.25 }} onClick={(e) => e.stopPropagation()} className="relative max-h-[90vh] w-full max-w-5xl">
-            <img src={image.src} alt={image.alt} loading="eager" className="max-h-[85vh] w-full rounded-2xl object-contain" />
+            <img src={image.src} alt={image.alt} loading="eager" draggable={false} onDragStart={(e)=>e.preventDefault()} onContextMenu={(e)=>e.preventDefault()} className="max-h-[85vh] w-full select-none rounded-2xl object-contain" />
             {image.caption && <p className="mt-3 text-center font-ui text-sm text-white/70">{image.caption}</p>}
           </motion.div>
         </motion.div>
@@ -67,7 +67,7 @@ export default function GalleryGrid({ images = [], categories = [], showFilter =
               exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.3 }} className="break-inside-avoid">
               <button onClick={() => setLightboxImage(image)} aria-label={`Ver imagen: ${image.alt}`}
                 className="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl border border-line focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background">
-                <LazyImage src={image.src} alt={image.alt} className="w-full transition-transform duration-500 group-hover:scale-[1.07]" />
+                <LazyImage src={image.src} alt={image.alt} watermark className="w-full transition-transform duration-500 group-hover:scale-[1.07]" />
                 <div className="absolute inset-0 flex items-center justify-center bg-background/0 transition-colors duration-300 group-hover:bg-background/40">
                   <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white opacity-0 backdrop-blur-md transition-all duration-300 group-hover:opacity-100">
                     <ZoomIn size={22} strokeWidth={2} aria-hidden="true" />
