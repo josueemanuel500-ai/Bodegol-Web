@@ -1,0 +1,97 @@
+:root {
+  --navy-primary:  #071B3A;
+  --navy-dark:     #031126;
+  --navy-raised:   #0E2A52;
+  --orange:        #FF690F;
+  --orange-hover:  #FF8A3D;
+  --white:         #FFFFFF;
+  --light:         #F5F7FA;
+  --muted:         #CBD5E1;
+  --success-raw:   #22C55E;
+  --warning-raw:   #F59E0B;
+  --danger-raw:    #EF4444;
+
+  --background:         var(--navy-dark);
+  --surface:            var(--navy-primary);
+  --surface-secondary:  var(--navy-raised);
+  --surface-overlay:    rgba(3, 17, 38, 0.82);
+  --primary:            var(--orange);
+  --primary-hover:      var(--orange-hover);
+  --accent:             var(--orange);
+  --text-primary:       var(--white);
+  --text-secondary:     var(--muted);
+  --text-muted:         #8DA0BD;
+  --text-inverse:       var(--navy-dark);
+  --border:             #16335C;
+  --border-strong-c:    #244B82;
+  --border-glow-c:      rgba(255, 105, 15, 0.45);
+  --success:            var(--success-raw);
+  --warning:            var(--warning-raw);
+  --danger:             var(--danger-raw);
+  --info:               #3B82F6;
+  --shadow-card:    0 1px 12px rgba(3, 17, 38, 0.45);
+  --shadow-card-lg: 0 12px 40px rgba(3, 17, 38, 0.55);
+  --glow-primary:   0 0 24px rgba(255, 105, 15, 0.40);
+  --glow-accent:    0 0 24px rgba(255, 138, 61, 0.45);
+
+  --color-primary:       var(--primary);
+  --color-primary-dark:  var(--primary-hover);
+  --color-primary-light: var(--orange-hover);
+  --color-accent:        var(--accent);
+  --color-accent-dark:   var(--orange-hover);
+  --color-dark:          var(--navy-dark);
+  --color-light:         var(--light);
+  --color-muted:         var(--text-secondary);
+  --surface-base:        var(--background);
+  --surface-elevated:    var(--surface);
+  --surface-raised:      var(--surface-secondary);
+  --border-default:      var(--border);
+  --border-strong:       var(--border-strong-c);
+  --border-glow:         var(--border-glow-c);
+  --status-success:      var(--success);
+  --status-warning:      var(--warning);
+  --status-error:        var(--danger);
+  --status-info:         var(--info);
+
+  /* Typography · families */
+  --font-display: 'Bebas Neue', 'Oswald', 'Arial Narrow', sans-serif;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-ui:      'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Typography · fluid size scale */
+  --fs-hero:        clamp(3rem, 7vw + 1rem, 7rem);
+  --fs-display:     clamp(2.5rem, 5vw + 1rem, 5rem);
+  --fs-section:     clamp(2rem, 3.5vw + 0.5rem, 3.25rem);
+  --fs-card-title:  clamp(1.25rem, 1.2vw + 0.75rem, 1.625rem);
+  --fs-lead:        clamp(1.0625rem, 0.6vw + 0.9rem, 1.375rem);
+  --fs-body:        1rem;
+  --fs-body-sm:     0.9375rem;
+  --fs-button:      0.9375rem;
+  --fs-nav:         0.9375rem;
+  --fs-label:       0.8125rem;
+  --fs-caption:     0.8125rem;
+  --fs-small:       0.75rem;
+
+  /* Typography · line-height & tracking */
+  --lh-hero:    0.92;
+  --lh-heading: 1.0;
+  --lh-snug:    1.25;
+  --lh-body:    1.6;
+  --lh-relaxed: 1.75;
+  --tracking-display: 0.01em;
+  --tracking-heading: 0.015em;
+  --tracking-label:   0.08em;
+  --tracking-body:    0;
+
+  --duration-fast:   150ms;
+  --duration-base:   250ms;
+  --duration-slow:   400ms;
+  --ease-out:        cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
+  --max-width-site:     1280px;
+  --max-width-content:  900px;
+  --section-padding-y:  5rem;
+  --section-padding-x:  1.25rem;
+  --nav-height:         70px;
+  --border-radius-card: 0.875rem;
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Bodegol",
+  "short_name": "Bodegol",
+  "description": "Fútbol 5v5, canchas, comida y eventos en Mérida.",
+  "lang": "es-MX",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#031126",
+  "theme_color": "#031126",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

@@ -84,10 +84,22 @@ export default function Contact() {
 
           {/* Mapa: embed si existe, si no placeholder */}
           {business.location.mapsEmbed ? (
-            <div className="overflow-hidden rounded-2xl border border-line">
-              {/* GOOGLE MAPS embed (16:9) */}
+            <div className="overflow-hidden rounded-2xl border-2 border-primary/70 shadow-card">
+              {/* Barra con colores Bodegol (naranja + blanco) */}
+              <div className="flex items-center justify-between gap-3 bg-primary px-4 py-3">
+                <span className="inline-flex min-w-0 items-center gap-2 font-ui text-sm font-semibold text-white">
+                  <MapPin size={16} strokeWidth={2.25} className="flex-shrink-0" aria-hidden="true" />
+                  <span className="truncate">{business.location.fullAddress}</span>
+                </span>
+                <a href={business.location.mapsUrl} target="_blank" rel="noopener noreferrer"
+                  className="flex-shrink-0 rounded-lg bg-white px-3 py-1.5 font-ui text-xs font-bold text-primary transition-transform duration-200 hover:-translate-y-0.5">
+                  Cómo llegar
+                </a>
+              </div>
+              {/* Mapa de Google (embed sin API key) */}
               <iframe title="Ubicación de Bodegol en Google Maps" src={business.location.mapsEmbed}
-                className="aspect-[16/9] w-full" style={{ border: 0 }} loading="lazy" referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
+                className="block aspect-[16/10] w-full" style={{ border: 0 }} loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade" allowFullScreen />
             </div>
           ) : (
             <a href={business.location.mapsUrl} target="_blank" rel="noopener noreferrer" aria-label="Ver ubicación en Google Maps"

@@ -6,7 +6,7 @@
 // IMAGE (promo.image): 1080×1080 WebP cuadrada, máx 300 KB → public/images/promotions/
 
 export const promotionsHeading = {
-  eyebrow:  '🔥 Promociones',
+  eyebrow:  'Promociones',
   title:    'Ofertas que no se repiten',
   subtitle: 'Aprovecha nuestras promos semanales. Llega temprano, come bien y no pagues de más.',
 }

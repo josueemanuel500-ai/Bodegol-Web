@@ -38,7 +38,7 @@ export const business = {
     zip:         '97204',
     fullAddress: 'C. 3 Bodega 5 y 6, Zona Industrial, 97204 Mérida, Yucatán',
     mapsUrl:     'https://maps.google.com/?q=Bodegol+C.+3+Bodega+5+y+6+Zona+Industrial+97204+Merida+Yucatan',
-    mapsEmbed:   '', // ✏️  Paste your Google Maps embed URL here
+    mapsEmbed:   'https://maps.google.com/maps?q=C.+3+Bodega+5+y+6,+Zona+Industrial,+97204+Merida,+Yucatan&z=16&output=embed',
   },
 
   // Official opening hours

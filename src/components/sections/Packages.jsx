@@ -28,7 +28,7 @@ export default function Packages() {
       <SectionHeading id="packages-heading" eyebrow={packagesHeading.eyebrow} title={packagesHeading.title} subtitle={packagesHeading.subtitle} />
 
       <motion.div variants={ANIMATION.STAGGER} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
-        className="grid grid-cols-1 gap-6 md:grid-cols-3 md:items-start">
+        className="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2 md:items-start">
         {packages.map((pkg) => {
           const waUrl = buildWhatsAppUrl(business.contact.whatsapp, pkg.cta.message)
           const hot = pkg.highlighted
@@ -51,8 +51,14 @@ export default function Packages() {
 
               <div className={cn('flex flex-1 flex-col gap-5 p-7', hot && 'bg-surface')}>
                 <div>
-                  <p className="font-display text-3xl font-black text-primary">{pkg.priceLabel}</p>
-                  <p className="font-ui text-xs text-content-muted">{pkg.priceNote}</p>
+                  {pkg.priceLabel ? (
+                    <>
+                      <p className="font-display text-3xl font-black text-primary">{pkg.priceLabel}</p>
+                      {pkg.priceNote && <p className="font-ui text-xs text-content-muted">{pkg.priceNote}</p>}
+                    </>
+                  ) : (
+                    <p className="font-display text-2xl font-black uppercase tracking-wide text-primary">Cotiza por WhatsApp</p>
+                  )}
                 </div>
                 <div className="flex flex-wrap gap-4">
                   <span className="inline-flex items-center gap-1.5 font-ui text-xs text-content-secondary">

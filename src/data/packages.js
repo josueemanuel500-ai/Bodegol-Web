@@ -1,13 +1,11 @@
 /**
- * packages.js — Birthday & Event Packages
- * ✏️  Edit package names, prices, features, images, WhatsApp messages.
+ * packages.js — Cumpleaños y eventos
+ * IMAGE (pkg.image): 1200×900 WebP horizontal, máx 300 KB → public/images/packages/
  */
-// IMAGE (pkg.image): 1200×900 WebP horizontal, máx 300 KB → public/images/packages/
-
 export const packagesHeading = {
   eyebrow:  'Eventos',
-  title:    'Cumpleaños, empresas y torneos',
-  subtitle: 'Canchas para cumpleaños en Mérida, eventos de empresa y torneos de fútbol. Ponemos la cancha, la comida y el ambiente; tú solo llega a festejar.',
+  title:    'Cumpleaños y eventos',
+  subtitle: 'Canchas para cumpleaños en Mérida y eventos en áreas climatizadas. Nuestro Paquete Fiesta es todo incluido, de 3 horas. Pregúntanos por WhatsApp.',
 }
 
 export const packages = [
@@ -15,13 +13,12 @@ export const packages = [
     id:          'cancha',
     name:        'Paquete Cancha',
     subtitle:    'Solo a jugar',
-    emoji:       '⚽',
     highlighted: false,
     badge:       null,
     priceLabel:  'Desde $600 / hora',
     priceNote:   'Por cancha completa',
     minGuests:   10,
-    maxGuests:   14,
+    maxGuests:   10,
     duration:    '1 hora mínimo',
     image:       '/images/packages/paquete-cancha.jpg',
     features: [
@@ -29,69 +26,37 @@ export const packages = [
       'Balón oficial incluido',
       'Vestidores y regaderas',
       'Marcación reglamentaria',
-      'Cronómetro digital',
     ],
-    notIncluded: ['Comida y bebidas (pagar por separado)', 'Decoración'],
+    notIncluded: ['Comida y bebidas (por separado)'],
     cta: {
       label:   'Reservar cancha',
       message: '¡Hola! Quiero reservar una cancha en Bodegol. ¿Qué disponibilidad tienen?',
     },
   },
   {
-    id:          'cumpleanos',
-    name:        'Paquete Cumpleaños',
-    subtitle:    'La fiesta perfecta',
-    emoji:       '🎂',
+    id:          'fiesta',
+    name:        'Paquete Fiesta',
+    subtitle:    'Cumpleaños y eventos',
     highlighted: true,
-    badge:       '⭐ Más Popular',
-    priceLabel:  'Desde $2,500',
-    priceNote:   'Para 15 personas',
+    badge:       'Más popular',
+    priceLabel:  '',        // sin precio: se cotiza por WhatsApp
+    priceNote:   '',
     minGuests:   15,
-    maxGuests:   30,
-    duration:    '3 horas',
-    image:       '/images/packages/paquete-cumpleanos.jpg',
-    features: [
-      '1 hora de cancha de fútbol 5v5',
-      'Mesa reservada por 2 horas',
-      'Decoración básica incluida',
-      'Pastel de cumpleaños (1 kg)',
-      'Mesero exclusivo para el grupo',
-      'Carta de menú completa',
-      '10% de descuento en bebidas',
-    ],
-    notIncluded: ['Bebidas (pago por separado)', 'Decoración extra'],
-    cta: {
-      label:   'Reservar este paquete',
-      message: '¡Hola! Me interesa el Paquete Cumpleaños. ¿Tienen disponibilidad?',
-    },
-  },
-  {
-    id:          'grupal',
-    name:        'Paquete Grupal',
-    subtitle:    'Equipos y empresas',
-    emoji:       '🏆',
-    highlighted: false,
-    badge:       null,
-    priceLabel:  'Desde $5,000',
-    priceNote:   'Para 30+ personas',
-    minGuests:   30,
     maxGuests:   null,
-    duration:    '4+ horas',
-    image:       '/images/packages/paquete-grupal.jpg',
+    duration:    '3 horas de servicio',
+    image:       '/images/packages/paquete-fiesta.jpg',
     features: [
-      '2 canchas de fútbol 5v5 (torneo)',
-      'Área privada reservada',
-      'Menú buffet personalizable',
-      'Barra de bebidas por consumo',
-      'Decoración temática',
-      'Staff dedicado de servicio',
-      'Sistema de sonido exclusivo',
-      'Coordinador de evento incluido',
+      'Áreas climatizadas',
+      '3 horas de servicio',
+      'Pizza',
+      'Agua 500 ml y Power 500 ml',
+      'Pastel de chocolate o vainilla',
+      'Piñata',
     ],
     notIncluded: [],
     cta: {
-      label:   'Solicitar cotización',
-      message: '¡Hola! Quiero información sobre el Paquete Grupal para un evento. ¿Podemos hablar?',
+      label:   'Solicitar información',
+      message: '¡Hola! Quiero información del Paquete Fiesta (cumpleaños/evento) en Bodegol. ¿Me pueden dar los detalles?',
     },
   },
 ]

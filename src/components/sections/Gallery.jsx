@@ -1,50 +1,30 @@
 /**
- * Gallery.jsx — Photo Gallery Section
- * Content from src/data/gallery.js
+ * Gallery.jsx — Galería de fotos (sin categorías ni filtros).
+ * Muestra todas las imágenes de data/gallery.js en un mosaico + lightbox.
  */
-
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, ZoomIn } from 'lucide-react'
 import { createPortal } from 'react-dom'
-import { galleryImages, galleryCategories, galleryHeading } from '@/data/gallery'
+import { galleryImages, galleryHeading } from '@/data/gallery'
 import SectionWrapper from '@/components/ui/SectionWrapper'
 import SectionHeading from '@/components/ui/SectionHeading'
-import LazyImage      from '@/components/ui/LazyImage'
-import { ANIMATION } from '@/constants'
-import { cn } from '@/utils/cn'
+import LazyImage from '@/components/ui/LazyImage'
 
 function Lightbox({ image, onClose }) {
   if (!image) return null
   return createPortal(
     <AnimatePresence>
-      <motion.div
-        key="lb"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-modal flex items-center justify-center p-4 bg-black/95"
-        onClick={onClose}
-        role="dialog"
-        aria-modal="true"
-        aria-label={image.alt}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
-          aria-label="Cerrar imagen"
-        >
-          <X size={22} />
+      <motion.div key="lb" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+        className="fixed inset-0 z-modal flex items-center justify-center p-4" style={{ background: 'rgba(3,17,38,0.94)' }}
+        onClick={onClose} role="dialog" aria-modal="true" aria-label={image.alt}>
+        <button onClick={onClose} aria-label="Cerrar imagen"
+          className="absolute right-4 top-4 rounded-full border border-white/15 bg-white/10 p-2.5 text-white/80 backdrop-blur-md transition-colors hover:bg-white/20 hover:text-white">
+          <X size={22} aria-hidden="true" />
         </button>
-        <motion.img
-          src={image.src}
-          alt={image.alt}
-          initial={{ scale: 0.92, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="max-w-5xl max-h-[88vh] w-full object-contain rounded-xl"
-          onClick={e => e.stopPropagation()}
-          loading="eager"
-        />
+        <motion.img src={image.src} alt={image.alt} initial={{ scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
+          className="max-h-[88vh] w-full max-w-5xl select-none rounded-2xl object-contain" draggable={false}
+          onClick={(e) => e.stopPropagation()} onContextMenu={(e) => e.preventDefault()} loading="eager" />
       </motion.div>
     </AnimatePresence>,
     document.body
@@ -52,72 +32,26 @@ function Lightbox({ image, onClose }) {
 }
 
 export default function Gallery() {
-  const [active,    setActive]    = useState('all')
-  const [lightbox,  setLightbox]  = useState(null)
-
-  const filtered = active === 'all'
-    ? galleryImages
-    : galleryImages.filter(img => img.category === active)
-
+  const [lightbox, setLightbox] = useState(null)
   return (
-    <SectionWrapper id="gallery" background="elevated">
-      <SectionHeading
-        id="gallery-heading"
-        eyebrow={galleryHeading.eyebrow}
-        title={galleryHeading.title}
-        subtitle={galleryHeading.subtitle}
-      />
+    <SectionWrapper id="gallery" background="elevated" glow>
+      <SectionHeading id="gallery-heading" eyebrow={galleryHeading.eyebrow} title={galleryHeading.title} subtitle={galleryHeading.subtitle} />
 
-      {/* Filter */}
-      <div className="flex gap-2 flex-wrap justify-center mb-8" role="group" aria-label="Filtrar galería">
-        {galleryCategories.map(cat => (
-          <button
-            key={cat.id}
-            onClick={() => setActive(cat.id)}
-            aria-pressed={active === cat.id}
-            className={cn(
-              'px-4 py-2 rounded-full text-sm font-ui font-medium transition-all duration-200',
-              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary',
-              active === cat.id
-                ? 'bg-brand-primary text-white'
-                : 'bg-surface-base border border-border-default text-text-secondary hover:border-border-strong hover:text-text-primary'
-            )}
-          >
-            {cat.label}
-          </button>
+      <div className="columns-2 gap-3 space-y-3 md:columns-3 lg:columns-4">
+        {galleryImages.map((img) => (
+          <motion.div key={img.id} initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.35 }} className="break-inside-avoid">
+            <button onClick={() => setLightbox(img)} aria-label={`Ver: ${img.alt}`}
+              className="group relative block w-full cursor-zoom-in overflow-hidden rounded-xl border border-line focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface">
+              <LazyImage src={img.src} alt={img.alt} watermark className="w-full transition-transform duration-500 group-hover:scale-[1.06]" />
+              <div className="absolute inset-0 flex items-center justify-center bg-background/0 transition-colors duration-300 group-hover:bg-background/40">
+                <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white opacity-0 backdrop-blur-md transition-all duration-300 group-hover:opacity-100">
+                  <ZoomIn size={20} strokeWidth={2} aria-hidden="true" />
+                </span>
+              </div>
+            </button>
+          </motion.div>
         ))}
-      </div>
-
-      {/* Grid — masonry-style with columns */}
-      <div className="columns-2 md:columns-3 lg:columns-4 gap-3 space-y-3">
-        <AnimatePresence mode="popLayout">
-          {filtered.map(img => (
-            <motion.div
-              key={img.id}
-              layout
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.92 }}
-              transition={{ duration: 0.25 }}
-              className="break-inside-avoid"
-            >
-              <button
-                onClick={() => setLightbox(img)}
-                aria-label={`Ver: ${img.alt}`}
-                className="group relative w-full overflow-hidden rounded-xl block cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary"
-              >
-                <LazyImage
-                  src={img.src}
-                  alt={img.alt}
-                  className="w-full group-hover:scale-105 transition-transform duration-400"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-200 flex items-center justify-center">
-                  <ZoomIn size={24} className="text-white opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" aria-hidden="true" />
-                </div>
-              </button>
-            </motion.div>
-          ))}
-        </AnimatePresence>
       </div>
 
       <Lightbox image={lightbox} onClose={() => setLightbox(null)} />
