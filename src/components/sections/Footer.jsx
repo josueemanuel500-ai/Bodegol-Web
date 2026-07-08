@@ -58,32 +58,32 @@ export default function Footer() {
             )}
           </div>
 
-          {/* Nav columns (first two only — keep it minimal) */}
-          {footerConfig.columns.slice(0, 2).map((col) => (
-            <div key={col.heading} className="flex flex-col gap-4">
-              <h3 className="t-label text-content-primary">{col.heading}</h3>
-              <ul className="flex flex-col gap-2.5">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <a href={link.href} className="font-ui text-sm text-content-secondary transition-colors hover:text-primary">{link.label}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Reservaciones */}
+          <div className="flex flex-col gap-4">
+            <h3 className="t-label text-content-primary">{footerConfig.columns[1].heading}</h3>
+            <ul className="flex flex-col gap-2.5">
+              {footerConfig.columns[1].links.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} className="font-ui text-sm text-content-secondary transition-colors hover:text-primary">{link.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Horarios — al costado de Reservaciones */}
+          <div className="flex flex-col gap-4">
+            <h3 className="t-label text-content-primary">Horarios</h3>
+            <dl className="flex flex-col gap-2.5">
+              {business.hours.map((h) => (
+                <div key={h.days}>
+                  <dt className="font-ui text-sm text-content-secondary">{h.days}</dt>
+                  <dd className="font-ui text-sm font-semibold text-content-primary">{h.time}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
 
-        {/* Hours */}
-        <div className="mt-12 border-t border-line pt-8">
-          <dl className="flex flex-wrap gap-x-8 gap-y-2">
-            {business.hours.map((h) => (
-              <div key={h.days} className="flex items-center gap-2 text-sm font-ui">
-                <dt className="text-content-muted">{h.days}:</dt>
-                <dd className="font-medium text-content-primary">{h.time}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
       </div>
 
       {/* Bottom bar */}

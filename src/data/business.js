@@ -37,8 +37,8 @@ export const business = {
     country:     'México',
     zip:         '97204',
     fullAddress: 'C. 3 Bodega 5 y 6, Zona Industrial, 97204 Mérida, Yucatán',
-    mapsUrl:     'https://maps.google.com/?q=Bodegol+C.+3+Bodega+5+y+6+Zona+Industrial+97204+Merida+Yucatan',
-    mapsEmbed:   'https://maps.google.com/maps?q=C.+3+Bodega+5+y+6,+Zona+Industrial,+97204+Merida,+Yucatan&z=16&output=embed',
+    mapsUrl:     'https://maps.google.com/?q=Deportivo+Bodegol+C.+3+Bodega+5+y+6+Zona+Industrial+97204+Merida+Yucatan',
+    mapsEmbed:   'https://maps.google.com/maps?q=Deportivo+Bodegol,+C.+3+Bodega+5+y+6,+Zona+Industrial,+97204+Merida,+Yucatan&z=17&output=embed',
   },
 
   // Official opening hours

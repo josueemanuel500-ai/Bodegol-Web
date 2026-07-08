@@ -72,7 +72,12 @@ export default function MenuSection() {
           {filtered.map((item) => <MenuItem key={item.id} item={item} />)}
         </AnimatePresence>
       </motion.div>
-      <div className="mt-12 flex flex-col items-center gap-4 text-center">
+
+      <p className="mt-6 text-center text-xs italic text-content-muted">
+        Imágenes con fines ilustrativos. La presentación real puede variar.
+      </p>
+
+      <div className="mt-8 flex flex-col items-center gap-4 text-center">
         <p className="font-ui text-sm text-content-muted">¿Listo para ordenar? Pide directo por WhatsApp.</p>
         <Button as="a" href={waUrl} target="_blank" rel="noopener noreferrer" variant="primary" size="lg" icon={MessageCircle}>
           Hacer pedido por WhatsApp

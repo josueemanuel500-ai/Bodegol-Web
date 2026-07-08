@@ -57,6 +57,7 @@ export default function ReservationCTA() {
                 </li>
               ))}
             </ul>
+            <p className="mt-4 text-[0.7rem] text-white/45">Aplican restricciones.</p>
           </div>
         </motion.div>
       </div>
