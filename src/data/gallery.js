@@ -12,22 +12,14 @@ export const galleryHeading = {
 }
 
 export const galleryImages = [
-  { id: 'g1',  src: '/images/gallery/cancha-noche.jpg',   alt: 'Cancha de fútbol 5v5 iluminada de noche en Bodegol' },
-  { id: 'g2',  src: '/images/gallery/botana.jpg',         alt: 'Botana recién servida en Bodegol' },
-  { id: 'g3',  src: '/images/gallery/ambiente-bar.jpg',   alt: 'Ambiente del bar y pantallas gigantes en Bodegol' },
-  { id: 'g4',  src: '/images/gallery/cumpleanos.jpg',     alt: 'Celebración de cumpleaños en Bodegol' },
-  { id: 'g5',  src: '/images/gallery/hamburguesa.jpg',    alt: 'Hamburguesa Bodegol con papas' },
-  { id: 'g6',  src: '/images/gallery/cancha-dia.jpg',     alt: 'Cancha de pasto sintético de día en Bodegol' },
-  { id: 'g7',  src: '/images/gallery/michelada.jpg',      alt: 'Michelada servida en Bodegol' },
-  { id: 'g8',  src: '/images/gallery/partido.jpg',        alt: 'Grupo viendo el partido en pantalla gigante' },
-  { id: 'g9',  src: '/images/gallery/cancha-aerial.jpg',  alt: 'Vista aérea de las canchas de Bodegol' },
-  { id: 'g10', src: '/images/gallery/evento-empresa.jpg', alt: 'Evento en las instalaciones de Bodegol' },
-  { id: 'g11', src: '/images/gallery/frappe.jpg',         alt: 'Frappé servido en Bodegol' },
-  { id: 'g12', src: '/images/gallery/vestidores.jpg',     alt: 'Vestidores modernos y limpios de Bodegol' },
-  { id: 'g13', src: '/images/gallery/evento-equipo-verde.jpg', alt: 'Equipo reunido en la cancha interior de Bodegol' },
-  { id: 'g14', src: '/images/gallery/subcampeones-torneo.jpg',  alt: 'Subcampeones del torneo Bodegol con trofeo y premio' },
-  { id: 'g15', src: '/images/gallery/trofeo-subcampeon.jpg',    alt: 'Jugador con trofeo de subcampeón en Bodegol' },
-  { id: 'g16', src: '/images/gallery/campeonas-torneo.jpg',     alt: 'Campeonas del torneo Bodegol con trofeo y premio' },
+  { id: 'g1', src: '/images/gallery/ambiente-bar.jpg',          alt: 'Ambiente del bar y pantallas gigantes en Bodegol' },
+  { id: 'g2', src: '/images/gallery/evento-empresa.jpg',        alt: 'Evento en las instalaciones de Bodegol' },
+  { id: 'g3', src: '/images/gallery/partido.jpg',               alt: 'Grupo viendo el partido en pantalla gigante' },
+  { id: 'g4', src: '/images/gallery/vestidores.jpg',            alt: 'Vestidores modernos y limpios de Bodegol' },
+  { id: 'g5', src: '/images/gallery/evento-equipo-verde.jpg',   alt: 'Equipo reunido en la cancha interior de Bodegol' },
+  { id: 'g6', src: '/images/gallery/subcampeones-torneo.jpg',   alt: 'Subcampeones del torneo Bodegol con trofeo y premio' },
+  { id: 'g7', src: '/images/gallery/trofeo-subcampeon.jpg',     alt: 'Jugador con trofeo de subcampeón en Bodegol' },
+  { id: 'g8', src: '/images/gallery/campeonas-torneo.jpg',      alt: 'Campeonas del torneo Bodegol con trofeo y premio' },
 ]
 
 export default galleryImages
