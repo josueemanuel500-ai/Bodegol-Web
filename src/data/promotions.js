@@ -18,13 +18,13 @@ export const promotions = [
     tag:         'Diario',
     emoji:       '🍺',
     title:       'Happy Hour',
-    description: 'Cervezas nacionales 2×1, cocteles con 30% OFF y caguamas en $240 desde las 10 PM.',
+    description: 'Pa que compartas caguamas a tan solo $240.',
     schedule:    'Diario · desde 10:00 PM',
     image:       '/images/promotions/happy-hour.jpg',
     imageAlt:    'Cervezas 2x1 Happy Hour Bodegol',
     cta: {
       label:   'Quiero aprovechar',
-      message: '¡Hola! Vi que tienen Happy Hour y caguamas en $240 desde las 10 PM. ¿Está disponible hoy?',
+      message: '¡Hola! Vi que tienen caguamas a tan solo $240 desde las 10 PM. ¿Está disponible hoy?',
     },
   },
   {
