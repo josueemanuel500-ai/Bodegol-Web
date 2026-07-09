@@ -24,6 +24,10 @@ export const galleryImages = [
   { id: 'g10', src: '/images/gallery/evento-empresa.jpg', alt: 'Evento en las instalaciones de Bodegol' },
   { id: 'g11', src: '/images/gallery/frappe.jpg',         alt: 'Frappé servido en Bodegol' },
   { id: 'g12', src: '/images/gallery/vestidores.jpg',     alt: 'Vestidores modernos y limpios de Bodegol' },
+  { id: 'g13', src: '/images/gallery/evento-equipo-verde.jpg', alt: 'Equipo reunido en la cancha interior de Bodegol' },
+  { id: 'g14', src: '/images/gallery/subcampeones-torneo.jpg',  alt: 'Subcampeones del torneo Bodegol con trofeo y premio' },
+  { id: 'g15', src: '/images/gallery/trofeo-subcampeon.jpg',    alt: 'Jugador con trofeo de subcampeón en Bodegol' },
+  { id: 'g16', src: '/images/gallery/campeonas-torneo.jpg',     alt: 'Campeonas del torneo Bodegol con trofeo y premio' },
 ]
 
 export default galleryImages
