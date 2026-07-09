@@ -45,16 +45,16 @@ export const promotions = [
   {
     id:          'cancha-madrugadores',
     active:      true,
-    tag:         'Fines de semana',
+    tag:         'Cubetazo',
     emoji:       '🌅',
-    title:       'Madrugadores',
-    description: '30% de descuento en canchas reservadas antes de las 2 PM los sábados y domingos.',
-    schedule:    'Sáb y Dom · antes de 2:00 PM',
+    title:       'Cubetazos Mixtos',
+    description: 'Cubetazos mixtos de XX Lager, Ultra y XX Lager Ámbar en $300.',
+    schedule:    'Promoción por tiempo limitado',
     image:       '/images/promotions/madrugadores.jpg',
     imageAlt:    'Descuento cancha mañana Bodegol',
     cta: {
-      label:   'Reservar temprano',
-      message: '¡Hola! Quiero aprovechar el descuento de madrugadores. ¿Tienen disponibilidad este fin de semana?',
+      label:   'Quiero aprovechar',
+      message: '¡Hola! Vi la promo de cubetazos mixtos en $300. ¿Sigue disponible?',
     },
   },
 ]
