@@ -57,6 +57,21 @@ export const promotions = [
       message: '¡Hola! Vi la promo de cubetazos mixtos en $300. ¿Sigue disponible?',
     },
   },
+  {
+    id:          'michelada-duo',
+    active:      true,
+    tag:         'Diario',
+    emoji:       '🍻',
+    title:       'La Pareja Perfecta',
+    description: 'Pa este calor, la pareja perfecta a solo $60.',
+    schedule:    'Todos los días',
+    image:       '/images/promotions/michelada-duo.jpg',
+    imageAlt:    'Michelada con cerveza Dos Equis Bodegol',
+    cta: {
+      label:   'Quiero aprovechar',
+      message: '¡Hola! Vi la promo de la pareja perfecta a solo $60. ¿Está disponible hoy?',
+    },
+  },
 ]
 
 export const activePromotions = promotions.filter(p => p.active)
