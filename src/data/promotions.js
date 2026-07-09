@@ -30,16 +30,16 @@ export const promotions = [
   {
     id:          'combo-partido',
     active:      true,
-    tag:         'Días de partido',
+    tag:         'Tiempo limitado',
     emoji:       '📺',
-    title:       'Combo Partido',
-    description: 'Jarra de cerveza + orden de botana + entrada al área de pantallas a precio especial.',
-    schedule:    'Días de partido de Champions y Liga MX',
+    title:       'Hot Dogs',
+    description: 'Hot Dogs con papas a la francesa por $60.',
+    schedule:    'Válido por tiempo limitado',
     image:       '/images/promotions/combo-partido.jpg',
-    imageAlt:    'Combo partido Bodegol pantallas',
+    imageAlt:    'Hot dogs con papas a la francesa Bodegol',
     cta: {
-      label:   'Ver próximos partidos',
-      message: '¡Hola! ¿Cuándo es el próximo partido con el combo especial?',
+      label:   'Promociones del mes',
+      message: '¡Hola! Vi la promo de Hot Dogs con papas a la francesa por $60. ¿Sigue disponible?',
     },
   },
   {
