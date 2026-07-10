@@ -29,8 +29,9 @@ export default function ReservationCTA() {
           className="relative overflow-hidden rounded-[2rem] border border-primary/25 px-6 py-16 text-center md:px-16 md:py-20"
           style={{ background: 'linear-gradient(150deg, var(--surface) 0%, var(--background) 100%)' }}>
           {/* IMAGE backdrop — 2000×1100 */}
-          <div className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-15 mix-blend-luminosity"
-            style={{ backgroundImage: "url('/images/cta/reservation-bg.jpg')" }} aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-35"
+            style={{ backgroundImage: "url('/images/cta/reservation-bg.jpg?v=20260710')" }} aria-hidden="true" />
+          <div className="pointer-events-none absolute inset-0 bg-background/55" aria-hidden="true" />
           <div className="pointer-events-none absolute -top-24 left-1/2 h-72 w-[36rem] -translate-x-1/2 rounded-full blur-3xl"
             style={{ background: 'radial-gradient(circle, rgba(255,105,15,0.32) 0%, transparent 70%)' }} aria-hidden="true" />
 
