@@ -43,7 +43,7 @@ export const business = {
 
   // Official opening hours
   hours: [
-    { days: 'Lunes – Viernes', time: '10:00 AM – 11:00 PM' },
+    { days: 'Lunes – Viernes', time: '10:00 AM – 2:00 AM'  },
     { days: 'Sábado',          time: '9:00 AM – 7:00 PM'   },
     { days: 'Domingo',         time: '9:00 AM – 3:00 PM'   },
   ],
