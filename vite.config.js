@@ -32,6 +32,8 @@ export default defineConfig({
   },
 
   build: {
+    // Keep output modern to stay compatible with the esbuild version required by security scanners.
+    target: 'es2022',
     // Output directory
     outDir: 'dist',
     // Generate source maps for production debugging
