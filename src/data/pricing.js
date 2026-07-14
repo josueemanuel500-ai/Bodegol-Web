@@ -29,15 +29,16 @@ export const pricingPlans = [
     name:     'Cancha Especial',
     popular:  false,
     tiers: [
-      { label: '1 hora', price: '$500', unit: 'MXN' },
+      { label: '1 hora · desde 10 PM', price: '$500', unit: 'MXN' },
     ],
     features: [
       'Fútbol 5 vs 5 (10 jugadores)',
-      'Tarifa preferente',
+      'Disponible a partir de las 10:00 PM',
+      'Sujeta a disponibilidad',
       'Iluminación nocturna LED',
       'Balón oficial + vestidores',
     ],
-    cta: { label: 'Reservar cancha', message: '¡Hola! Quiero reservar la Cancha Especial en Bodegol.' },
+    cta: { label: 'Preguntar disponibilidad', message: '¡Hola! Quiero reservar la Cancha Especial de $500 después de las 10:00 PM. ¿Tienen disponibilidad?' },
   },
 ]
 

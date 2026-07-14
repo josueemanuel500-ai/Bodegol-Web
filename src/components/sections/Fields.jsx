@@ -30,7 +30,7 @@ export default function Fields() {
   const [activeField, setActiveField] = useState(fields[0].id)
   const selected = fields.find((f) => f.id === activeField) || fields[0]
   const waUrl = buildWhatsAppUrl(business.contact.whatsapp,
-    `¡Hola! Quiero reservar la ${selected.name} en Bodegol. ¿Tienen disponibilidad?`)
+    selected.reservationMessage || `¡Hola! Quiero reservar la ${selected.name} en Bodegol. ¿Tienen disponibilidad?`)
 
   return (
     <SectionWrapper id="canchas" background="elevated" glow>
