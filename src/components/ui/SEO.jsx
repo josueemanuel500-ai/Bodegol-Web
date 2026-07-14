@@ -8,11 +8,12 @@ import React from 'react'
 import { Helmet } from 'react-helmet-async'
 import seoDefaults from '@/config/seo.config'
 
-export default function SEO({ title, description, image, path, type = 'website', noIndex = false }) {
+export default function SEO({ title, description, image, imageAlt, path, type = 'website', noIndex = false }) {
   const fullTitle = title ? seoDefaults.titleTemplate.replace('%s', title) : seoDefaults.defaultTitle
   const desc = description || seoDefaults.description
   const url = `${seoDefaults.siteUrl}${path || (typeof window !== 'undefined' ? window.location.pathname : '/')}`
   const img = `${seoDefaults.siteUrl}${image || seoDefaults.ogImage}`
+  const imgAlt = imageAlt || seoDefaults.ogImageAlt
 
   return (
     <Helmet prioritizeSeoTags>
@@ -29,6 +30,11 @@ export default function SEO({ title, description, image, path, type = 'website',
       <meta property="og:description" content={desc} />
       <meta property="og:url" content={url} />
       <meta property="og:image" content={img} />
+      <meta property="og:image:secure_url" content={img} />
+      <meta property="og:image:type" content={seoDefaults.ogImageType} />
+      <meta property="og:image:width" content={seoDefaults.ogImageWidth} />
+      <meta property="og:image:height" content={seoDefaults.ogImageHeight} />
+      <meta property="og:image:alt" content={imgAlt} />
       <meta property="og:locale" content={seoDefaults.locale} />
 
       {/* Twitter */}
@@ -36,6 +42,7 @@ export default function SEO({ title, description, image, path, type = 'website',
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={desc} />
       <meta name="twitter:image" content={img} />
+      <meta name="twitter:image:alt" content={imgAlt} />
     </Helmet>
   )
 }
