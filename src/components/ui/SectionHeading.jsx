@@ -12,10 +12,10 @@ const ALIGN = {
 }
 
 export default function SectionHeading({
-  eyebrow, title, subtitle, align = 'center', id, as: Tag = 'h2', accent = true,
+  eyebrow, title, subtitle, align = 'center', id, as: Tag = 'h2', accent = true, className = '',
 }) {
   return (
-    <div className={cn('flex flex-col gap-4 mb-14 md:mb-20', ALIGN[align] || ALIGN.center)}>
+    <div className={cn('flex flex-col gap-4 mb-14 md:mb-20', ALIGN[align] || ALIGN.center, className)}>
       {eyebrow && (
         <span className="inline-flex items-center gap-2 self-auto">
           {accent && <span className="h-px w-6 bg-primary" aria-hidden="true" />}
