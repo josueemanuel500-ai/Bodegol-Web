@@ -48,7 +48,7 @@ export const packages = [
     features: [
       'Áreas climatizadas',
       '3 horas de servicio',
-      'Pizza',
+      'Opciones de comida: pizza, hot dogs, hamburguesas y croissants',
       'Agua 500 ml y Power 500 ml',
       'Pastel de chocolate o vainilla',
       'Piñata',
