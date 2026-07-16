@@ -13,10 +13,14 @@ export const siteConfig = {
   isProd: import.meta.env.PROD,
 
   // ── API endpoints ──────────────────────────────────────────────────
+  // Nota: la URL y la anon key de Supabase son PÚBLICAS (viajan en el navegador;
+  // la seguridad real la dan las políticas RLS). Se dejan como valor por defecto
+  // para que funcione al desplegar por git sin configurar variables de entorno.
+  // El .env local (VITE_SUPABASE_*) sigue teniendo prioridad como override.
   api: {
     baseUrl:      import.meta.env.VITE_API_URL           || 'http://localhost:4000',
-    supabaseUrl:  import.meta.env.VITE_SUPABASE_URL      || '',
-    supabaseKey:  import.meta.env.VITE_SUPABASE_ANON_KEY || '',
+    supabaseUrl:  import.meta.env.VITE_SUPABASE_URL      || 'https://vucytmlgksahnoqtbyhf.supabase.co',
+    supabaseKey:  import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1Y3l0bWxna3NhaG5vcXRieWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NDY0NzMsImV4cCI6MjA5ODMyMjQ3M30.JtHTm4GU-PaH7Y51Gksvcje5PS2aD6-_QzCZzkWOr1k',
   },
 
   // ── Analytics ──────────────────────────────────────────────────────
