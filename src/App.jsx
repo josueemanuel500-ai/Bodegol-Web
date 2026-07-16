@@ -12,6 +12,8 @@ import { ThemeProvider } from '@/context/ThemeContext'
 import { BusinessProvider } from '@/context/BusinessContext'
 import { AnalyticsProvider } from '@/context/AnalyticsContext'
 import { ToastProvider } from '@/components/ui/Toast'
+import { AdminProvider } from '@/context/AdminContext'
+import AdminPanel from '@/components/admin/AdminPanel'
 import PageLoader from '@/components/ui/PageLoader'
 
 export default function App() {
@@ -19,15 +21,18 @@ export default function App() {
     <HelmetProvider>
       <ThemeProvider>
         <BusinessProvider>
-          <ToastProvider>
-            <BrowserRouter>
-              <AnalyticsProvider>
-                <Suspense fallback={<PageLoader />}>
-                  <AppRouter />
-                </Suspense>
-              </AnalyticsProvider>
-            </BrowserRouter>
-          </ToastProvider>
+          <AdminProvider>
+            <ToastProvider>
+              <BrowserRouter>
+                <AnalyticsProvider>
+                  <Suspense fallback={<PageLoader />}>
+                    <AppRouter />
+                  </Suspense>
+                </AnalyticsProvider>
+              </BrowserRouter>
+            </ToastProvider>
+            <AdminPanel />
+          </AdminProvider>
         </BusinessProvider>
       </ThemeProvider>
     </HelmetProvider>

@@ -8,7 +8,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { MessageCircle, Clock, ArrowRight } from 'lucide-react'
-import { activePromotions, promotionsHeading } from '@/data/promotions'
+import { promotionsHeading } from '@/data/promotions'
+import { usePromotions } from '@/hooks/usePromotions'
 import { useBusiness } from '@/context/BusinessContext'
 import { buildWhatsAppUrl } from '@/utils/format'
 import SectionWrapper from '@/components/ui/SectionWrapper'
@@ -19,14 +20,15 @@ import { ANIMATION } from '@/constants'
 
 export default function Promotions() {
   const { business } = useBusiness()
-  if (activePromotions.length === 0) return null
+  const { promotions } = usePromotions()
+  if (!promotions || promotions.length === 0) return null
 
   return (
     <SectionWrapper id="promotions" background="base" glow>
       <SectionHeading id="promotions-heading" eyebrow={promotionsHeading.eyebrow} title={promotionsHeading.title} subtitle={promotionsHeading.subtitle} />
       <motion.div variants={ANIMATION.STAGGER} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
         className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {activePromotions.map((promo) => {
+        {promotions.map((promo) => {
           const waUrl = buildWhatsAppUrl(business.contact.whatsapp, promo.cta.message)
           return (
             <motion.a key={promo.id} variants={ANIMATION.FADE_UP} href={waUrl} target="_blank" rel="noopener noreferrer"

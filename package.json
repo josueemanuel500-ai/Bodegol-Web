@@ -14,6 +14,7 @@
     "sitemap": "node scripts/generate-sitemap.mjs"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.110.6",
     "framer-motion": "^11.0.0",
     "lucide-react": "^0.378.0",
     "react": "^18.3.0",

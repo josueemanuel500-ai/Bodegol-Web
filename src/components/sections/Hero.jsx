@@ -12,6 +12,8 @@ import { MessageCircle, ArrowRight, ChevronDown } from 'lucide-react'
 import { heroContent } from '@/data/hero'
 import { useBusiness } from '@/context/BusinessContext'
 import { buildWhatsAppUrl } from '@/utils/format'
+import { useAdmin } from '@/context/AdminContext'
+import { useSecretTap } from '@/hooks/useSecretTap'
 import { cn } from '@/utils/cn'
 
 const container = { hidden: {}, visible: { transition: { staggerChildren: 0.13, delayChildren: 0.15 } } }
@@ -20,6 +22,8 @@ const rise = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, trans
 export default function Hero() {
   const { business } = useBusiness()
   const reduce = useReducedMotion()
+  const { openAdmin } = useAdmin()
+  const secretTap = useSecretTap(openAdmin) // 7 toques en el logo → panel admin
   const waUrl = buildWhatsAppUrl(business.contact.whatsapp, heroContent.cta.primary.message)
   const title = heroContent.headline
   const endsDot = title.trimEnd().endsWith('.')
@@ -64,7 +68,8 @@ export default function Hero() {
             src={business.logo.main}
             alt={business.logo.alt}
             draggable={false}
-            className="h-44 w-auto select-none drop-shadow-2xl md:h-56"
+            onClick={secretTap}
+            className="h-44 w-auto cursor-default select-none drop-shadow-2xl md:h-56"
           />
         </motion.div>
 
