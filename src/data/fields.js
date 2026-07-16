@@ -14,7 +14,7 @@ const baseSpecs = {
   capacity: '10 jugadores (5 vs 5)',
   surface:  'Pasto sintético profesional',
   lighting: 'Iluminación nocturna LED',
-  features: ['Vestidores y regaderas', 'Balón oficial incluido', 'Porterías con red', 'Marcación reglamentaria'],
+  features: ['Vestidores y regaderas', 'Porterías con red', 'Marcación reglamentaria'],
   available: true,
 }
 
@@ -28,7 +28,6 @@ export const fields = [
 
 export const fieldFAQ = [
   { q: '¿Puedo reservar por horas?',        a: 'Sí, reservamos por horas. Mínimo 1 hora por reservación.' },
-  { q: '¿Incluyen balón?',                  a: 'Sí, el balón oficial está incluido.' },
   { q: '¿Tienen vestidores?',               a: 'Sí, contamos con vestidores y regaderas sin costo adicional.' },
   { q: '¿Puedo cancelar mi reservación?',   a: 'Cancelaciones con más de 2 horas de anticipación no generan cargo.' },
 ]

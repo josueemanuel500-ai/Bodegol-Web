@@ -23,7 +23,6 @@ export const packages = [
     image:       '/images/packages/paquete-cancha.jpg',
     features: [
       'Cancha de fútbol 5v5 (5 vs 5)',
-      'Balón oficial incluido',
       'Vestidores y regaderas',
       'Marcación reglamentaria',
     ],
