@@ -8,12 +8,12 @@
 import React, { useEffect, useState, useCallback } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, Plus, Trash2, Pencil, LogOut, Save, ShieldAlert, Loader2, Eye, EyeOff, RefreshCw } from 'lucide-react'
+import { X, Plus, Trash2, Pencil, LogOut, Save, ShieldAlert, Loader2, Eye, EyeOff, RefreshCw, Upload } from 'lucide-react'
 import { useAdmin } from '@/context/AdminContext'
 import { isSupabaseConfigured } from '@/services/supabase.service'
 import {
   fetchPromotions, createPromotion, updatePromotion, deletePromotion,
-  signIn, signOut, getSession, onAuthChange,
+  uploadPromotionImage, signIn, signOut, getSession, onAuthChange,
 } from '@/services/promotions.service'
 import { cn } from '@/utils/cn'
 
@@ -67,8 +67,17 @@ function Login({ onDone }) {
 // ── Formulario de promoción ──────────────────────────────────────────────
 function PromoForm({ initial, onSave, onCancel, busy }) {
   const [p, setP] = useState(initial || EMPTY)
+  const [uploading, setUploading] = useState(false)
+  const [upErr, setUpErr] = useState('')
   const set = (k, v) => setP((prev) => ({ ...prev, [k]: v }))
   const setCta = (k, v) => setP((prev) => ({ ...prev, cta: { ...prev.cta, [k]: v } }))
+  const onPickFile = async (e) => {
+    const f = e.target.files?.[0]; if (!f) return
+    setUploading(true); setUpErr('')
+    try { const url = await uploadPromotionImage(f); set('image', url) }
+    catch (er) { setUpErr(er?.message || 'No se pudo subir la imagen.') }
+    finally { setUploading(false); e.target.value = '' }
+  }
   return (
     <form onSubmit={(e) => { e.preventDefault(); onSave(p) }} className="flex flex-col gap-3">
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -80,7 +89,24 @@ function PromoForm({ initial, onSave, onCancel, busy }) {
         <Field label="Horario"><input value={p.schedule} onChange={(e) => set('schedule', e.target.value)} className={glassField} placeholder="Lun–Vie · 5–7 PM" /></Field>
         <Field label="Orden (menor = primero)"><input type="number" value={p.sort} onChange={(e) => set('sort', e.target.value)} className={glassField} placeholder="0" /></Field>
       </div>
-      <Field label="Imagen (ruta)"><input value={p.image} onChange={(e) => set('image', e.target.value)} className={glassField} placeholder="/images/promotions/happy-hour.jpg" /></Field>
+      <div className="flex flex-col gap-2">
+        <span className="font-ui text-xs font-semibold uppercase tracking-wide text-white/70">
+          Imagen — recomendado 1080 × 1080 px (cuadrada) · PNG o JPG · máx 3 MB
+        </span>
+        {p.image && (
+          <img src={p.image} alt="Vista previa" className="h-28 w-28 rounded-xl border border-white/15 object-cover" />
+        )}
+        <div className="flex flex-wrap items-center gap-2">
+          <label className="inline-flex cursor-pointer items-center gap-2 rounded-xl border border-white/20 bg-white/10 px-3 py-2 text-sm text-white transition hover:bg-white/20">
+            {uploading ? <Loader2 size={16} className="animate-spin" /> : <Upload size={16} />}
+            {uploading ? 'Subiendo…' : 'Subir PNG/JPG'}
+            <input type="file" accept="image/png,image/jpeg" className="hidden" disabled={uploading} onChange={onPickFile} />
+          </label>
+          {p.image && <button type="button" onClick={() => set('image', '')} className="text-xs text-white/60 hover:text-white">Quitar</button>}
+        </div>
+        {upErr && <p className="text-xs text-red-300">{upErr}</p>}
+        <input value={p.image} onChange={(e) => set('image', e.target.value)} className={glassField} placeholder="o pega una ruta/URL de imagen" />
+      </div>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <Field label="Texto del botón"><input value={p.cta?.label} onChange={(e) => setCta('label', e.target.value)} className={glassField} placeholder="Quiero aprovechar" /></Field>
         <Field label="Mensaje WhatsApp"><input value={p.cta?.message} onChange={(e) => setCta('message', e.target.value)} className={glassField} placeholder="¡Hola! Quiero info de..." /></Field>

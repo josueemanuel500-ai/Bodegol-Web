@@ -37,13 +37,13 @@ export default function Gallery() {
     <SectionWrapper id="gallery" background="elevated" glow>
       <SectionHeading id="gallery-heading" eyebrow={galleryHeading.eyebrow} title={galleryHeading.title} subtitle={galleryHeading.subtitle} />
 
-      <div className="columns-2 gap-3 space-y-3 md:columns-3 lg:columns-4">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {galleryImages.map((img) => (
           <motion.div key={img.id} initial={{ opacity: 0, scale: 0.96 }} whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.35 }} className="break-inside-avoid">
+            viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.35 }}>
             <button onClick={() => setLightbox(img)} aria-label={`Ver: ${img.alt}`}
-              className="group relative block w-full cursor-zoom-in overflow-hidden rounded-xl border border-line focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface">
-              <LazyImage src={img.src} alt={img.alt} watermark className="w-full transition-transform duration-500 group-hover:scale-[1.06]" />
+              className="group relative block aspect-[4/3] w-full cursor-zoom-in overflow-hidden rounded-xl border border-line focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-surface">
+              <LazyImage src={img.src} alt={img.alt} watermark className="h-full w-full transition-transform duration-500 group-hover:scale-[1.06]" />
               <div className="absolute inset-0 flex items-center justify-center bg-background/0 transition-colors duration-300 group-hover:bg-background/40">
                 <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white opacity-0 backdrop-blur-md transition-all duration-300 group-hover:opacity-100">
                   <ZoomIn size={20} strokeWidth={2} aria-hidden="true" />

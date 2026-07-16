@@ -88,3 +88,19 @@ export function onAuthChange(cb) {
   const { data } = supabase.auth.onAuthStateChange((_e, session) => cb(session))
   return () => data.subscription.unsubscribe()
 }
+
+// ── Storage: subir imagen de promoción (bucket "promotions") ─────────────────
+export async function uploadPromotionImage(file) {
+  if (!isSupabaseConfigured) throw new Error('Supabase no está configurado.')
+  const ok = ['image/png', 'image/jpeg', 'image/jpg', 'image/webp']
+  if (!ok.includes(file.type)) throw new Error('Formato no válido. Usa PNG o JPG.')
+  if (file.size > 3 * 1024 * 1024) throw new Error('La imagen pesa más de 3 MB. Redúcela.')
+  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase().replace('jpeg', 'jpg')
+  const path = `promo-${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`
+  const { error } = await supabase.storage.from('promotions').upload(path, file, {
+    cacheControl: '3600', contentType: file.type, upsert: false,
+  })
+  if (error) throw error
+  const { data } = supabase.storage.from('promotions').getPublicUrl(path)
+  return data.publicUrl
+}
