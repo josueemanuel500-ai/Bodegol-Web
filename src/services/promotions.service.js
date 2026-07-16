@@ -65,8 +65,12 @@ export async function updatePromotion(id, p) {
 }
 
 export async function deletePromotion(id) {
-  const { error } = await supabase.from(TABLE).delete().eq('id', id)
+  const { data, error } = await supabase.from(TABLE).delete().eq('id', id).select()
   if (error) throw error
+  if (!data || data.length === 0) {
+    throw new Error('No se eliminó. Es posible que tu sesión haya expirado: cierra sesión y vuelve a entrar.')
+  }
+  return data
 }
 
 // ── Auth admin ─────────────────────────────────────────────────────────────

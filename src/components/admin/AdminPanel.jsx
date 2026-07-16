@@ -132,6 +132,7 @@ function Manager({ onLogout }) {
   const [editing, setEditing] = useState(null) // promo | 'new' | null
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState('')
+  const [confirmId, setConfirmId] = useState(null)
 
   const load = useCallback(async () => {
     setLoading(true); setErr('')
@@ -151,9 +152,8 @@ function Manager({ onLogout }) {
     finally { setBusy(false) }
   }
   const remove = async (id) => {
-    if (!window.confirm('¿Eliminar esta promoción?')) return
-    setBusy(true)
-    try { await deletePromotion(id); await load() }
+    setBusy(true); setErr('')
+    try { await deletePromotion(id); setConfirmId(null); await load() }
     catch (e) { setErr(e?.message || 'No se pudo eliminar.') }
     finally { setBusy(false) }
   }
@@ -191,8 +191,20 @@ function Manager({ onLogout }) {
                 <p className="truncate font-ui text-sm font-semibold text-white">{p.title || '(sin título)'}</p>
                 <p className="truncate text-xs text-white/50">{p.tag} · {p.schedule}</p>
               </div>
-              <button onClick={() => setEditing(p)} className="rounded-lg p-2 text-white/70 hover:bg-white/10 hover:text-white" aria-label="Editar"><Pencil size={16} /></button>
-              <button onClick={() => remove(p.id)} className="rounded-lg p-2 text-red-300 hover:bg-red-500/20" aria-label="Eliminar"><Trash2 size={16} /></button>
+              {confirmId === p.id ? (
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs text-white/70">¿Eliminar?</span>
+                  <button onClick={() => remove(p.id)} disabled={busy} className="rounded-lg bg-red-500/80 px-2.5 py-1 text-xs font-bold text-white hover:bg-red-500 disabled:opacity-60">
+                    {busy ? '…' : 'Sí'}
+                  </button>
+                  <button onClick={() => setConfirmId(null)} className="rounded-lg border border-white/20 px-2.5 py-1 text-xs text-white/80 hover:bg-white/10">No</button>
+                </div>
+              ) : (
+                <>
+                  <button onClick={() => setEditing(p)} className="rounded-lg p-2 text-white/70 hover:bg-white/10 hover:text-white" aria-label="Editar"><Pencil size={16} /></button>
+                  <button onClick={() => setConfirmId(p.id)} className="rounded-lg p-2 text-red-300 hover:bg-red-500/20" aria-label="Eliminar"><Trash2 size={16} /></button>
+                </>
+              )}
             </li>
           ))}
         </ul>
