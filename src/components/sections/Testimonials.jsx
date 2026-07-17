@@ -48,8 +48,6 @@ function Avatar({ name, src, size = 44 }) {
         alt={name}
         loading="lazy"
         draggable={false}
-        onDragStart={(e) => e.preventDefault()}
-        onContextMenu={(e) => e.preventDefault()}
         width={size}
         height={size}
         className="rounded-full object-cover flex-shrink-0"

@@ -1,0 +1,45 @@
+/**
+ * protection.css — Protección de contenido (producción).
+ * - Bloquea selección de texto y arrastre/callout de imágenes.
+ * - NO afecta campos editables (accesibilidad).
+ * - No usa `touch-action: none` global (rompería el scroll en móvil).
+ */
+
+html, body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Imágenes/media: no arrastrables, no seleccionables, sin "Guardar imagen" (callout) */
+img, picture, svg, video, canvas {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Contenedores con imagen de fondo: sin callout al mantener presionado */
+[style*="background-image"] {
+  -webkit-touch-callout: none;
+}
+
+/* ── ACCESIBILIDAD ──────────────────────────────────────────────────────────
+   Campos editables SIEMPRE seleccionables/editables (formularios, buscadores). */
+input, textarea, select, option, button,
+[contenteditable=""], [contenteditable="true"],
+.allow-select, [data-allow-select], .allow-select * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+  -webkit-user-drag: auto;
+}

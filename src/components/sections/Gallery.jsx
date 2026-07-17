@@ -24,7 +24,7 @@ function Lightbox({ image, onClose }) {
         </button>
         <motion.img src={image.src} alt={image.alt} initial={{ scale: 0.92, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}
           className="max-h-[88vh] w-full max-w-5xl select-none rounded-2xl object-contain" draggable={false}
-          onClick={(e) => e.stopPropagation()} onContextMenu={(e) => e.preventDefault()} loading="eager" />
+          onClick={(e) => e.stopPropagation()} loading="eager" />
       </motion.div>
     </AnimatePresence>,
     document.body

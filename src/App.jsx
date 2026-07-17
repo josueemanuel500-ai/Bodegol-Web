@@ -14,11 +14,13 @@ import { AnalyticsProvider } from '@/context/AnalyticsContext'
 import { ToastProvider } from '@/components/ui/Toast'
 import { AdminProvider } from '@/context/AdminContext'
 import AdminPanel from '@/components/admin/AdminPanel'
+import ContentProtection from '@/components/util/ContentProtection'
 import PageLoader from '@/components/ui/PageLoader'
 
 export default function App() {
   return (
     <HelmetProvider>
+      <ContentProtection />
       <ThemeProvider>
         <BusinessProvider>
           <AdminProvider>

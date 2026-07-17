@@ -17,8 +17,6 @@ const ASPECT_RATIO_CLASSES = {
   landscape: 'aspect-video',
   portrait:  'aspect-[3/4]',
 }
-const preventDefault = (e) => e.preventDefault()
-
 export default function LazyImage({
   src, alt, className = '', aspectRatio = null, objectFit = 'cover',
   priority = false, watermark = false, watermarkText = 'Bodegol', width, height, ...rest
@@ -66,8 +64,6 @@ export default function LazyImage({
           onError={() => setErrored(true)}
           {...rest}
           draggable={false}
-          onDragStart={preventDefault}
-          onContextMenu={preventDefault}
         />
       )}
 
