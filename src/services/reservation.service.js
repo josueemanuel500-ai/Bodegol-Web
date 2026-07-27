@@ -4,15 +4,13 @@
  * All reservation-related API calls go through this service.
  * Components never call the API directly.
  *
- * CURRENT STATE: Stub implementation.
- *   - createReservation() logs to console in dev and simulates a 1s delay.
- *   - Replace the stub with real api.post() calls when the backend is ready.
- *
- * INTEGRATION NOTE:
- *   When integrating with Raven POS or a custom backend:
- *   1. Set VITE_API_URL in .env
- *   2. Replace the stub in createReservation() with: return api.post('/reservations', data)
- *   3. The form component doesn't need to change at all.
+ * Wired to the real Raven POS backend: POST /public/:businessId/reservations
+ * (public/anonymous channel — no login, see reservations/public-reservations.controller.ts
+ * in the raven-pos repo). Real DTO fields: resourceRef, customerName, phone
+ * (optional), startsAt, endsAt (ISO datetimes) — NOT the generic
+ * name/date/time/guests/occasion/notes shape this stub originally assumed;
+ * Bodegol books sports courts (a time range on one of 5 fixed courts), not
+ * restaurant tables. ReservationForm.jsx already sends the right shape.
  */
 
 import api from './api.service'
@@ -22,14 +20,11 @@ import { buildWhatsAppUrl } from '@/utils/format'
 // ─── Types (JSDoc only — no TypeScript) ───────────────────────────────────
 /**
  * @typedef {Object} ReservationData
- * @property {string} name
- * @property {string} phone
- * @property {string} [email]
- * @property {string} date       ISO date string
- * @property {string} time       e.g. '20:00'
- * @property {number} guests
- * @property {string} [occasion]
- * @property {string} [notes]
+ * @property {string} resourceRef   e.g. 'Área 1'..'Área 5'
+ * @property {string} customerName
+ * @property {string} [phone]
+ * @property {string} startsAt      ISO datetime
+ * @property {string} endsAt        ISO datetime
  */
 
 class ReservationService {
@@ -45,14 +40,12 @@ class ReservationService {
       throw new Error('Reservation system is not enabled.')
     }
 
-    // ── STUB: replace with real API call ──
     if (siteConfig.isDev) {
-      console.log('[ReservationService] createReservation (stub):', data)
-      await new Promise((res) => setTimeout(res, 1000))
-      return { id: `res-${Date.now()}`, status: 'pending', ...data }
+      console.log('[ReservationService] createReservation:', data)
     }
 
-    return api.post('/reservations', data)
+    const { data: created } = await api.post(`/public/${siteConfig.businessId}/reservations`, data)
+    return created
   }
 
   /**
@@ -65,28 +58,26 @@ class ReservationService {
   buildWhatsAppReservation(data, whatsappNumber) {
     const lines = [
       `*Nueva Reservación*`,
-      `Nombre: ${data.name}`,
-      `Teléfono: ${data.phone}`,
-      `Fecha: ${data.date}`,
-      `Hora: ${data.time}`,
-      `Personas: ${data.guests}`,
-      data.occasion ? `Ocasión: ${data.occasion}` : null,
-      data.notes    ? `Notas: ${data.notes}`       : null,
+      `Cancha: ${data.resourceRef}`,
+      `Nombre: ${data.customerName}`,
+      data.phone ? `Teléfono: ${data.phone}` : null,
+      `Inicio: ${data.startsAt}`,
+      `Fin: ${data.endsAt}`,
     ].filter(Boolean)
 
     return buildWhatsAppUrl(whatsappNumber, lines.join('\n'))
   }
 
   /**
-   * Check availability for a given date/time/guests combination.
-   * Stub — returns available: true always until backend is integrated.
+   * Existing (non-cancelled) reservations for a court on a given calendar
+   * date — lets the caller compute free slots. Matches
+   * GET /public/:businessId/reservations/availability?resource=&date=
    */
-  async checkAvailability({ date, time, guests }) {
-    if (siteConfig.isDev) {
-      await new Promise((res) => setTimeout(res, 400))
-      return { available: true, remainingSlots: 10 }
-    }
-    return api.get(`/reservations/availability?date=${date}&time=${time}&guests=${guests}`)
+  async checkAvailability({ resourceRef, date }) {
+    const { data } = await api.get(
+      `/public/${siteConfig.businessId}/reservations/availability?resource=${encodeURIComponent(resourceRef)}&date=${date}`
+    )
+    return data
   }
 }
 

@@ -34,9 +34,10 @@ export const siteConfig = {
   // Toggle features without deleting code.
   // Set to true when the corresponding backend integration is ready.
   features: {
-    // Online reservation form (currently uses WhatsApp)
-    // Set true when api.bodegol.com.mx + Supabase is connected
-    reservationSystem: false,
+    // Online reservation form — connected to the real Raven POS backend
+    // (api.bodegol.com.mx) via reservation.service.js. WhatsApp stays as
+    // an alternative option, not replaced.
+    reservationSystem: true,
 
     // Online menu ordering (future)
     onlineOrdering: false,

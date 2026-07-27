@@ -3,12 +3,15 @@
  * IMAGE backdrop — 2000 × 1100 px (16:9), .webp < 400 KB.
  *   public/images/cta/reservation-bg.jpg
  */
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { MessageCircle, Phone, LayoutGrid, Users, CalendarDays } from 'lucide-react'
 import { useBusiness } from '@/context/BusinessContext'
 import { buildWhatsAppUrl } from '@/utils/format'
+import siteConfig from '@/config/site.config'
 import Button from '@/components/buttons/Button'
+import Modal from '@/components/ui/Modal'
+import ReservationForm from '@/components/sections/ReservationForm'
 
 const TRUST = [
   { icon: LayoutGrid, label: '5 canchas disponibles' },
@@ -19,6 +22,7 @@ const TRUST = [
 
 export default function ReservationCTA() {
   const { business } = useBusiness()
+  const [formOpen, setFormOpen] = useState(false)
   const wa = buildWhatsAppUrl(business.contact.whatsapp, '¡Hola Bodegol! Quiero reservar una cancha. ¿Qué disponibilidad tienen?')
 
   return (
@@ -39,9 +43,15 @@ export default function ReservationCTA() {
             <h2 id="reservation-heading" className="t-hero-title text-white" style={{ fontSize: 'clamp(2.25rem, 4.5vw + 1rem, 4.5rem)' }}>
               Reserva tu cancha y vive el fútbol en Bodegol.
             </h2>
-            <div className="mt-1 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row">
-              <Button as="a" href={wa} target="_blank" rel="noopener noreferrer" variant="primary" size="xl" icon={MessageCircle} fullWidth className="sm:w-auto">
-                Reserva tu cancha
+            <div className="mt-1 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row sm:flex-wrap">
+              {siteConfig.features.reservationSystem && (
+                <Button variant="primary" size="xl" icon={CalendarDays} fullWidth className="sm:w-auto" onClick={() => setFormOpen(true)}>
+                  Reservar en línea
+                </Button>
+              )}
+              <Button as="a" href={wa} target="_blank" rel="noopener noreferrer"
+                variant={siteConfig.features.reservationSystem ? 'secondary' : 'primary'} size="xl" icon={MessageCircle} fullWidth className="sm:w-auto">
+                Reserva por WhatsApp
               </Button>
               <Button as="a" href={business.contact.phoneTel} variant="secondary" size="xl" icon={Phone} fullWidth className="sm:w-auto">
                 {business.contact.phone}
@@ -61,6 +71,12 @@ export default function ReservationCTA() {
           </div>
         </motion.div>
       </div>
+
+      {siteConfig.features.reservationSystem && (
+        <Modal isOpen={formOpen} onClose={() => setFormOpen(false)} title="Reserva tu cancha" size="sm">
+          <ReservationForm onSuccess={() => setFormOpen(false)} />
+        </Modal>
+      )}
     </section>
   )
 }
