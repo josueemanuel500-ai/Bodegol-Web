@@ -16,7 +16,6 @@ import SectionWrapper from '@/components/ui/SectionWrapper'
 import SectionHeading from '@/components/ui/SectionHeading'
 import LazyImage from '@/components/ui/LazyImage'
 import Badge from '@/components/ui/Badge'
-import { ANIMATION } from '@/constants'
 
 function Lightbox({ promo, onClose }) {
   if (!promo) return null
@@ -47,12 +46,11 @@ export default function Promotions() {
   return (
     <SectionWrapper id="promotions" background="base" glow>
       <SectionHeading id="promotions-heading" eyebrow={promotionsHeading.eyebrow} title={promotionsHeading.title} subtitle={promotionsHeading.subtitle} />
-      <motion.div variants={ANIMATION.STAGGER} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }}
-        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {promotions.map((promo) => {
           const waUrl = buildWhatsAppUrl(business.contact.whatsapp, promo.cta.message)
           return (
-            <motion.article key={promo.id} variants={ANIMATION.FADE_UP}
+            <article key={promo.id}
               className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-card-lg">
               {/* Imagen — clic para verla en grande */}
               <button type="button" onClick={() => setLightbox(promo)} aria-label={`Ver imagen: ${promo.title}`}
@@ -75,10 +73,10 @@ export default function Promotions() {
                 className="flex items-center justify-center gap-2 bg-primary py-3 font-ui text-sm font-bold text-white transition-colors hover:bg-primary-hover">
                 <MessageCircle size={16} strokeWidth={2} aria-hidden="true" />{promo.cta.label}
               </a>
-            </motion.article>
+            </article>
           )
         })}
-      </motion.div>
+      </div>
       <Lightbox promo={lightbox} onClose={() => setLightbox(null)} />
     </SectionWrapper>
   )
