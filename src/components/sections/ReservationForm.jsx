@@ -8,10 +8,12 @@
  * phone, startsAt, endsAt (ISO). Las 5 canchas son fijas, todas 5 vs 5.
  */
 import React, { useState } from 'react'
-import { CalendarDays, Clock, LayoutGrid, User, Phone, Timer } from 'lucide-react'
+import { CalendarDays, LayoutGrid, User, Phone, Timer } from 'lucide-react'
 import { useToast } from '@/components/ui/Toast'
 import Button from '@/components/buttons/Button'
 import Input from '@/components/forms/Input'
+import DatePickerField from '@/components/forms/DatePickerField'
+import TimePickerField from '@/components/forms/TimePickerField'
 import Chip from '@/components/ui/Chip'
 import reservationService from '@/services/reservation.service'
 
@@ -110,9 +112,9 @@ export default function ReservationForm({ onSuccess }) {
       <div className="rounded-xl border border-line bg-surface-elevated/40 p-4">
         <p className="mb-3 font-ui text-sm font-semibold text-content-secondary">¿Cuándo?</p>
         <div className="grid grid-cols-2 gap-3">
-          <Input id="resv-date" label="Fecha" icon={CalendarDays} type="date" min={todayIso} value={form.date}
+          <DatePickerField id="resv-date" label="Fecha" min={todayIso} value={form.date}
             onChange={set('date')} required />
-          <Input id="resv-time" label="Hora de inicio" icon={Clock} type="time" value={form.startTime}
+          <TimePickerField id="resv-time" label="Hora de inicio" value={form.startTime}
             onChange={set('startTime')} required />
         </div>
 

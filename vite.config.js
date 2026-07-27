@@ -71,5 +71,11 @@ export default defineConfig({
   // Optimize pre-bundling of dependencies
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom', 'framer-motion', 'lucide-react'],
+    // Match build.target — otherwise the dev-time pre-bundler falls back to
+    // Vite's default baseline browser target, which esbuild 0.28 rejects for
+    // destructuring transforms in these deps.
+    esbuildOptions: {
+      target: 'es2022',
+    },
   },
 })

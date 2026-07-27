@@ -29,18 +29,20 @@ export default function Navbar() {
   const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [revealed, setRevealed] = useState(() => location.pathname !== '/')
   const [formOpen, setFormOpen] = useState(false)
 
   useEffect(() => {
-    const fn = () => {
-      setScrolled(window.scrollY > 40)
-      if (window.scrollY > 40) setRevealed(true)
-    }
+    const fn = () => setScrolled(window.scrollY > 40)
     fn()
     window.addEventListener('scroll', fn, { passive: true })
     return () => window.removeEventListener('scroll', fn)
   }, [])
+
+  // Oculto solo sobre el hero de Inicio y solo mientras no se ha bajado —
+  // en cuanto se hace scroll aparece, y al volver arriba se vuelve a
+  // ocultar (simétrico). En cualquier otra página no hay hero de pantalla
+  // completa, así que siempre está visible.
+  const revealed = location.pathname !== '/' || scrolled
 
   useEffect(() => {
     if (menuOpen) document.body.style.overflow = 'hidden'
