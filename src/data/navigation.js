@@ -4,12 +4,12 @@
  */
 
 export const mainNavLinks = [
-  { id: 'canchas',    label: 'Canchas',    href: '/#canchas'    },
-  { id: 'menu',       label: 'Menú',       href: '/#menu'       },
-  { id: 'promotions', label: 'Promociones',href: '/#promotions' },
-  { id: 'packages',   label: 'Paquetes',   href: '/#packages'   },
-  { id: 'gallery',    label: 'Galería',    href: '/#gallery'    },
-  { id: 'faq',        label: 'FAQ',        href: '/#faq'        },
+  { id: 'canchas',    label: 'Canchas',    href: '/canchas'    },
+  { id: 'menu',       label: 'Menú',       href: '/menu'       },
+  { id: 'promotions', label: 'Promociones',href: '/promociones' },
+  { id: 'packages',   label: 'Paquetes',   href: '/paquetes'   },
+  { id: 'gallery',    label: 'Galería',    href: '/galeria'    },
+  { id: 'faq',        label: 'FAQ',        href: '/faq'        },
 ]
 
 export const navCTA = {

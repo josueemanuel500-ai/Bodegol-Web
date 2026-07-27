@@ -8,9 +8,11 @@
  * phone, startsAt, endsAt (ISO). Las 5 canchas son fijas, todas 5 vs 5.
  */
 import React, { useState } from 'react'
-import { CalendarDays } from 'lucide-react'
+import { CalendarDays, Clock, LayoutGrid, User, Phone, Timer } from 'lucide-react'
 import { useToast } from '@/components/ui/Toast'
 import Button from '@/components/buttons/Button'
+import Input from '@/components/forms/Input'
+import Chip from '@/components/ui/Chip'
 import reservationService from '@/services/reservation.service'
 
 const COURTS = ['Área 1', 'Área 2', 'Área 3', 'Área 4', 'Área 5']
@@ -20,12 +22,21 @@ const DURATIONS = [
   { value: 120, label: '2 horas' },
 ]
 
-const inputClass =
-  'w-full rounded-xl border border-line bg-background px-4 py-2.5 font-ui text-sm text-content-primary ' +
-  'placeholder:text-content-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-colors'
+const EMPTY_FORM = { resourceRef: COURTS[0], customerName: '', phone: '', date: '', startTime: '', duration: 60 }
+
 const labelClass = 'mb-1.5 block font-ui text-sm font-semibold text-content-secondary'
 
-const EMPTY_FORM = { resourceRef: COURTS[0], customerName: '', phone: '', date: '', startTime: '', duration: 60 }
+// Un TypeError "Failed to fetch" es el navegador diciendo que ni siquiera
+// pudo abrir la conexión (URL mal configurada, servidor caído, sin
+// internet) — muy distinto a un 400/404 real del backend con un mensaje
+// de negocio útil. Se distinguen para no mostrarle al visitante un texto
+// de navegador sin sentido.
+function friendlyErrorMessage(err) {
+  if (err instanceof TypeError) {
+    return 'No pudimos conectar con el servidor. Intenta de nuevo en un momento o reserva por WhatsApp.'
+  }
+  return err.message || 'No se pudo enviar la reservación. Intenta de nuevo.'
+}
 
 export default function ReservationForm({ onSuccess }) {
   const { toast } = useToast()
@@ -64,51 +75,63 @@ export default function ReservationForm({ onSuccess }) {
       setForm(EMPTY_FORM)
       onSuccess?.()
     } catch (err) {
-      setError(err.message || 'No se pudo enviar la reservación. Intenta de nuevo.')
+      setError(friendlyErrorMessage(err))
     } finally {
       setSubmitting(false)
     }
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
       <div>
-        <label className={labelClass} htmlFor="resv-court">Cancha (5 vs 5)</label>
-        <select id="resv-court" className={inputClass} value={form.resourceRef} onChange={set('resourceRef')}>
-          {COURTS.map((c) => <option key={c} value={c}>{c}</option>)}
-        </select>
-      </div>
-
-      <div>
-        <label className={labelClass} htmlFor="resv-name">Tu nombre</label>
-        <input id="resv-name" className={inputClass} value={form.customerName} onChange={set('customerName')}
-          placeholder="Juan Pérez" required />
-      </div>
-
-      <div>
-        <label className={labelClass} htmlFor="resv-phone">Teléfono (WhatsApp)</label>
-        <input id="resv-phone" className={inputClass} type="tel" value={form.phone} onChange={set('phone')}
-          placeholder="81 1234 5678" />
-      </div>
-
-      <div className="grid grid-cols-2 gap-3">
-        <div>
-          <label className={labelClass} htmlFor="resv-date">Fecha</label>
-          <input id="resv-date" className={inputClass} type="date" min={todayIso} value={form.date}
-            onChange={set('date')} required />
+        <label className={labelClass}>
+          <span className="inline-flex items-center gap-1.5"><LayoutGrid size={14} strokeWidth={2} aria-hidden="true" />Cancha (5 vs 5)</span>
+        </label>
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
+          {COURTS.map((c) => (
+            <Chip
+              key={c}
+              selected={form.resourceRef === c}
+              onClick={() => setForm((f) => ({ ...f, resourceRef: c }))}
+              className="w-full justify-center"
+            >
+              {c.replace('Área ', '#')}
+            </Chip>
+          ))}
         </div>
-        <div>
-          <label className={labelClass} htmlFor="resv-time">Hora de inicio</label>
-          <input id="resv-time" className={inputClass} type="time" value={form.startTime}
+      </div>
+
+      <Input id="resv-name" label="Tu nombre" icon={User} value={form.customerName} onChange={set('customerName')}
+        placeholder="Juan Pérez" required />
+
+      <Input id="resv-phone" label="Teléfono (WhatsApp)" icon={Phone} type="tel" value={form.phone} onChange={set('phone')}
+        placeholder="81 1234 5678" />
+
+      <div className="rounded-xl border border-line bg-surface-elevated/40 p-4">
+        <p className="mb-3 font-ui text-sm font-semibold text-content-secondary">¿Cuándo?</p>
+        <div className="grid grid-cols-2 gap-3">
+          <Input id="resv-date" label="Fecha" icon={CalendarDays} type="date" min={todayIso} value={form.date}
+            onChange={set('date')} required />
+          <Input id="resv-time" label="Hora de inicio" icon={Clock} type="time" value={form.startTime}
             onChange={set('startTime')} required />
         </div>
-      </div>
 
-      <div>
-        <label className={labelClass} htmlFor="resv-duration">Duración</label>
-        <select id="resv-duration" className={inputClass} value={form.duration} onChange={set('duration')}>
-          {DURATIONS.map((d) => <option key={d.value} value={d.value}>{d.label}</option>)}
-        </select>
+        <div className="mt-3">
+          <label className={labelClass}>
+            <span className="inline-flex items-center gap-1.5"><Timer size={14} strokeWidth={2} aria-hidden="true" />Duración</span>
+          </label>
+          <div className="flex flex-wrap gap-2">
+            {DURATIONS.map((d) => (
+              <Chip
+                key={d.value}
+                selected={Number(form.duration) === d.value}
+                onClick={() => setForm((f) => ({ ...f, duration: d.value }))}
+              >
+                {d.label}
+              </Chip>
+            ))}
+          </div>
+        </div>
       </div>
 
       {error && (

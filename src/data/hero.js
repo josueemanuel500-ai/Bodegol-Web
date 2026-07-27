@@ -28,7 +28,7 @@ export const heroContent = {
     },
     secondary: {
       label: 'Ver promociones',
-      href:  '/#promotions',
+      href:  '/promociones',
     },
   },
 }

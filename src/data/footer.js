@@ -12,21 +12,21 @@ export const footerConfig = {
     {
       heading: 'Bodegol',
       links: [
-        { label: 'Canchas de Fútbol',  href: '/#canchas'    },
-        { label: 'Menú',               href: '/#menu'       },
-        { label: 'Promociones',        href: '/#promotions' },
-        { label: 'Paquetes y Eventos', href: '/#packages'   },
-        { label: 'Galería',            href: '/#gallery'    },
+        { label: 'Canchas de Fútbol',  href: '/canchas'    },
+        { label: 'Menú',               href: '/menu'       },
+        { label: 'Promociones',        href: '/promociones' },
+        { label: 'Paquetes y Eventos', href: '/paquetes'   },
+        { label: 'Galería',            href: '/galeria'    },
       ],
     },
     {
       heading: 'Reservaciones',
       links: [
-        { label: 'Reservar Cancha',    href: '/#canchas'  },
-        { label: 'Paquete Cumpleaños', href: '/#packages' },
-        { label: 'Evento Privado',     href: '/#packages' },
-        { label: 'Preguntas Frecuentes', href: '/#faq'   },
-        { label: 'Contacto',           href: '/#contact'  },
+        { label: 'Reservar Cancha',    href: '/canchas'  },
+        { label: 'Paquete Cumpleaños', href: '/paquetes' },
+        { label: 'Evento Privado',     href: '/paquetes' },
+        { label: 'Preguntas Frecuentes', href: '/faq'   },
+        { label: 'Contacto',           href: '/faq'  },
       ],
     },
     {

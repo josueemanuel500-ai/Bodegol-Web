@@ -8,13 +8,18 @@ import React, { lazy } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import MainLayout from '@/layouts/MainLayout'
 
-const HomePage    = lazy(() => import('@/pages/HomePage'))
-const PrivacyPage = lazy(() => import('@/pages/PrivacyPage'))
-const TermsPage   = lazy(() => import('@/pages/TermsPage'))
-const NotFoundPage= lazy(() => import('@/pages/NotFoundPage'))
+const HomePage        = lazy(() => import('@/pages/HomePage'))
+const CanchasPage     = lazy(() => import('@/pages/CanchasPage'))
+const MenuPage        = lazy(() => import('@/pages/MenuPage'))
+const PromocionesPage = lazy(() => import('@/pages/PromocionesPage'))
+const PaquetesPage    = lazy(() => import('@/pages/PaquetesPage'))
+const GaleriaPage     = lazy(() => import('@/pages/GaleriaPage'))
+const FaqPage         = lazy(() => import('@/pages/FaqPage'))
+const PrivacyPage     = lazy(() => import('@/pages/PrivacyPage'))
+const TermsPage       = lazy(() => import('@/pages/TermsPage'))
+const NotFoundPage    = lazy(() => import('@/pages/NotFoundPage'))
 
 // Future pages — uncomment when ready:
-// const ReservationPage = lazy(() => import('@/pages/ReservationPage'))
 // const LoginPage       = lazy(() => import('@/pages/LoginPage'))
 // const BackofficePage  = lazy(() => import('@/pages/BackofficePage'))
 
@@ -22,7 +27,13 @@ export function AppRouter() {
   return (
     <Routes>
       <Route element={<MainLayout />}>
-        <Route index          element={<HomePage />}     />
+        <Route index             element={<HomePage />}        />
+        <Route path="canchas"    element={<CanchasPage />}     />
+        <Route path="menu"       element={<MenuPage />}        />
+        <Route path="promociones" element={<PromocionesPage />} />
+        <Route path="paquetes"   element={<PaquetesPage />}    />
+        <Route path="galeria"    element={<GaleriaPage />}     />
+        <Route path="faq"        element={<FaqPage />}         />
         <Route path="privacidad" element={<PrivacyPage />} />
         <Route path="terminos"   element={<TermsPage />}   />
         <Route path="404"        element={<NotFoundPage />} />
