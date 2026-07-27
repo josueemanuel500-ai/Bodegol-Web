@@ -39,15 +39,31 @@ function Lightbox({ promo, onClose }) {
 
 export default function Promotions() {
   const { business } = useBusiness()
-  const { promotions } = usePromotions()
+  const { promotions, loading } = usePromotions()
   const [lightbox, setLightbox] = useState(null)
-  if (!promotions || promotions.length === 0) return null
+  if (!loading && (!promotions || promotions.length === 0)) return null
 
   return (
     <SectionWrapper id="promotions" background="base" glow>
       <SectionHeading id="promotions-heading" eyebrow={promotionsHeading.eyebrow} title={promotionsHeading.title} subtitle={promotionsHeading.subtitle} />
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {promotions.map((promo) => {
+      {loading ? (
+        <div
+          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          role="status"
+          aria-label="Cargando promociones"
+          aria-live="polite"
+        >
+          {[0, 1, 2].map((item) => (
+            <div key={item} className="overflow-hidden rounded-2xl border border-line bg-surface shadow-card">
+              <div className="aspect-square animate-pulse bg-surface-elevated" />
+              <div className="h-11 animate-pulse border-t border-line bg-surface-secondary" />
+            </div>
+          ))}
+          <span className="sr-only">Cargando promociones actuales…</span>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {promotions.map((promo) => {
           const waUrl = buildWhatsAppUrl(business.contact.whatsapp, promo.cta.message)
           return (
             <article key={promo.id}
@@ -75,8 +91,9 @@ export default function Promotions() {
               </a>
             </article>
           )
-        })}
-      </div>
+          })}
+        </div>
+      )}
       <Lightbox promo={lightbox} onClose={() => setLightbox(null)} />
     </SectionWrapper>
   )

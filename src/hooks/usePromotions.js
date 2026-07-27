@@ -7,7 +7,11 @@ import { activePromotions } from '@/data/promotions'
 import { isSupabaseConfigured, fetchPromotions } from '@/services/promotions.service'
 
 export function usePromotions() {
-  const [promotions, setPromotions] = useState(activePromotions)
+  // No mostrar primero las promociones estáticas cuando existe conexión:
+  // ese reemplazo inmediato por los datos en vivo causaba un parpadeo.
+  const [promotions, setPromotions] = useState(() => (
+    isSupabaseConfigured ? [] : activePromotions
+  ))
   const [loading, setLoading] = useState(isSupabaseConfigured)
 
   const load = useCallback(async () => {
