@@ -61,9 +61,9 @@ export default function TimePickerField({ id, label, value, onChange, required =
           aria-haspopup="listbox"
           aria-expanded={open}
           className={cn(
-            'relative w-full min-h-[3rem] bg-surface-elevated text-content-primary text-left',
-            'border rounded-xl pl-11 pr-4 py-3 text-sm font-body transition-all duration-200',
-            'focus:outline-none focus:ring-4 border-line focus:ring-primary/25 focus:border-primary',
+            'relative h-16 w-full bg-white/[0.06] text-content-primary text-left backdrop-blur-md',
+            'border rounded-xl pl-11 pr-3 py-3 text-sm font-body transition-all duration-200',
+            'focus:outline-none focus:ring-4 border-white/15 focus:ring-primary/25 focus:border-primary',
             !value && 'text-content-muted'
           )}
         >

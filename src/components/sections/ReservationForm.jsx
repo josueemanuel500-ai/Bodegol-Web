@@ -89,13 +89,13 @@ export default function ReservationForm({ onSuccess }) {
         <label className={labelClass}>
           <span className="inline-flex items-center gap-1.5"><LayoutGrid size={14} strokeWidth={2} aria-hidden="true" />Cancha (5 vs 5)</span>
         </label>
-        <div className="grid grid-cols-3 gap-2 sm:grid-cols-5">
+        <div className="grid grid-cols-5 gap-2">
           {COURTS.map((c) => (
             <Chip
               key={c}
               selected={form.resourceRef === c}
               onClick={() => setForm((f) => ({ ...f, resourceRef: c }))}
-              className="w-full justify-center"
+              className="min-h-10 w-full justify-center px-2"
             >
               {c.replace('Área ', '#')}
             </Chip>
@@ -104,12 +104,14 @@ export default function ReservationForm({ onSuccess }) {
       </div>
 
       <Input id="resv-name" label="Tu nombre" icon={User} value={form.customerName} onChange={set('customerName')}
+        className="border-white/15 bg-white/[0.06] backdrop-blur-md"
         placeholder="Juan Pérez" required />
 
       <Input id="resv-phone" label="Teléfono (WhatsApp)" icon={Phone} type="tel" value={form.phone} onChange={set('phone')}
+        className="border-white/15 bg-white/[0.06] backdrop-blur-md"
         placeholder="81 1234 5678" />
 
-      <div className="rounded-xl border border-line bg-surface-elevated/40 p-4">
+      <div className="rounded-2xl border border-white/15 bg-white/[0.045] p-4 shadow-inner backdrop-blur-lg">
         <p className="mb-3 font-ui text-sm font-semibold text-content-secondary">¿Cuándo?</p>
         <div className="grid grid-cols-2 gap-3">
           <DatePickerField id="resv-date" label="Fecha" min={todayIso} value={form.date}
@@ -122,12 +124,13 @@ export default function ReservationForm({ onSuccess }) {
           <label className={labelClass}>
             <span className="inline-flex items-center gap-1.5"><Timer size={14} strokeWidth={2} aria-hidden="true" />Duración</span>
           </label>
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-3 gap-2">
             {DURATIONS.map((d) => (
               <Chip
                 key={d.value}
                 selected={Number(form.duration) === d.value}
                 onClick={() => setForm((f) => ({ ...f, duration: d.value }))}
+                className="min-h-10 w-full justify-center px-2"
               >
                 {d.label}
               </Chip>
@@ -142,7 +145,8 @@ export default function ReservationForm({ onSuccess }) {
         </p>
       )}
 
-      <Button type="submit" variant="primary" size="lg" icon={CalendarDays} loading={submitting} fullWidth>
+      <Button type="submit" variant="primary" size="lg" icon={CalendarDays} loading={submitting} fullWidth
+        className="min-h-14 rounded-2xl">
         Solicitar reservación
       </Button>
       <p className="text-center font-ui text-xs text-content-muted">

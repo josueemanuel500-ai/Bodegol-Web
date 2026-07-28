@@ -94,7 +94,7 @@ export default function Modal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="absolute inset-0 bg-surface-overlay"
+            className="absolute inset-0 bg-[#020b18]/75 backdrop-blur-sm"
             onClick={closeOnBackdrop ? onClose : undefined}
             aria-hidden="true"
           />
@@ -112,7 +112,7 @@ export default function Modal({
             exit={{ opacity: 0,    scale: 0.97,  y: 8 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className={cn(
-              'relative w-full bg-surface-base rounded-2xl shadow-card-lg',
+              'relative w-full rounded-3xl border border-white/15 bg-surface-base/80 shadow-[0_28px_90px_rgba(0,0,0,0.55)] backdrop-blur-2xl',
               'flex flex-col max-h-[90vh] overflow-hidden',
               'focus:outline-none',
               SIZES[size] || SIZES.md,
@@ -122,7 +122,7 @@ export default function Modal({
           >
             {/* Header */}
             {title && (
-              <div className="flex items-center justify-between px-6 py-4 border-b border-border-default flex-shrink-0">
+              <div className="flex flex-shrink-0 items-center justify-between border-b border-white/15 bg-white/[0.04] px-6 py-4">
                 <h2
                   id={titleId}
                   className="text-lg font-display font-bold text-text-primary"
@@ -133,8 +133,8 @@ export default function Modal({
                   onClick={onClose}
                   aria-label="Cerrar modal"
                   className={cn(
-                    'p-2 rounded-xl text-text-muted hover:text-text-primary',
-                    'hover:bg-surface-elevated transition-colors',
+                    'p-2 rounded-xl border border-transparent text-text-muted hover:text-text-primary',
+                    'hover:border-white/10 hover:bg-white/10 transition-colors',
                     'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary'
                   )}
                 >
@@ -144,7 +144,7 @@ export default function Modal({
             )}
 
             {/* Content */}
-            <div className="flex-1 overflow-y-auto px-6 py-5">
+            <div className="flex-1 overflow-y-auto bg-gradient-to-b from-white/[0.035] to-transparent px-6 py-5">
               {children}
             </div>
 
