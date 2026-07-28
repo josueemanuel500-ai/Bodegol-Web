@@ -47,7 +47,7 @@ export default function TimePickerField({ id, label, value, onChange, required =
   }
 
   return (
-    <div className="flex flex-col gap-2" ref={wrapRef}>
+    <div className={cn('flex flex-col gap-2', open && 'relative z-[100]')} ref={wrapRef}>
       {label && (
         <label htmlFor={id} className="t-label text-content-secondary normal-case tracking-normal text-sm font-medium">
           {label}{required && <span className="text-primary ml-1" aria-hidden="true">*</span>}
@@ -74,7 +74,7 @@ export default function TimePickerField({ id, label, value, onChange, required =
 
         {open && (
           <div ref={listRef} role="listbox" aria-label="Hora"
-            className="absolute right-0 z-50 mt-2 max-h-64 w-48 overflow-y-auto rounded-2xl border border-white/15 bg-surface-base/85 p-2 shadow-2xl backdrop-blur-xl">
+            className="absolute right-0 z-[110] mt-2 max-h-64 w-48 overflow-y-auto rounded-2xl border border-white/20 bg-[#071b3a]/95 p-2 shadow-[0_24px_70px_rgba(0,0,0,0.65)] backdrop-blur-2xl">
             {SLOTS.map((slot) => (
               <button
                 key={slot}
