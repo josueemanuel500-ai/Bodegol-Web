@@ -48,13 +48,14 @@ export default function Promotions() {
       <SectionHeading id="promotions-heading" eyebrow={promotionsHeading.eyebrow} title={promotionsHeading.title} subtitle={promotionsHeading.subtitle} />
       {loading ? (
         <div
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="flex flex-wrap justify-center gap-6"
           role="status"
           aria-label="Cargando promociones"
           aria-live="polite"
         >
           {[0, 1, 2].map((item) => (
-            <div key={item} className="overflow-hidden rounded-2xl border border-line bg-surface shadow-card">
+            <div key={item}
+              className="w-full overflow-hidden rounded-2xl border border-line bg-surface shadow-card sm:w-[calc(50%-0.75rem)] sm:max-w-[18rem] lg:w-[calc(25%-1.125rem)]">
               <div className="aspect-square animate-pulse bg-surface-elevated" />
               <div className="h-11 animate-pulse border-t border-line bg-surface-secondary" />
             </div>
@@ -62,12 +63,12 @@ export default function Promotions() {
           <span className="sr-only">Cargando promociones actuales…</span>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="flex flex-wrap justify-center gap-6">
           {promotions.map((promo) => {
           const waUrl = buildWhatsAppUrl(business.contact.whatsapp, promo.cta.message)
           return (
             <article key={promo.id}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-card-lg">
+              className="group flex w-full flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-card transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/50 hover:shadow-card-lg sm:w-[calc(50%-0.75rem)] sm:max-w-[18rem] lg:w-[calc(25%-1.125rem)]">
               {/* Imagen — clic para verla en grande */}
               <button type="button" onClick={() => setLightbox(promo)} aria-label={`Ver imagen: ${promo.title}`}
                 className="relative block aspect-square w-full cursor-zoom-in overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary">
