@@ -111,7 +111,7 @@ export default function ReservationForm({ onSuccess }) {
         className="border-white/15 bg-white/[0.06] backdrop-blur-md"
         placeholder="81 1234 5678" />
 
-      <div className="rounded-2xl border border-white/15 bg-white/[0.045] p-4 shadow-inner backdrop-blur-lg">
+      <div className="relative z-20 overflow-visible rounded-2xl border border-white/15 bg-white/[0.045] p-4 shadow-inner backdrop-blur-lg">
         <p className="mb-3 font-ui text-sm font-semibold text-content-secondary">¿Cuándo?</p>
         <div className="grid grid-cols-2 gap-3">
           <DatePickerField id="resv-date" label="Fecha" min={todayIso} value={form.date}
@@ -146,7 +146,7 @@ export default function ReservationForm({ onSuccess }) {
       )}
 
       <Button type="submit" variant="primary" size="lg" icon={CalendarDays} loading={submitting} fullWidth
-        className="min-h-14 rounded-2xl">
+        className="relative z-0 min-h-14 rounded-2xl">
         Solicitar reservación
       </Button>
       <p className="text-center font-ui text-xs text-content-muted">
