@@ -50,12 +50,14 @@
 /* Degradado de marca para superficies naranjas sólidas.
  * Los usos translúcidos (bg-primary/10, bg-primary/15, etc.) conservan
  * su color plano para no perder contraste ni legibilidad. */
-.bg-primary {
+.bg-primary,
+.bg-brand-primary {
   background-color: var(--primary);
   background-image: var(--orange-gradient);
 }
 
-.hover\:bg-primary-hover:hover {
+.hover\:bg-primary-hover:hover,
+.hover\:bg-brand-primary-dark:hover {
   background-color: var(--primary-hover);
   background-image: var(--orange-gradient-hover);
 }
