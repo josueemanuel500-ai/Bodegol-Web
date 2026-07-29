@@ -4,6 +4,10 @@
   --navy-raised:   #0E2A52;
   --orange:        #FF690F;
   --orange-hover:  #FF8A3D;
+  --orange-gradient-start: #FF9A1F;
+  --orange-gradient-end:   #FF5A1F;
+  --orange-gradient: linear-gradient(100deg, var(--orange-gradient-start) 0%, var(--orange-gradient-end) 100%);
+  --orange-gradient-hover: linear-gradient(100deg, #FFAA33 0%, #FF6B2C 100%);
   --white:         #FFFFFF;
   --light:         #F5F7FA;
   --muted:         #CBD5E1;
