@@ -78,15 +78,12 @@ export default function Navbar() {
             aria-label={`${business.name} — Inicio`}
             className="flex items-center gap-2.5 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-lg"
           >
-            {/* Logo text fallback — replace with <img> when real logo exists */}
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-brand-primary rounded-lg flex items-center justify-center flex-shrink-0">
-                <span className="text-white font-display font-black text-sm">B</span>
-              </div>
-              <span className="font-display font-black text-xl text-text-primary tracking-tight">
-                Bodegol
-              </span>
-            </div>
+            <img
+              src="/images/logo/bodegol-logo-header-custom.png"
+              alt="Deportivo Bodegol"
+              className="h-8 w-auto select-none object-contain sm:h-9"
+              draggable={false}
+            />
           </Link>
 
           {/* Desktop Nav Links */}
