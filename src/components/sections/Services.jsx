@@ -8,15 +8,17 @@
 
 import React from 'react'
 import { motion } from 'framer-motion'
-import * as LucideIcons from 'lucide-react'
+import { Beer, CalendarCheck, Music2, PartyPopper, Tv2, UtensilsCrossed } from 'lucide-react'
 import { services }      from '@/data/services'
 import SectionWrapper    from '@/components/ui/SectionWrapper'
 import SectionHeading    from '@/components/ui/SectionHeading'
 import { SECTION_IDS, ANIMATION } from '@/constants'
 
 // Resolve icon name string → Lucide component
+const iconMap = { Beer, CalendarCheck, Music2, PartyPopper, Tv2, UtensilsCrossed }
+
 function resolveIcon(name, size = 28) {
-  const Icon = LucideIcons[name]
+  const Icon = iconMap[name]
   return Icon ? <Icon size={size} aria-hidden="true" /> : null
 }
 

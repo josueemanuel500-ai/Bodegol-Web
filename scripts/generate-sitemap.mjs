@@ -8,9 +8,16 @@ import { dirname, resolve } from 'node:path'
 
 const SITE = 'https://bodegol.com.mx'
 const routes = [
-  { path: '/',           priority: '1.0', changefreq: 'weekly'  },
-  { path: '/privacidad', priority: '0.3', changefreq: 'yearly'  },
-  { path: '/terminos',   priority: '0.3', changefreq: 'yearly'  },
+  { path: '/',                         priority: '1.0', changefreq: 'weekly'  },
+  { path: '/canchas',                  priority: '0.9', changefreq: 'weekly'  },
+  { path: '/ver-partidos-en-merida',   priority: '0.9', changefreq: 'weekly'  },
+  { path: '/menu',                     priority: '0.8', changefreq: 'monthly' },
+  { path: '/promociones',              priority: '0.8', changefreq: 'weekly'  },
+  { path: '/paquetes',                 priority: '0.7', changefreq: 'monthly' },
+  { path: '/galeria',                  priority: '0.6', changefreq: 'monthly' },
+  { path: '/faq',                      priority: '0.6', changefreq: 'monthly' },
+  { path: '/privacidad',               priority: '0.3', changefreq: 'yearly'  },
+  { path: '/terminos',                 priority: '0.3', changefreq: 'yearly'  },
 ]
 
 const today = process.env.SITEMAP_DATE || new Date().toISOString().slice(0, 10)

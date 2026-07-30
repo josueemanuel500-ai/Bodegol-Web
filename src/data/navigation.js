@@ -5,6 +5,7 @@
 
 export const mainNavLinks = [
   { id: 'canchas',    label: 'Canchas',    href: '/canchas'    },
+  { id: 'partidos',   label: 'Ver partidos', href: '/ver-partidos-en-merida' },
   { id: 'menu',       label: 'Menú',       href: '/menu'       },
   { id: 'promotions', label: 'Promociones',href: '/promociones' },
   { id: 'packages',   label: 'Paquetes',   href: '/paquetes'   },

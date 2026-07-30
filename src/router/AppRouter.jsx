@@ -14,6 +14,7 @@ const MenuPage        = lazy(() => import('@/pages/MenuPage'))
 const PromocionesPage = lazy(() => import('@/pages/PromocionesPage'))
 const PaquetesPage    = lazy(() => import('@/pages/PaquetesPage'))
 const GaleriaPage     = lazy(() => import('@/pages/GaleriaPage'))
+const VerPartidosPage = lazy(() => import('@/pages/VerPartidosPage'))
 const FaqPage         = lazy(() => import('@/pages/FaqPage'))
 const PrivacyPage     = lazy(() => import('@/pages/PrivacyPage'))
 const TermsPage       = lazy(() => import('@/pages/TermsPage'))
@@ -33,6 +34,7 @@ export function AppRouter() {
         <Route path="promociones" element={<PromocionesPage />} />
         <Route path="paquetes"   element={<PaquetesPage />}    />
         <Route path="galeria"    element={<GaleriaPage />}     />
+        <Route path="ver-partidos-en-merida" element={<VerPartidosPage />} />
         <Route path="faq"        element={<FaqPage />}         />
         <Route path="privacidad" element={<PrivacyPage />} />
         <Route path="terminos"   element={<TermsPage />}   />
