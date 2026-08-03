@@ -10,9 +10,12 @@ import { Clock } from 'lucide-react'
 import { useClickOutside } from '@/hooks/useClickOutside'
 import { cn } from '@/utils/cn'
 
+const OPENING_MINUTES = 9 * 60 + 30
+const CLOSING_MINUTES = 22 * 60 + 30
+
 function buildSlots(stepMinutes = 30) {
   const slots = []
-  for (let m = 0; m < 24 * 60; m += stepMinutes) {
+  for (let m = OPENING_MINUTES; m <= CLOSING_MINUTES; m += stepMinutes) {
     const h = String(Math.floor(m / 60)).padStart(2, '0')
     const mm = String(m % 60).padStart(2, '0')
     slots.push(`${h}:${mm}`)
