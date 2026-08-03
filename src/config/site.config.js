@@ -5,8 +5,13 @@
  * Rest of the app imports from this file, never from import.meta.env directly.
  */
 
+const productionDefaults = {
+  businessId: 'fee427b8-3f87-4289-b68d-53a859850b66',
+  apiUrl: 'https://api.bodegol.com.mx/v1',
+}
+
 export const siteConfig = {
-  businessId: import.meta.env.VITE_BUSINESS_ID || 'bodegol',
+  businessId: import.meta.env.VITE_BUSINESS_ID || (import.meta.env.PROD ? productionDefaults.businessId : 'bodegol'),
 
   env:    import.meta.env.MODE     || 'development',
   isDev:  import.meta.env.DEV,
@@ -18,7 +23,7 @@ export const siteConfig = {
   // para que funcione al desplegar por git sin configurar variables de entorno.
   // El .env local (VITE_SUPABASE_*) sigue teniendo prioridad como override.
   api: {
-    baseUrl:      import.meta.env.VITE_API_URL           || 'http://localhost:4000',
+    baseUrl:      import.meta.env.VITE_API_URL           || (import.meta.env.PROD ? productionDefaults.apiUrl : 'http://localhost:4000'),
     supabaseUrl:  import.meta.env.VITE_SUPABASE_URL      || 'https://vucytmlgksahnoqtbyhf.supabase.co',
     supabaseKey:  import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1Y3l0bWxna3NhaG5vcXRieWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NDY0NzMsImV4cCI6MjA5ODMyMjQ3M30.JtHTm4GU-PaH7Y51Gksvcje5PS2aD6-_QzCZzkWOr1k',
   },

@@ -77,7 +77,15 @@ class ApiService {
     }
 
     if (!response.ok) {
-      const error = new Error(json?.message || `HTTP ${response.status}`)
+      const backendMessage =
+        json?.error?.message_es ||
+        json?.message_es ||
+        json?.error?.message ||
+        json?.message
+      const normalizedMessage = Array.isArray(backendMessage)
+        ? backendMessage.join(' ')
+        : backendMessage
+      const error = new Error(normalizedMessage || `HTTP ${response.status}`)
       error.status = response.status
       error.data   = json
       throw error

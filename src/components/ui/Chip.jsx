@@ -12,6 +12,7 @@ export default function Chip({
 }) {
   return (
     <Tag
+      type={Tag === 'button' ? (rest.type || 'button') : undefined}
       onClick={onClick}
       aria-pressed={onClick ? selected : undefined}
       className={cn(

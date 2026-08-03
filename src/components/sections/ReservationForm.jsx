@@ -34,6 +34,12 @@ const labelClass = 'mb-1.5 block font-ui text-sm font-semibold text-content-seco
 // de negocio útil. Se distinguen para no mostrarle al visitante un texto
 // de navegador sin sentido.
 function friendlyErrorMessage(err) {
+  if (err?.status === 409) {
+    return err.message || 'Ese horario ya no está disponible. Selecciona otra cancha u hora.'
+  }
+  if (err?.status >= 500) {
+    return 'El servidor no pudo registrar la solicitud. Intenta nuevamente en un momento.'
+  }
   if (err instanceof TypeError) {
     return 'No pudimos conectar con el servidor. Intenta de nuevo en un momento o reserva por WhatsApp.'
   }
@@ -51,6 +57,7 @@ export default function ReservationForm({ onSuccess }) {
 
   async function handleSubmit(e) {
     e.preventDefault()
+    if (submitting) return
     setError('')
 
     if (!form.customerName.trim() || !form.date || !form.startTime) {
@@ -93,6 +100,7 @@ export default function ReservationForm({ onSuccess }) {
           {COURTS.map((c) => (
             <Chip
               key={c}
+              type="button"
               selected={form.resourceRef === c}
               onClick={() => setForm((f) => ({ ...f, resourceRef: c }))}
               className="min-h-10 w-full justify-center px-2"
@@ -128,6 +136,7 @@ export default function ReservationForm({ onSuccess }) {
             {DURATIONS.map((d) => (
               <Chip
                 key={d.value}
+                type="button"
                 selected={Number(form.duration) === d.value}
                 onClick={() => setForm((f) => ({ ...f, duration: d.value }))}
                 className="min-h-10 w-full justify-center px-2"

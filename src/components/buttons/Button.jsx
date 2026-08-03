@@ -67,7 +67,13 @@ export default function Button({
     return null
   }
   return (
-    <Tag className={classes} disabled={Tag === 'button' ? isDisabled : undefined} aria-disabled={isDisabled} {...rest}>
+    <Tag
+      type={Tag === 'button' ? (rest.type || 'button') : undefined}
+      className={classes}
+      disabled={Tag === 'button' ? isDisabled : undefined}
+      aria-disabled={isDisabled}
+      {...rest}
+    >
       {renderIcon('left')}
       {children && <span>{children}</span>}
       {renderIcon('right')}
