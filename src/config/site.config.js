@@ -10,6 +10,13 @@ const productionDefaults = {
   apiUrl: 'https://api.bodegol.com.mx/v1',
 }
 
+function normalizeRavenApiUrl(value) {
+  return String(value || '')
+    .trim()
+    .replace(/\/+$/, '')
+    .replace(/\/v1$/i, '/v1')
+}
+
 export const siteConfig = {
   businessId: import.meta.env.VITE_BUSINESS_ID || (import.meta.env.PROD ? productionDefaults.businessId : 'bodegol'),
 
@@ -23,7 +30,7 @@ export const siteConfig = {
   // para que funcione al desplegar por git sin configurar variables de entorno.
   // El .env local (VITE_SUPABASE_*) sigue teniendo prioridad como override.
   api: {
-    baseUrl:      import.meta.env.VITE_API_URL           || (import.meta.env.PROD ? productionDefaults.apiUrl : 'http://localhost:4000'),
+    baseUrl:      normalizeRavenApiUrl(import.meta.env.VITE_API_URL || (import.meta.env.PROD ? productionDefaults.apiUrl : 'http://localhost:4000')),
     supabaseUrl:  import.meta.env.VITE_SUPABASE_URL      || 'https://vucytmlgksahnoqtbyhf.supabase.co',
     supabaseKey:  import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZ1Y3l0bWxna3NhaG5vcXRieWhmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NDY0NzMsImV4cCI6MjA5ODMyMjQ3M30.JtHTm4GU-PaH7Y51Gksvcje5PS2aD6-_QzCZzkWOr1k',
   },
