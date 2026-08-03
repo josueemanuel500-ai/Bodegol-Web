@@ -35,7 +35,7 @@ const labelClass = 'mb-1.5 block font-ui text-sm font-semibold text-content-seco
 // de navegador sin sentido.
 function friendlyErrorMessage(err) {
   if (err?.status === 409) {
-    return err.message || 'Ese horario ya no está disponible. Selecciona otra cancha u hora.'
+    return 'Cancha ocupada, prueba con otra.'
   }
   if (err?.status >= 500) {
     return 'El servidor no pudo registrar la solicitud. Intenta nuevamente en un momento.'
