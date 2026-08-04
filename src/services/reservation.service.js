@@ -79,6 +79,36 @@ class ReservationService {
     )
     return data
   }
+
+  /**
+   * Business-configured deposit (Backoffice → Negocio → "Reservaciones ·
+   * Anticipo"): hourly rate, % anticipo, and the account to transfer to.
+   * `{ enabled: false }` when the business hasn't set an hourly rate — the
+   * booking flow should skip the payment step entirely in that case.
+   */
+  async getDepositInfo() {
+    const { data } = await api.get(`/public/${siteConfig.businessId}/reservations/deposit-info`)
+    return data
+  }
+
+  /**
+   * Uploads the customer's own transfer receipt for a reservation created
+   * with a deposit — no login needed (the reservation id is the only
+   * credential). Staff still has to approve it before the court is
+   * actually confirmed; this only marks depositStatus as 'uploaded'.
+   *
+   * @param {string} reservationId
+   * @param {File} [file]              image (jpg/png/webp, max 5MB)
+   * @param {{reference?: string, notes?: string}} [meta]
+   */
+  async uploadProof(reservationId, file, meta = {}) {
+    const form = new FormData()
+    if (file) form.append('file', file)
+    if (meta.reference) form.append('reference', meta.reference)
+    if (meta.notes) form.append('notes', meta.notes)
+    const { data } = await api.postForm(`/public/${siteConfig.businessId}/reservations/${reservationId}/proof`, form)
+    return data
+  }
 }
 
 export const reservationService = new ReservationService()

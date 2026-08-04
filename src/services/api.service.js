@@ -104,6 +104,31 @@ class ApiService {
   put    = (endpoint, data, opts) => this._request('PUT',    endpoint, data, opts)
   patch  = (endpoint, data, opts) => this._request('PATCH',  endpoint, data, opts)
   delete = (endpoint, opts)       => this._request('DELETE', endpoint, null, opts)
+
+  /**
+   * Multipart upload (e.g. a reservation payment-proof image) — bypasses
+   * _request's JSON serialization entirely. A FormData body must NOT get a
+   * manual Content-Type: the browser sets its own multipart boundary.
+   */
+  async postForm(endpoint, formData, options = {}) {
+    const url = endpoint.startsWith('http') ? endpoint : `${this.baseUrl}${endpoint}`
+    const headers = { Accept: 'application/json', ...options.headers }
+    const token = this._getToken()
+    if (token) headers['Authorization'] = `Bearer ${token}`
+
+    const response = await fetch(url, { method: 'POST', headers, body: formData, signal: options.signal })
+    let json
+    try { json = await response.json() } catch { json = null }
+
+    if (!response.ok) {
+      const backendMessage = json?.error?.message_es || json?.message_es || json?.error?.message || json?.message
+      const error = new Error(Array.isArray(backendMessage) ? backendMessage.join(' ') : (backendMessage || `HTTP ${response.status}`))
+      error.status = response.status
+      error.data = json
+      throw error
+    }
+    return json
+  }
 }
 
 // Singleton instance

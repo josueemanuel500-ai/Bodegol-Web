@@ -6,6 +6,14 @@
  * "booked", lista para que el staff la confirme. Contrato real del backend
  * (POST /public/:businessId/reservations): resourceRef, customerName,
  * phone, startsAt, endsAt (ISO). Las 5 canchas son fijas, todas 5 vs 5.
+ *
+ * Anticipo (BODEGOL_ANTICIPO_FLOW): cuando el negocio tiene configurada una
+ * tarifa por hora en Backoffice, el backend calcula el anticipo (50% del
+ * total) y la reservación queda "booked" con depositStatus "pending" — el
+ * horario se aparta temporalmente mientras el cliente sube su comprobante
+ * (segundo paso, ver DepositUploadStep abajo) y el staff lo aprueba. Si el
+ * negocio no tiene tarifa configurada, el flujo original (sin anticipo)
+ * sigue funcionando igual que antes.
  */
 import React, { useState } from 'react'
 import { CalendarDays, LayoutGrid, User, Phone, Timer } from 'lucide-react'
@@ -16,6 +24,7 @@ import DatePickerField from '@/components/forms/DatePickerField'
 import TimePickerField from '@/components/forms/TimePickerField'
 import Chip from '@/components/ui/Chip'
 import reservationService from '@/services/reservation.service'
+import DepositUploadStep from './DepositUploadStep'
 
 const COURTS = ['Área 1', 'Área 2', 'Área 3', 'Área 4', 'Área 5']
 const DURATIONS = [
@@ -23,10 +32,17 @@ const DURATIONS = [
   { value: 90, label: '1.5 horas' },
   { value: 120, label: '2 horas' },
 ]
+// Solo para mostrar un estimado ANTES de enviar — el monto real y
+// autoritativo del anticipo lo calcula el backend con la tarifa configurada
+// en Backoffice, nunca se confía en un cálculo hecho aquí. Si el negocio
+// cambia la tarifa, este estimado puede quedar desactualizado un momento
+// hasta el próximo deploy del sitio — no afecta el cobro real.
+const HOURLY_RATE_ESTIMATE = 500
 
 const EMPTY_FORM = { resourceRef: COURTS[0], customerName: '', phone: '', date: '', startTime: '', duration: 60 }
 
 const labelClass = 'mb-1.5 block font-ui text-sm font-semibold text-content-secondary'
+const money = (n) => `$${Number(n).toLocaleString('es-MX', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`
 
 // Un TypeError "Failed to fetch" es el navegador diciendo que ni siquiera
 // pudo abrir la conexión (URL mal configurada, servidor caído, sin
@@ -51,9 +67,13 @@ export default function ReservationForm({ onSuccess }) {
   const [form, setForm] = useState(EMPTY_FORM)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
+  // Una vez creada la reservación CON anticipo, cambiamos a un segundo paso
+  // (subir comprobante) en vez de cerrar el modal de inmediato.
+  const [pendingDeposit, setPendingDeposit] = useState(null)
 
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
   const todayIso = new Date().toISOString().slice(0, 10)
+  const estimatedTotal = HOURLY_RATE_ESTIMATE * (Number(form.duration) / 60)
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -73,21 +93,37 @@ export default function ReservationForm({ onSuccess }) {
 
     setSubmitting(true)
     try {
-      await reservationService.createReservation({
+      const created = await reservationService.createReservation({
         resourceRef: form.resourceRef,
         customerName: form.customerName.trim(),
         phone: form.phone.trim() || undefined,
         startsAt: startsAt.toISOString(),
         endsAt: endsAt.toISOString(),
       })
-      toast.success('¡Solicitud recibida! Te confirmamos pronto por WhatsApp.', 'Reservación enviada')
       setForm(EMPTY_FORM)
-      onSuccess?.()
+      // El backend solo pone depositStatus cuando el negocio tiene anticipo
+      // configurado — si no, sigue siendo una reservación simple como antes.
+      if (created?.deposit && created?.depositStatus === 'pending') {
+        setPendingDeposit({ id: created.id, resourceRef: form.resourceRef, deposit: created.deposit })
+      } else {
+        toast.success('¡Solicitud recibida! Te confirmamos pronto por WhatsApp.', 'Reservación enviada')
+        onSuccess?.()
+      }
     } catch (err) {
       setError(friendlyErrorMessage(err))
     } finally {
       setSubmitting(false)
     }
+  }
+
+  if (pendingDeposit) {
+    return (
+      <DepositUploadStep
+        reservation={pendingDeposit}
+        onDone={() => { toast.success('¡Comprobante recibido! En cuanto lo verifiquemos tu cancha queda confirmada.', 'Anticipo enviado'); onSuccess?.() }}
+        onSkip={() => { toast.success('Reservación guardada. Puedes enviar tu comprobante más tarde por WhatsApp.', 'Solicitud enviada'); onSuccess?.() }}
+      />
+    )
   }
 
   return (
@@ -146,6 +182,10 @@ export default function ReservationForm({ onSuccess }) {
             ))}
           </div>
         </div>
+
+        <p className="mt-3 text-center font-ui text-xs text-content-muted">
+          Total estimado <b className="text-content-secondary">{money(estimatedTotal)}</b> · si tu cancha requiere anticipo, te lo mostramos en el siguiente paso.
+        </p>
       </div>
 
       {error && (
