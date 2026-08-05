@@ -96,7 +96,7 @@ export default function DepositUploadStep({ reservation, onDone, onSkip }) {
     <div className="flex flex-col gap-5">
       <div className="rounded-2xl border border-primary/30 bg-primary/10 p-4 text-center">
         <p className="font-ui text-sm font-semibold text-content-primary">
-          ¡Ya casi! Tu {reservation.resourceRef} queda apartada en cuanto recibamos tu anticipo.
+          ¡Ya casi! Tu cancha queda apartada en cuanto recibamos tu anticipo.
         </p>
         <p className="mt-1 font-ui text-2xl font-bold text-primary">{money(reservation.deposit)}</p>
         <p className="font-ui text-xs text-content-muted">Anticipo de tu reservación</p>
