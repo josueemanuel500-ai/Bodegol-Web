@@ -189,7 +189,7 @@ export default function ReservationForm({ onSuccess }) {
       </div>
 
       {error && (
-        <p role="alert" className="rounded-xl bg-status-error/10 px-4 py-2.5 font-ui text-sm text-status-error">
+        <p role="alert" className="rounded-xl bg-status-error/10 px-4 py-2.5 text-center font-ui text-sm font-bold text-white">
           {error}
         </p>
       )}
