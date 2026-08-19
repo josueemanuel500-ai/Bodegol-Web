@@ -80,6 +80,31 @@ class ReservationService {
     return data
   }
 
+  /** Public-safe reservation settings configured in Raven Backoffice. */
+  async getConfiguration() {
+    const { data } = await api.get(`/public/${siteConfig.businessId}/reservations/configuration`)
+    return data
+  }
+
+  /** Real court names configured in Raven Backoffice. */
+  async getAreas() {
+    const { data } = await api.get(`/public/${siteConfig.businessId}/reservations/areas-config`)
+    return data
+  }
+
+  /**
+   * Real availability for a calendar period. The backend excludes existing
+   * reservations and administrative event blocks before returning slots.
+   */
+  async getCalendar({ from, to, duration, resourceRef }) {
+    const query = new URLSearchParams({ from, to, duration: String(duration) })
+    if (resourceRef) query.set('resource', resourceRef)
+    const { data } = await api.get(
+      `/public/${siteConfig.businessId}/reservations/calendar?${query.toString()}`
+    )
+    return data
+  }
+
   /**
    * Business-configured deposit (Backoffice → Negocio → "Reservaciones ·
    * Anticipo"): hourly rate, % anticipo, and the account to transfer to.
