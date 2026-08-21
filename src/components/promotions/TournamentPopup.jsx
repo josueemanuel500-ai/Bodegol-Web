@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, MessageCircle, X } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { buildWhatsAppUrl } from '@/utils/format'
 import { useScrollLock } from '@/hooks/useScrollLock'
 
@@ -12,11 +12,18 @@ const WHATSAPP_URL = buildWhatsAppUrl('529991998760', 'Información para el torn
 export default function TournamentPopup() {
   const [open, setOpen] = useState(false)
   const closeButtonRef = useRef(null)
+  const navigate = useNavigate()
   useScrollLock(open)
 
   useEffect(() => {
     const previewRequested = new URLSearchParams(window.location.search).get('preview') === 'torneo'
-    if (!previewRequested && sessionStorage.getItem(SESSION_KEY)) return undefined
+    let alreadySeen = false
+    try {
+      alreadySeen = sessionStorage.getItem(SESSION_KEY) === 'seen'
+    } catch {
+      // Algunos navegadores bloquean sessionStorage; el popup debe seguir funcionando.
+    }
+    if (!previewRequested && alreadySeen) return undefined
     const timer = window.setTimeout(() => setOpen(true), 700)
     return () => window.clearTimeout(timer)
   }, [])
@@ -30,8 +37,17 @@ export default function TournamentPopup() {
   }, [open])
 
   function close() {
-    sessionStorage.setItem(SESSION_KEY, 'seen')
     setOpen(false)
+    try {
+      sessionStorage.setItem(SESSION_KEY, 'seen')
+    } catch {
+      // Cerrar nunca debe depender de que el navegador permita almacenamiento.
+    }
+  }
+
+  function viewDetails() {
+    close()
+    navigate('/torneo-veteranos-35-merida')
   }
 
   if (typeof document === 'undefined') return null
@@ -44,7 +60,7 @@ export default function TournamentPopup() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          onMouseDown={(event) => event.target === event.currentTarget && close()}
+          onPointerDown={(event) => event.target === event.currentTarget && close()}
         >
           <motion.section
             role="dialog"
@@ -80,10 +96,10 @@ export default function TournamentPopup() {
                 <p className="font-ui text-sm text-white/65">Inscripciones abiertas · Fútbol 5 vs 5 · Iniciamos en septiembre</p>
               </div>
               <div className="flex flex-col gap-2 sm:flex-row">
-                <Link to="/torneo-veteranos-35-merida" onClick={close}
+                <button type="button" onClick={viewDetails}
                   className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/25 px-4 py-3 font-ui text-sm font-bold text-white transition hover:border-primary hover:bg-primary/10">
                   Ver detalles <ArrowRight size={17} aria-hidden="true" />
-                </Link>
+                </button>
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" onClick={close}
                   className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-5 py-3 font-ui text-sm font-black text-[#062b14] shadow-lg transition hover:-translate-y-0.5 hover:bg-[#35e777] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
                   <MessageCircle size={19} aria-hidden="true" /> Información por WhatsApp
