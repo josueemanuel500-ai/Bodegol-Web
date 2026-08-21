@@ -7,7 +7,7 @@ import { buildWhatsAppUrl } from '@/utils/format'
 import { useScrollLock } from '@/hooks/useScrollLock'
 
 const SESSION_KEY = 'bodegol:torneo-veteranos-35:v1'
-const WHATSAPP_URL = buildWhatsAppUrl('529991998760', 'Información para el torneo')
+const WHATSAPP_URL = buildWhatsAppUrl('529991998760', 'Información para el torneo de veteranos')
 
 export default function TournamentPopup() {
   const [open, setOpen] = useState(false)
@@ -15,7 +15,8 @@ export default function TournamentPopup() {
   useScrollLock(open)
 
   useEffect(() => {
-    if (sessionStorage.getItem(SESSION_KEY)) return undefined
+    const previewRequested = new URLSearchParams(window.location.search).get('preview') === 'torneo'
+    if (!previewRequested && sessionStorage.getItem(SESSION_KEY)) return undefined
     const timer = window.setTimeout(() => setOpen(true), 700)
     return () => window.clearTimeout(timer)
   }, [])
@@ -39,7 +40,7 @@ export default function TournamentPopup() {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-[550] flex items-center justify-center bg-[#020b18]/85 p-3 backdrop-blur-md sm:p-6"
+          className="fixed inset-0 z-[550] flex items-start justify-center overflow-y-auto bg-[#020b18]/85 p-3 backdrop-blur-md sm:items-center sm:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -53,7 +54,7 @@ export default function TournamentPopup() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.97, y: 10 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="relative w-full max-w-5xl overflow-hidden rounded-2xl border border-primary/40 bg-[#031126] shadow-[0_30px_100px_rgba(0,0,0,0.75)] sm:rounded-3xl"
+            className="relative my-auto w-full max-w-5xl overflow-hidden rounded-2xl border border-primary/40 bg-[#031126] shadow-[0_30px_100px_rgba(0,0,0,0.75)] sm:rounded-3xl"
           >
             <button
               ref={closeButtonRef}
@@ -70,7 +71,7 @@ export default function TournamentPopup() {
               alt="Torneo de Veteranos 35+, fútbol 5 contra 5, inscripciones abiertas e inicio en septiembre"
               width="1600"
               height="900"
-              className="block aspect-video w-full object-cover"
+              className="block max-h-[48svh] w-full bg-black object-contain sm:max-h-[62vh] lg:max-h-[65vh]"
             />
 
             <div className="flex flex-col gap-3 border-t border-white/10 bg-[#031126] p-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
