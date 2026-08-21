@@ -17,6 +17,7 @@ import { Outlet } from 'react-router-dom'
 import Navbar from '@/components/navigation/Navbar'
 import Footer from '@/components/sections/Footer'
 import ScrollToTop from '@/components/ui/ScrollToTop'
+import TournamentPopup from '@/components/promotions/TournamentPopup'
 
 export default function MainLayout() {
   return (
@@ -38,6 +39,8 @@ export default function MainLayout() {
 
       {/* Scroll to top button (appears after scrolling down) */}
       <ScrollToTop />
+
+      <TournamentPopup />
     </>
   )
 }
