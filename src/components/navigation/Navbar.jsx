@@ -15,7 +15,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X, MessageCircle, CalendarDays } from 'lucide-react'
+import { Menu, X, MessageCircle, CalendarDays, ChevronDown } from 'lucide-react'
 import { mainNavLinks, navCTA } from '@/data/navigation'
 import { useBusiness } from '@/context/BusinessContext'
 import { buildWhatsAppUrl } from '@/utils/format'
@@ -30,6 +30,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [formOpen, setFormOpen] = useState(false)
+  const [tournamentsOpen, setTournamentsOpen] = useState(false)
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40)
@@ -56,6 +57,7 @@ export default function Navbar() {
   )
 
   const isActive = (href) => location.pathname === href
+  const isGroupActive = (link) => link.children?.some((child) => isActive(child.href))
 
   return (
     <>
@@ -88,26 +90,38 @@ export default function Navbar() {
 
           {/* Desktop Nav Links */}
           <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-1">
-            {mainNavLinks.map((link) => (
-              <Link
-                key={link.id}
-                to={link.href}
-                className={cn(
-                  'relative px-3.5 py-2 text-sm font-ui font-medium rounded-lg transition-colors duration-200',
-                  isActive(link.href)
-                    ? 'text-brand-primary'
-                    : 'text-text-secondary hover:text-text-primary hover:bg-surface-elevated'
-                )}
-                aria-current={isActive(link.href) ? 'page' : undefined}
-              >
+            {mainNavLinks.map((link) => link.children ? (
+              <div key={link.id} className="group relative">
+                <button
+                  type="button"
+                  className={cn(
+                    'flex items-center gap-1 px-3.5 py-2 text-sm font-ui font-medium rounded-lg transition-colors duration-200',
+                    isGroupActive(link) ? 'text-brand-primary bg-brand-primary/10' : 'text-text-secondary hover:text-text-primary hover:bg-surface-elevated'
+                  )}
+                  aria-haspopup="menu"
+                >
+                  {link.label}
+                  <ChevronDown size={15} className="transition-transform group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true" />
+                </button>
+                <div className="invisible absolute left-1/2 top-full z-20 w-52 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                  <div className="rounded-xl border border-border-default bg-surface-base/98 p-2 shadow-card-lg backdrop-blur-md" role="menu">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.id}
+                        to={child.href}
+                        role="menuitem"
+                        className={cn('block rounded-lg px-3 py-2.5 text-sm font-ui font-medium transition-colors', isActive(child.href) ? 'bg-brand-primary/10 text-brand-primary' : 'text-text-secondary hover:bg-surface-elevated hover:text-text-primary')}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <Link key={link.id} to={link.href} className={cn('relative px-3.5 py-2 text-sm font-ui font-medium rounded-lg transition-colors duration-200', isActive(link.href) ? 'text-brand-primary' : 'text-text-secondary hover:text-text-primary hover:bg-surface-elevated')} aria-current={isActive(link.href) ? 'page' : undefined}>
                 {link.label}
-                {isActive(link.href) && (
-                  <motion.span
-                    layoutId="nav-pill"
-                    className="absolute inset-0 bg-brand-primary/10 rounded-lg"
-                    transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
-                  />
-                )}
+                {isActive(link.href) && <motion.span layoutId="nav-pill" className="absolute inset-0 bg-brand-primary/10 rounded-lg" transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }} />}
               </Link>
             ))}
           </nav>
@@ -172,18 +186,25 @@ export default function Navbar() {
               <ul className="flex flex-col gap-1">
                 {mainNavLinks.map((link) => (
                   <li key={link.id}>
-                    <Link
-                      to={link.href}
-                      onClick={() => setMenuOpen(false)}
-                      className={cn(
-                        'flex items-center px-4 py-4 text-lg font-ui font-medium rounded-xl transition-colors',
-                        isActive(link.href)
-                          ? 'text-brand-primary bg-brand-primary/10'
-                          : 'text-text-primary hover:bg-surface-elevated'
-                      )}
-                    >
-                      {link.label}
-                    </Link>
+                    {link.children ? (
+                      <>
+                        <button type="button" onClick={() => setTournamentsOpen((open) => !open)} aria-expanded={tournamentsOpen} className={cn('flex w-full items-center justify-between px-4 py-4 text-lg font-ui font-medium rounded-xl transition-colors', isGroupActive(link) ? 'text-brand-primary bg-brand-primary/10' : 'text-text-primary hover:bg-surface-elevated')}>
+                          {link.label}
+                          <ChevronDown size={20} className={cn('transition-transform', tournamentsOpen && 'rotate-180')} aria-hidden="true" />
+                        </button>
+                        {tournamentsOpen && (
+                          <ul className="ml-4 mt-1 flex flex-col gap-1 border-l border-border-default pl-3">
+                            {link.children.map((child) => (
+                              <li key={child.id}><Link to={child.href} onClick={() => setMenuOpen(false)} className={cn('block rounded-xl px-4 py-3 font-ui font-medium transition-colors', isActive(child.href) ? 'bg-brand-primary/10 text-brand-primary' : 'text-text-secondary hover:bg-surface-elevated hover:text-text-primary')}>{child.label}</Link></li>
+                            ))}
+                          </ul>
+                        )}
+                      </>
+                    ) : (
+                      <Link to={link.href} onClick={() => setMenuOpen(false)} className={cn('flex items-center px-4 py-4 text-lg font-ui font-medium rounded-xl transition-colors', isActive(link.href) ? 'text-brand-primary bg-brand-primary/10' : 'text-text-primary hover:bg-surface-elevated')}>
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

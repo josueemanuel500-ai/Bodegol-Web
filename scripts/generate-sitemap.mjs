@@ -12,6 +12,7 @@ const routes = [
   { path: '/canchas',                  priority: '0.9', changefreq: 'weekly'  },
   { path: '/ver-partidos-en-merida',   priority: '0.9', changefreq: 'weekly'  },
   { path: '/torneo-veteranos-35-merida', priority: '0.9', changefreq: 'weekly' },
+  { path: '/torneo-femenil-merida',      priority: '0.9', changefreq: 'weekly' },
   { path: '/menu',                     priority: '0.8', changefreq: 'monthly' },
   { path: '/promociones',              priority: '0.8', changefreq: 'weekly'  },
   { path: '/paquetes',                 priority: '0.7', changefreq: 'monthly' },
