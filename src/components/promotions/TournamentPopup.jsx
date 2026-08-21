@@ -76,8 +76,8 @@ export default function TournamentPopup() {
 
             <div className="flex flex-col gap-3 border-t border-white/10 bg-[#031126] p-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
               <div className="min-w-0">
-                <h2 id="tournament-popup-title" className="font-display text-xl font-black uppercase text-white sm:text-2xl">Inscripciones abiertas</h2>
-                <p className="font-ui text-sm text-white/65">Torneo de Veteranos 35+ · Fútbol 5 vs 5 · Iniciamos en septiembre</p>
+                <h2 id="tournament-popup-title" className="font-display text-xl font-black uppercase text-white sm:text-2xl">Torneo Bodegol 35+</h2>
+                <p className="font-ui text-sm text-white/65">Inscripciones abiertas · Fútbol 5 vs 5 · Iniciamos en septiembre</p>
               </div>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <Link to="/torneo-veteranos-35-merida" onClick={close}

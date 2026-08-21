@@ -6,7 +6,7 @@
 export const mainNavLinks = [
   { id: 'canchas',    label: 'Canchas',    href: '/canchas'    },
   { id: 'partidos',   label: 'Ver partidos', href: '/ver-partidos-en-merida' },
-  { id: 'torneo',     label: 'Torneo 35+', href: '/torneo-veteranos-35-merida' },
+  { id: 'torneo',     label: 'Torneo Bodegol', href: '/torneo-veteranos-35-merida' },
   { id: 'menu',       label: 'Menú',       href: '/menu'       },
   { id: 'promotions', label: 'Promociones',href: '/promociones' },
   { id: 'packages',   label: 'Paquetes',   href: '/paquetes'   },
