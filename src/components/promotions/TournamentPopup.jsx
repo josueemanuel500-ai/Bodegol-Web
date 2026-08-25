@@ -7,7 +7,7 @@ import { buildWhatsAppUrl } from '@/utils/format'
 import { useScrollLock } from '@/hooks/useScrollLock'
 
 const SESSION_KEY = 'bodegol:torneo-veteranos-35:v1'
-const WHATSAPP_URL = buildWhatsAppUrl('529991998760', 'Información para el torneo de veteranos')
+const WHATSAPP_URL = buildWhatsAppUrl('529999062061', 'Información para el torneo de veteranos')
 
 export default function TournamentPopup() {
   const [open, setOpen] = useState(false)

@@ -4,7 +4,7 @@ import SEO from '@/components/ui/SEO'
 import Button from '@/components/buttons/Button'
 import { buildWhatsAppUrl } from '@/utils/format'
 
-const WHATSAPP_URL = buildWhatsAppUrl('529991998760', 'Información para el torneo de veteranos')
+const WHATSAPP_URL = buildWhatsAppUrl('529999062061', 'Información para el torneo de veteranos')
 
 const prizes = [
   'Primer lugar: $2,000 en efectivo y $1,000 en consumo',
@@ -65,7 +65,7 @@ export default function TorneoVeteranosPage() {
               <Button as="a" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" icon={MessageCircle} size="lg" fullWidth className="mt-7">
                 Información para el torneo de veteranos
               </Button>
-              <a href="tel:+529991998760" className="mt-4 block text-center font-ui text-sm font-semibold text-content-secondary hover:text-primary">999 199 8760</a>
+              <a href="tel:+529999062061" className="mt-4 block text-center font-ui text-sm font-semibold text-content-secondary hover:text-primary">999 906 2061</a>
             </div>
           </div>
         </section>
