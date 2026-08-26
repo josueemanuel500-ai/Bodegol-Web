@@ -15,12 +15,11 @@
  * negocio no tiene tarifa configurada, el flujo original (sin anticipo)
  * sigue funcionando igual que antes.
  */
-import React, { useEffect, useMemo, useState } from 'react'
-import { CalendarDays, ChevronLeft, ChevronRight, LayoutGrid, LoaderCircle, User, Phone, Timer, ArrowRight, ArrowLeft, Check } from 'lucide-react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { CalendarDays, ChevronLeft, ChevronRight, ChevronDown, LayoutGrid, LoaderCircle, User, Phone, Timer, ArrowRight, ArrowLeft, Check } from 'lucide-react'
 import { useToast } from '@/components/ui/Toast'
 import Button from '@/components/buttons/Button'
 import Input from '@/components/forms/Input'
-import Select from '@/components/forms/Select'
 import Chip from '@/components/ui/Chip'
 import reservationService from '@/services/reservation.service'
 import DepositUploadStep from './DepositUploadStep'
@@ -92,9 +91,26 @@ export default function ReservationForm({ onSuccess }) {
   // (subir comprobante) en vez de cerrar el modal de inmediato.
   const [pendingDeposit, setPendingDeposit] = useState(null)
   const [step, setStep] = useState(1)
+  const [bookingMenuOpen, setBookingMenuOpen] = useState(false)
+  const bookingMenuRef = useRef(null)
 
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
   const estimatedTotal = HOURLY_RATE_ESTIMATE * (Number(form.duration) / 60)
+
+  useEffect(() => {
+    if (!bookingMenuOpen) return undefined
+    const closeMenu = (event) => {
+      if (event.key === 'Escape' || (event.type === 'pointerdown' && !bookingMenuRef.current?.contains(event.target))) {
+        setBookingMenuOpen(false)
+      }
+    }
+    document.addEventListener('pointerdown', closeMenu)
+    document.addEventListener('keydown', closeMenu)
+    return () => {
+      document.removeEventListener('pointerdown', closeMenu)
+      document.removeEventListener('keydown', closeMenu)
+    }
+  }, [bookingMenuOpen])
 
   useEffect(() => {
     let active = true
@@ -223,9 +239,31 @@ export default function ReservationForm({ onSuccess }) {
           {!courts.length && <p className="mt-2 font-ui text-xs text-content-muted">Cargando canchas disponibles…</p>}
         </div>
 
-        <Select id="resv-type" label="Tipo de reservación" value={form.bookingType} onChange={set('bookingType')} options={BOOKING_TYPES} className="border-primary/40 bg-[#0b1628] font-ui font-semibold text-white shadow-inner hover:border-primary/70" />
+        <div ref={bookingMenuRef} className="relative z-40">
+          <label id="resv-type-label" className="mb-2 block font-ui text-sm font-semibold text-content-secondary">Tipo de reservación</label>
+          <button
+            id="resv-type"
+            type="button"
+            aria-labelledby="resv-type-label resv-type"
+            aria-haspopup="listbox"
+            aria-expanded={bookingMenuOpen}
+            onClick={() => setBookingMenuOpen((open) => !open)}
+            className={`flex min-h-12 w-full items-center justify-between rounded-2xl border bg-[#0b1628] px-4 py-3 text-left font-ui text-sm font-bold text-white shadow-inner transition ${bookingMenuOpen ? 'border-primary ring-4 ring-primary/20' : 'border-primary/40 hover:border-primary/70'}`}
+          >
+            {BOOKING_TYPES.find((item) => item.value === form.bookingType)?.label}
+            <ChevronDown size={18} className={`text-primary transition-transform ${bookingMenuOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+          </button>
+          {bookingMenuOpen && <div role="listbox" aria-labelledby="resv-type-label" className="absolute left-0 right-0 top-[calc(100%+.5rem)] overflow-hidden rounded-2xl border border-primary/40 bg-[#0b1628] p-1.5 shadow-[0_18px_50px_rgba(0,0,0,.55)]">
+            {BOOKING_TYPES.map((item) => {
+              const selected = item.value === form.bookingType
+              return <button key={item.value} type="button" role="option" aria-selected={selected} onClick={() => { setForm((current) => ({ ...current, bookingType: item.value })); setBookingMenuOpen(false) }} className={`flex w-full items-center justify-between rounded-xl px-4 py-3 text-left font-ui text-sm font-semibold transition ${selected ? 'bg-primary text-white' : 'text-content-primary hover:bg-white/[0.07] hover:text-white'}`}>
+                {item.label}{selected && <Check size={16} aria-hidden="true" />}
+              </button>
+            })}
+          </div>}
+        </div>
 
-        <div className="relative z-20 overflow-visible rounded-2xl border border-white/15 bg-white/[0.045] p-4 shadow-inner backdrop-blur-lg sm:p-5">
+        <div className="relative z-20 mx-auto w-full max-w-[560px] overflow-visible rounded-2xl border border-white/15 bg-white/[0.045] p-4 shadow-inner backdrop-blur-lg">
         <div>
           <label className={labelClass}>
             <span className="inline-flex items-center gap-1.5"><Timer size={14} strokeWidth={2} aria-hidden="true" />Duración</span>
