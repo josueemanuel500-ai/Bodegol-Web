@@ -13,18 +13,18 @@ export default function ReservacionesPage() {
   return <>
     <SEO title="Reservar cancha de fútbol en Mérida — Bodegol" description="Consulta la disponibilidad de las canchas Bodegol y reserva en línea por fecha y hora. Tu solicitud se registra directamente en Raven POS." path="/reservaciones" />
     <div className="min-h-screen bg-background pt-[var(--nav-height)]">
-      <section className="relative overflow-hidden border-b border-line py-14 sm:py-20">
+      <section className="relative overflow-hidden border-b border-line py-10 sm:py-14">
         <div className="pointer-events-none absolute inset-0 opacity-30" style={{ background: 'radial-gradient(circle at 50% 0%, rgba(255,105,15,.55), transparent 48%)' }} aria-hidden="true" />
         <div className="site-container relative text-center">
           <p className="t-label text-primary">Reservaciones en línea</p>
-          <h1 className="t-hero-title mx-auto mt-4 max-w-4xl text-white">Elige tu cancha, fecha y hora</h1>
-          <p className="mx-auto mt-5 max-w-2xl font-ui text-lg leading-relaxed text-content-secondary">Consulta espacios disponibles en tiempo real y completa tu reservación en tres pasos.</p>
+          <h1 className="mx-auto mt-3 max-w-4xl font-display text-4xl font-black uppercase leading-none text-white sm:text-5xl">Elige tu cancha, fecha y hora</h1>
+          <p className="mx-auto mt-4 max-w-2xl font-ui text-base leading-relaxed text-content-secondary">Consulta espacios disponibles en tiempo real y completa tu reservación en tres pasos.</p>
         </div>
       </section>
 
-      <section className="section-padding">
-        <div className="site-container grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
-          <div className="rounded-3xl border border-primary/20 bg-surface p-4 shadow-card-lg sm:p-8">
+      <section className="py-10 sm:py-14">
+        <div className="site-container grid max-w-5xl items-start gap-6 lg:grid-cols-[minmax(0,1fr)_280px]">
+          <div className="rounded-3xl border border-primary/20 bg-surface p-4 shadow-card-lg sm:p-6">
             <ReservationForm />
           </div>
           <aside className="space-y-4 lg:sticky lg:top-[calc(var(--nav-height)+2rem)]" aria-label="Información sobre la reservación">

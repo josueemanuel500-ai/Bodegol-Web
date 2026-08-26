@@ -33,7 +33,15 @@ const Select = forwardRef(function Select({
           aria-describedby={[descId, errorId].filter(Boolean).join(' ') || undefined}
           className={selectClasses} {...rest}>
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value} disabled={opt.disabled}>{opt.label}</option>
+            <option
+              key={opt.value}
+              value={opt.value}
+              disabled={opt.disabled}
+              className="bg-[#0b1628] text-white"
+              style={{ backgroundColor: '#0b1628', color: '#ffffff' }}
+            >
+              {opt.label}
+            </option>
           ))}
         </select>
         <ChevronDown size={18} strokeWidth={2}

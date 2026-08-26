@@ -223,9 +223,9 @@ export default function ReservationForm({ onSuccess }) {
           {!courts.length && <p className="mt-2 font-ui text-xs text-content-muted">Cargando canchas disponibles…</p>}
         </div>
 
-        <Select id="resv-type" label="Tipo de reservación" value={form.bookingType} onChange={set('bookingType')} options={BOOKING_TYPES} className="border-white/15 bg-white/[0.06] backdrop-blur-md" />
+        <Select id="resv-type" label="Tipo de reservación" value={form.bookingType} onChange={set('bookingType')} options={BOOKING_TYPES} className="border-primary/40 bg-[#0b1628] font-ui font-semibold text-white shadow-inner hover:border-primary/70" />
 
-        <div className="relative z-20 overflow-visible rounded-2xl border border-white/15 bg-white/[0.045] p-4 shadow-inner backdrop-blur-lg sm:p-6">
+        <div className="relative z-20 overflow-visible rounded-2xl border border-white/15 bg-white/[0.045] p-4 shadow-inner backdrop-blur-lg sm:p-5">
         <div>
           <label className={labelClass}>
             <span className="inline-flex items-center gap-1.5"><Timer size={14} strokeWidth={2} aria-hidden="true" />Duración</span>
@@ -262,7 +262,7 @@ export default function ReservationForm({ onSuccess }) {
               <ChevronRight size={18} />
             </button>
           </div>
-          <div className="grid grid-cols-7 gap-1.5 text-center sm:gap-2">
+          <div className="grid grid-cols-7 gap-1 text-center sm:gap-1.5">
             {WEEKDAYS.map((day, index) => <span key={`${day}-${index}`} className="py-1 font-ui text-[11px] font-bold text-content-muted">{day}</span>)}
             {calendarCells.map((cell, index) => {
               if (!cell) return <span key={`empty-${index}`} />
@@ -272,7 +272,7 @@ export default function ReservationForm({ onSuccess }) {
               return <button key={cell.date} type="button" disabled={!available || loadingCalendar}
                 aria-label={`${cell.date}${available ? ', disponible' : ', no disponible'}`}
                 onClick={() => setForm((current) => ({ ...current, date:cell.date, startTime:'' }))}
-                className={`aspect-square min-h-10 rounded-lg border font-ui text-sm font-bold transition sm:min-h-14 ${selected ? 'border-primary bg-primary text-white shadow-glow-primary' : available ? 'border-white/15 bg-white/[0.07] text-content-primary hover:border-primary/70 hover:bg-primary/15' : 'border-transparent bg-white/[0.02] text-content-muted opacity-35'}`}>
+                className={`aspect-square min-h-9 rounded-lg border font-ui text-xs font-bold transition sm:min-h-11 sm:text-sm ${selected ? 'border-primary bg-primary text-white shadow-glow-primary' : available ? 'border-white/15 bg-white/[0.07] text-content-primary hover:border-primary/70 hover:bg-primary/15' : 'border-transparent bg-white/[0.02] text-content-muted opacity-35'}`}>
                 {cell.number}
               </button>
             })}
