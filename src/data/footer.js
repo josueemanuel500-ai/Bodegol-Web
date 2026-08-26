@@ -22,7 +22,7 @@ export const footerConfig = {
     {
       heading: 'Reservaciones',
       links: [
-        { label: 'Reservar Cancha',    href: '/canchas'  },
+        { label: 'Reservar Cancha',    href: '/reservaciones'  },
         { label: 'Paquete Cumpleaños', href: '/paquetes' },
         { label: 'Evento Privado',     href: '/paquetes' },
         { label: 'Preguntas Frecuentes', href: '/faq'   },

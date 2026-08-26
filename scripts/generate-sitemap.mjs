@@ -10,6 +10,7 @@ const SITE = 'https://bodegol.com.mx'
 const routes = [
   { path: '/',                         priority: '1.0', changefreq: 'weekly'  },
   { path: '/canchas',                  priority: '0.9', changefreq: 'weekly'  },
+  { path: '/reservaciones',            priority: '0.9', changefreq: 'weekly'  },
   { path: '/ver-partidos-en-merida',   priority: '0.9', changefreq: 'weekly'  },
   { path: '/torneo-veteranos-35-merida', priority: '0.9', changefreq: 'weekly' },
   { path: '/torneo-femenil-merida',      priority: '0.9', changefreq: 'weekly' },

@@ -17,6 +17,7 @@ const GaleriaPage     = lazy(() => import('@/pages/GaleriaPage'))
 const VerPartidosPage = lazy(() => import('@/pages/VerPartidosPage'))
 const TorneoVeteranosPage = lazy(() => import('@/pages/TorneoVeteranosPage'))
 const TorneoFemenilPage = lazy(() => import('@/pages/TorneoFemenilPage'))
+const ReservacionesPage = lazy(() => import('@/pages/ReservacionesPage'))
 const FaqPage         = lazy(() => import('@/pages/FaqPage'))
 const PrivacyPage     = lazy(() => import('@/pages/PrivacyPage'))
 const TermsPage       = lazy(() => import('@/pages/TermsPage'))
@@ -39,6 +40,7 @@ export function AppRouter() {
         <Route path="ver-partidos-en-merida" element={<VerPartidosPage />} />
         <Route path="torneo-veteranos-35-merida" element={<TorneoVeteranosPage />} />
         <Route path="torneo-femenil-merida" element={<TorneoFemenilPage />} />
+        <Route path="reservaciones" element={<ReservacionesPage />} />
         <Route path="faq"        element={<FaqPage />}         />
         <Route path="privacidad" element={<PrivacyPage />} />
         <Route path="terminos"   element={<TermsPage />}   />

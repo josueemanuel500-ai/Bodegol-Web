@@ -3,15 +3,14 @@
  * IMAGE backdrop — 2000 × 1100 px (16:9), .webp < 400 KB.
  *   public/images/cta/reservation-bg.jpg
  */
-import React, { useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { MessageCircle, Phone, LayoutGrid, Users, CalendarDays } from 'lucide-react'
 import { useBusiness } from '@/context/BusinessContext'
 import { buildWhatsAppUrl } from '@/utils/format'
 import siteConfig from '@/config/site.config'
 import Button from '@/components/buttons/Button'
-import Modal from '@/components/ui/Modal'
-import ReservationForm from '@/components/sections/ReservationForm'
 
 const TRUST = [
   { icon: LayoutGrid, label: '5 canchas disponibles' },
@@ -22,7 +21,6 @@ const TRUST = [
 
 export default function ReservationCTA() {
   const { business } = useBusiness()
-  const [formOpen, setFormOpen] = useState(false)
   const wa = buildWhatsAppUrl(business.contact.whatsapp, '¡Hola Bodegol! Quiero reservar una cancha. ¿Qué disponibilidad tienen?')
 
   return (
@@ -45,7 +43,7 @@ export default function ReservationCTA() {
             </h2>
             <div className="mt-1 flex w-full flex-col items-center justify-center gap-4 sm:w-auto sm:flex-row sm:flex-wrap">
               {siteConfig.features.reservationSystem && (
-                <Button variant="primary" size="xl" icon={CalendarDays} fullWidth className="sm:w-auto" onClick={() => setFormOpen(true)}>
+                <Button as={Link} to="/reservaciones" variant="primary" size="xl" icon={CalendarDays} fullWidth className="sm:w-auto">
                   Reservar en línea
                 </Button>
               )}
@@ -72,11 +70,6 @@ export default function ReservationCTA() {
         </motion.div>
       </div>
 
-      {siteConfig.features.reservationSystem && (
-        <Modal isOpen={formOpen} onClose={() => setFormOpen(false)} title="Reserva tu cancha" size="sm">
-          <ReservationForm onSuccess={() => setFormOpen(false)} />
-        </Modal>
-      )}
     </section>
   )
 }

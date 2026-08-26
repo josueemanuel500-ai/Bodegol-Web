@@ -16,7 +16,7 @@
  * sigue funcionando igual que antes.
  */
 import React, { useEffect, useMemo, useState } from 'react'
-import { CalendarDays, ChevronLeft, ChevronRight, LayoutGrid, LoaderCircle, User, Phone, Timer } from 'lucide-react'
+import { CalendarDays, ChevronLeft, ChevronRight, LayoutGrid, LoaderCircle, User, Phone, Timer, ArrowRight, ArrowLeft, Check } from 'lucide-react'
 import { useToast } from '@/components/ui/Toast'
 import Button from '@/components/buttons/Button'
 import Input from '@/components/forms/Input'
@@ -91,6 +91,7 @@ export default function ReservationForm({ onSuccess }) {
   // Una vez creada la reservación CON anticipo, cambiamos a un segundo paso
   // (subir comprobante) en vez de cerrar el modal de inmediato.
   const [pendingDeposit, setPendingDeposit] = useState(null)
+  const [step, setStep] = useState(1)
 
   const set = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }))
   const estimatedTotal = HOURLY_RATE_ESTIMATE * (Number(form.duration) / 60)
@@ -149,7 +150,7 @@ export default function ReservationForm({ onSuccess }) {
     if (submitting) return
     setError('')
 
-    if (!form.customerName.trim() || !form.date || !form.startTime) {
+    if (!form.customerName.trim() || !form.phone.trim() || !form.date || !form.startTime) {
       setError('Completa todos los campos requeridos.')
       return
     }
@@ -196,41 +197,35 @@ export default function ReservationForm({ onSuccess }) {
     )
   }
 
+  const selectedDateLabel = form.date
+    ? new Date(`${form.date}T12:00:00`).toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
+    : ''
+
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-      <div>
-        <label className={labelClass}>
-          <span className="inline-flex items-center gap-1.5"><LayoutGrid size={14} strokeWidth={2} aria-hidden="true" />Cancha (5 vs 5)</span>
-        </label>
-        <div className="grid grid-cols-5 gap-2">
-          {courts.map((c) => (
-            <Chip
-              key={c}
-              type="button"
-              selected={form.resourceRef === c}
-              onClick={() => setForm((f) => ({ ...f, resourceRef: c }))}
-              className="min-h-10 w-full justify-center px-2"
-            >
-              {c.replace(/^(Área|Cancha)\s*/i, '#')}
-            </Chip>
-          ))}
+      <ol className="grid grid-cols-3 gap-2" aria-label="Progreso de la reservación">
+        {['Fecha y hora', 'Tus datos', 'Anticipo'].map((label, index) => {
+          const number = index + 1
+          const active = number === step
+          const complete = number < step
+          return <li key={label} className={`rounded-xl border px-2 py-3 text-center font-ui text-xs font-bold sm:text-sm ${active ? 'border-primary bg-primary/15 text-primary' : complete ? 'border-primary/30 bg-primary/5 text-content-primary' : 'border-white/10 text-content-muted'}`}>
+            <span className="mx-auto mb-1 flex h-6 w-6 items-center justify-center rounded-full border border-current">{complete ? <Check size={14} /> : number}</span>{label}
+          </li>
+        })}
+      </ol>
+
+      {step === 1 && <>
+        <div>
+          <label className={labelClass}><span className="inline-flex items-center gap-1.5"><LayoutGrid size={14} aria-hidden="true" />Cancha (5 vs 5)</span></label>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-5">
+            {courts.map((c) => <Chip key={c} type="button" selected={form.resourceRef === c} onClick={() => setForm((f) => ({ ...f, resourceRef: c, date: '', startTime: '' }))} className="min-h-11 w-full justify-center px-2">{c.replace(/^(Área|Cancha)\s*/i, '#')}</Chip>)}
+          </div>
+          {!courts.length && <p className="mt-2 font-ui text-xs text-content-muted">Cargando canchas disponibles…</p>}
         </div>
-        {!courts.length && <p className="mt-2 font-ui text-xs text-content-muted">Cargando canchas disponibles…</p>}
-      </div>
 
-      <Select id="resv-type" label="Tipo de reservación" value={form.bookingType}
-        onChange={set('bookingType')} options={BOOKING_TYPES}
-        className="border-white/15 bg-white/[0.06] backdrop-blur-md" />
+        <Select id="resv-type" label="Tipo de reservación" value={form.bookingType} onChange={set('bookingType')} options={BOOKING_TYPES} className="border-white/15 bg-white/[0.06] backdrop-blur-md" />
 
-      <Input id="resv-name" label="Tu nombre" icon={User} value={form.customerName} onChange={set('customerName')}
-        className="border-white/15 bg-white/[0.06] backdrop-blur-md"
-        placeholder="Juan Pérez" required />
-
-      <Input id="resv-phone" label="Teléfono (WhatsApp)" icon={Phone} type="tel" value={form.phone} onChange={set('phone')}
-        className="border-white/15 bg-white/[0.06] backdrop-blur-md"
-        placeholder="81 1234 5678" />
-
-      <div className="relative z-20 overflow-visible rounded-2xl border border-white/15 bg-white/[0.045] p-4 shadow-inner backdrop-blur-lg">
+        <div className="relative z-20 overflow-visible rounded-2xl border border-white/15 bg-white/[0.045] p-4 shadow-inner backdrop-blur-lg sm:p-6">
         <div>
           <label className={labelClass}>
             <span className="inline-flex items-center gap-1.5"><Timer size={14} strokeWidth={2} aria-hidden="true" />Duración</span>
@@ -267,7 +262,7 @@ export default function ReservationForm({ onSuccess }) {
               <ChevronRight size={18} />
             </button>
           </div>
-          <div className="grid grid-cols-7 gap-1 text-center">
+          <div className="grid grid-cols-7 gap-1.5 text-center sm:gap-2">
             {WEEKDAYS.map((day, index) => <span key={`${day}-${index}`} className="py-1 font-ui text-[11px] font-bold text-content-muted">{day}</span>)}
             {calendarCells.map((cell, index) => {
               if (!cell) return <span key={`empty-${index}`} />
@@ -277,7 +272,7 @@ export default function ReservationForm({ onSuccess }) {
               return <button key={cell.date} type="button" disabled={!available || loadingCalendar}
                 aria-label={`${cell.date}${available ? ', disponible' : ', no disponible'}`}
                 onClick={() => setForm((current) => ({ ...current, date:cell.date, startTime:'' }))}
-                className={`aspect-square min-h-9 rounded-lg border font-ui text-sm font-bold transition ${selected ? 'border-primary bg-primary text-white shadow-glow-primary' : available ? 'border-white/15 bg-white/[0.07] text-content-primary hover:border-primary/70 hover:bg-primary/15' : 'border-transparent bg-white/[0.02] text-content-muted opacity-35'}`}>
+                className={`aspect-square min-h-10 rounded-lg border font-ui text-sm font-bold transition sm:min-h-14 ${selected ? 'border-primary bg-primary text-white shadow-glow-primary' : available ? 'border-white/15 bg-white/[0.07] text-content-primary hover:border-primary/70 hover:bg-primary/15' : 'border-transparent bg-white/[0.02] text-content-muted opacity-35'}`}>
                 {cell.number}
               </button>
             })}
@@ -299,7 +294,27 @@ export default function ReservationForm({ onSuccess }) {
         <p className="mt-3 text-center font-ui text-xs text-content-muted">
           Total estimado <b className="text-content-secondary">{money(estimatedTotal)}</b> · si tu cancha requiere anticipo, te lo mostramos en el siguiente paso.
         </p>
-      </div>
+        </div>
+
+        <Button type="button" variant="primary" size="lg" icon={ArrowRight} fullWidth disabled={!form.resourceRef || !form.date || !form.startTime} onClick={() => setStep(2)} className="min-h-14 rounded-2xl">
+          Continuar con mis datos
+        </Button>
+      </>}
+
+      {step === 2 && <>
+        <div className="rounded-2xl border border-primary/25 bg-primary/10 p-4">
+          <p className="font-ui text-xs font-bold uppercase tracking-wider text-primary">Horario seleccionado</p>
+          <p className="mt-1 font-ui font-bold capitalize text-content-primary">{selectedDateLabel}</p>
+          <p className="font-ui text-sm text-content-secondary">{form.resourceRef} · {form.startTime} · {DURATIONS.find((item) => item.value === Number(form.duration))?.label}</p>
+        </div>
+
+        <Input id="resv-name" label="Nombre completo" icon={User} value={form.customerName} onChange={set('customerName')} className="border-white/15 bg-white/[0.06] backdrop-blur-md" placeholder="Juan Pérez" autoComplete="name" required />
+        <Input id="resv-phone" label="Teléfono con WhatsApp" icon={Phone} type="tel" value={form.phone} onChange={set('phone')} className="border-white/15 bg-white/[0.06] backdrop-blur-md" placeholder="999 000 0000" autoComplete="tel" required />
+
+        <p className="rounded-xl border border-white/10 bg-white/[0.04] p-4 font-ui text-sm leading-relaxed text-content-secondary">
+          Al continuar se registrará la solicitud en Raven POS. Si la reservación requiere anticipo, enseguida verás el importe y la cuenta configurada por Bodegol.
+        </p>
+      </>}
 
       {error && (
         <p role="alert" className="rounded-xl bg-status-error/10 px-4 py-2.5 text-center font-ui text-sm font-bold text-white">
@@ -307,14 +322,11 @@ export default function ReservationForm({ onSuccess }) {
         </p>
       )}
 
-      <Button type="submit" variant="primary" size="lg" icon={CalendarDays} loading={submitting} fullWidth
-        disabled={!form.resourceRef || !form.date || !form.startTime}
-        className="relative z-0 min-h-14 rounded-2xl">
-        Solicitar reservación
-      </Button>
-      <p className="text-center font-ui text-xs text-content-muted">
-        Te confirmamos por teléfono/WhatsApp en las próximas horas.
-      </p>
+      {step === 2 && <div className="grid gap-3 sm:grid-cols-[auto_1fr]">
+        <Button type="button" variant="secondary" size="lg" icon={ArrowLeft} onClick={() => setStep(1)} className="min-h-14 rounded-2xl">Cambiar horario</Button>
+        <Button type="submit" variant="primary" size="lg" icon={CalendarDays} loading={submitting} fullWidth disabled={!form.customerName.trim() || !form.phone.trim()} className="relative z-0 min-h-14 rounded-2xl">Registrar y continuar</Button>
+      </div>}
+      {step === 2 && <p className="text-center font-ui text-xs text-content-muted">La reservación queda sujeta a confirmación del anticipo cuando corresponda.</p>}
     </form>
   )
 }

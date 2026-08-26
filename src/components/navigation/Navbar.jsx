@@ -21,15 +21,12 @@ import { useBusiness } from '@/context/BusinessContext'
 import { buildWhatsAppUrl } from '@/utils/format'
 import { cn } from '@/utils/cn'
 import siteConfig from '@/config/site.config'
-import Modal from '@/components/ui/Modal'
-import ReservationForm from '@/components/sections/ReservationForm'
 
 export default function Navbar() {
   const { business } = useBusiness()
   const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-  const [formOpen, setFormOpen] = useState(false)
   const [tournamentsOpen, setTournamentsOpen] = useState(false)
 
   useEffect(() => {
@@ -129,8 +126,8 @@ export default function Navbar() {
           {/* Desktop CTA */}
           <div className="hidden lg:flex items-center gap-2.5">
             {siteConfig.features.reservationSystem && (
-              <button
-                onClick={() => setFormOpen(true)}
+              <Link
+                to="/reservaciones"
                 className={cn(
                   'inline-flex items-center gap-2 px-4 py-2.5 rounded-xl',
                   'border border-white/35 text-white hover:border-brand-primary hover:text-brand-primary hover:bg-brand-primary/10',
@@ -140,7 +137,7 @@ export default function Navbar() {
               >
                 <CalendarDays size={16} aria-hidden="true" />
                 Reservar
-              </button>
+              </Link>
             )}
             <a
               href={whatsappUrl}
@@ -210,8 +207,9 @@ export default function Navbar() {
               </ul>
 
               {siteConfig.features.reservationSystem && (
-                <button
-                  onClick={() => { setMenuOpen(false); setFormOpen(true) }}
+                <Link
+                  to="/reservaciones"
+                  onClick={() => setMenuOpen(false)}
                   className={cn(
                     'mt-4 flex items-center justify-center gap-2.5 w-full py-4 rounded-xl',
                     'border border-white/25 text-text-primary hover:border-brand-primary hover:text-brand-primary',
@@ -220,7 +218,7 @@ export default function Navbar() {
                 >
                   <CalendarDays size={20} />
                   Reservar en línea
-                </button>
+                </Link>
               )}
 
               <a
@@ -242,11 +240,6 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {siteConfig.features.reservationSystem && (
-        <Modal isOpen={formOpen} onClose={() => setFormOpen(false)} title="Reserva tu cancha" size="sm">
-          <ReservationForm onSuccess={() => setFormOpen(false)} />
-        </Modal>
-      )}
     </>
   )
 }
