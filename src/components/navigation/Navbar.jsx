@@ -28,6 +28,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [tournamentsOpen, setTournamentsOpen] = useState(false)
+  const [desktopTournamentsOpen, setDesktopTournamentsOpen] = useState(false)
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 40)
@@ -47,6 +48,18 @@ export default function Navbar() {
     else document.body.style.overflow = ''
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
+
+  useEffect(() => {
+    setMenuOpen(false)
+    setTournamentsOpen(false)
+    setDesktopTournamentsOpen(false)
+  }, [location.pathname])
+
+  const closeNavigation = () => {
+    setMenuOpen(false)
+    setTournamentsOpen(false)
+    setDesktopTournamentsOpen(false)
+  }
 
   const whatsappUrl = buildWhatsAppUrl(
     business.contact.whatsapp,
@@ -74,6 +87,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link
             to="/"
+            onClick={closeNavigation}
             aria-label={`${business.name} — Inicio`}
             className="flex items-center gap-2.5 flex-shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary rounded-lg"
           >
@@ -88,24 +102,33 @@ export default function Navbar() {
           {/* Desktop Nav Links */}
           <nav aria-label="Navegación principal" className="hidden lg:flex items-center gap-1">
             {mainNavLinks.map((link) => link.children ? (
-              <div key={link.id} className="group relative">
+              <div
+                key={link.id}
+                className="relative"
+                onMouseEnter={() => setDesktopTournamentsOpen(true)}
+                onMouseLeave={() => setDesktopTournamentsOpen(false)}
+                onBlur={(event) => !event.currentTarget.contains(event.relatedTarget) && setDesktopTournamentsOpen(false)}
+              >
                 <button
                   type="button"
+                  onClick={() => setDesktopTournamentsOpen((open) => !open)}
                   className={cn(
                     'flex items-center gap-1 px-3.5 py-2 text-sm font-ui font-medium rounded-lg transition-colors duration-200',
                     isGroupActive(link) ? 'text-brand-primary bg-brand-primary/10' : 'text-text-secondary hover:text-text-primary hover:bg-surface-elevated'
                   )}
                   aria-haspopup="menu"
+                  aria-expanded={desktopTournamentsOpen}
                 >
                   {link.label}
-                  <ChevronDown size={15} className="transition-transform group-hover:rotate-180 group-focus-within:rotate-180" aria-hidden="true" />
+                  <ChevronDown size={15} className={cn('transition-transform', desktopTournamentsOpen && 'rotate-180')} aria-hidden="true" />
                 </button>
-                <div className="invisible absolute left-1/2 top-full z-20 w-52 -translate-x-1/2 pt-2 opacity-0 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+                <div className={cn('absolute left-1/2 top-full z-20 w-52 -translate-x-1/2 pt-2 transition-all duration-150', desktopTournamentsOpen ? 'visible opacity-100' : 'invisible pointer-events-none opacity-0')}>
                   <div className="rounded-xl border border-border-default bg-surface-base/98 p-2 shadow-card-lg backdrop-blur-md" role="menu">
                     {link.children.map((child) => (
                       <Link
                         key={child.id}
                         to={child.href}
+                        onClick={closeNavigation}
                         role="menuitem"
                         className={cn('block rounded-lg px-3 py-2.5 text-sm font-ui font-medium transition-colors', isActive(child.href) ? 'bg-brand-primary/10 text-brand-primary' : 'text-text-secondary hover:bg-surface-elevated hover:text-text-primary')}
                       >
@@ -192,13 +215,13 @@ export default function Navbar() {
                         {tournamentsOpen && (
                           <ul className="ml-4 mt-1 flex flex-col gap-1 border-l border-border-default pl-3">
                             {link.children.map((child) => (
-                              <li key={child.id}><Link to={child.href} onClick={() => setMenuOpen(false)} className={cn('block rounded-xl px-4 py-3 font-ui font-medium transition-colors', isActive(child.href) ? 'bg-brand-primary/10 text-brand-primary' : 'text-text-secondary hover:bg-surface-elevated hover:text-text-primary')}>{child.label}</Link></li>
+                              <li key={child.id}><Link to={child.href} onClick={closeNavigation} className={cn('block rounded-xl px-4 py-3 font-ui font-medium transition-colors', isActive(child.href) ? 'bg-brand-primary/10 text-brand-primary' : 'text-text-secondary hover:bg-surface-elevated hover:text-text-primary')}>{child.label}</Link></li>
                             ))}
                           </ul>
                         )}
                       </>
                     ) : (
-                      <Link to={link.href} onClick={() => setMenuOpen(false)} className={cn('flex items-center px-4 py-4 text-lg font-ui font-medium rounded-xl transition-colors', isActive(link.href) ? 'text-brand-primary bg-brand-primary/10' : 'text-text-primary hover:bg-surface-elevated')}>
+                      <Link to={link.href} onClick={closeNavigation} className={cn('flex items-center px-4 py-4 text-lg font-ui font-medium rounded-xl transition-colors', isActive(link.href) ? 'text-brand-primary bg-brand-primary/10' : 'text-text-primary hover:bg-surface-elevated')}>
                         {link.label}
                       </Link>
                     )}
@@ -209,7 +232,7 @@ export default function Navbar() {
               {siteConfig.features.reservationSystem && (
                 <Link
                   to="/reservaciones"
-                  onClick={() => setMenuOpen(false)}
+                  onClick={closeNavigation}
                   className={cn(
                     'mt-4 flex items-center justify-center gap-2.5 w-full py-4 rounded-xl',
                     'border border-white/25 text-text-primary hover:border-brand-primary hover:text-brand-primary',

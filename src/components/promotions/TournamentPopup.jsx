@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, MessageCircle, X } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { buildWhatsAppUrl } from '@/utils/format'
 import { useScrollLock } from '@/hooks/useScrollLock'
 
@@ -12,7 +12,10 @@ const WHATSAPP_URL = buildWhatsAppUrl('529999062061', 'Información para el torn
 export default function TournamentPopup() {
   const [open, setOpen] = useState(false)
   const closeButtonRef = useRef(null)
+  const openTimerRef = useRef(null)
+  const previousPathRef = useRef(null)
   const navigate = useNavigate()
+  const location = useLocation()
   useScrollLock(open)
 
   useEffect(() => {
@@ -24,9 +27,20 @@ export default function TournamentPopup() {
       // Algunos navegadores bloquean sessionStorage; el popup debe seguir funcionando.
     }
     if (!previewRequested && alreadySeen) return undefined
-    const timer = window.setTimeout(() => setOpen(true), 700)
-    return () => window.clearTimeout(timer)
+    openTimerRef.current = window.setTimeout(() => setOpen(true), 700)
+    return () => window.clearTimeout(openTimerRef.current)
   }, [])
+
+  useEffect(() => {
+    if (previousPathRef.current === null) {
+      previousPathRef.current = location.pathname
+      return
+    }
+    if (previousPathRef.current !== location.pathname) {
+      previousPathRef.current = location.pathname
+      close()
+    }
+  }, [location.pathname])
 
   useEffect(() => {
     if (!open) return undefined
@@ -37,6 +51,7 @@ export default function TournamentPopup() {
   }, [open])
 
   function close() {
+    if (openTimerRef.current) window.clearTimeout(openTimerRef.current)
     setOpen(false)
     try {
       sessionStorage.setItem(SESSION_KEY, 'seen')
