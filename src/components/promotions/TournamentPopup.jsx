@@ -99,16 +99,16 @@ export default function TournamentPopup() {
 
             <img
               src="/images/promotions/torneo-veteranos-popup.jpg"
-              alt="Torneo sabatino de Veteranos 35+, fútbol 5 contra 5, inicia el 5 de septiembre"
-              width="1254"
-              height="1254"
+              alt="Torneo sabatino de Veteranos 35+, fútbol 5 contra 5, cupo limitado"
+              width="1404"
+              height="1152"
               className="mx-auto block max-h-[66svh] w-full bg-black object-contain sm:max-h-[72vh] lg:max-h-[74vh]"
             />
 
             <div className="flex flex-col gap-3 border-t border-white/10 bg-[#031126] p-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
               <div className="min-w-0">
                 <h2 id="tournament-popup-title" className="font-display text-xl font-black uppercase text-white sm:text-2xl">Torneo Bodegol 35+</h2>
-                <p className="font-ui text-sm text-white/65">Inscripciones abiertas · Fútbol 5 vs 5 · Iniciamos el 5 de septiembre</p>
+                <p className="font-ui text-sm text-white/65">Inscripciones abiertas · Sábados de 5 a 8 PM · Cupo limitado</p>
               </div>
               <div className="flex flex-col gap-2 sm:flex-row">
                 <button type="button" onClick={viewDetails}

@@ -7,11 +7,10 @@ import { buildWhatsAppUrl } from '@/utils/format'
 const WHATSAPP_URL = buildWhatsAppUrl('529999062061', 'Información para el torneo de veteranos')
 
 const prizes = [
-  'Primer lugar: $2,000 en efectivo y $1,000 en consumo',
-  'Segundo lugar: $1,000 en vale de consumo',
-  'Trofeo para el equipo campeón',
+  'Primer lugar: $5,000 pesos en premios, trofeo y 50% de descuento en la próxima inscripción',
+  'Segundo lugar: 30% de descuento en la próxima inscripción',
   'Trofeo al campeón goleador',
-  'Trofeo al portero con menos goles recibidos',
+  'Trofeo al mejor portero',
 ]
 
 export default function TorneoVeteranosPage() {
@@ -19,7 +18,7 @@ export default function TorneoVeteranosPage() {
     <>
       <SEO
         title="Torneo Bodegol 35+ — Fútbol en Mérida"
-        description="Inscríbete al Torneo Bodegol de Veteranos 35+, uno de nuestros torneos de fútbol 5 vs 5 en Mérida. Consulta premios, inscripción y solicita información por WhatsApp."
+        description="Inscríbete al Torneo Bodegol de Veteranos 35+ sabatino, fútbol 5 vs 5 en canchas sintéticas techadas de Mérida. Cupo limitado."
         image="/images/promotions/torneo-veteranos-35.jpg"
         imageAlt="Torneo de Veteranos 35+ de fútbol 5 vs 5 en Mérida"
         path="/torneo-veteranos-35-merida"
@@ -33,7 +32,7 @@ export default function TorneoVeteranosPage() {
               <p className="t-label mb-4 text-primary">Torneos de fútbol en Mérida · Inscripciones abiertas</p>
               <h1 id="torneo-title" className="t-hero-title text-white">Torneo Bodegol de Veteranos 35+</h1>
               <p className="mt-5 max-w-2xl font-ui text-lg leading-relaxed text-content-secondary">
-                El Torneo Bodegol forma parte de nuestros torneos de fútbol en Mérida. Esta edición está dirigida a jugadores veteranos de 35 años o más y se juega en formato de fútbol 5 contra 5. Iniciamos en septiembre y la inscripción es de <strong className="text-white">$3,000 por equipo</strong>.
+                Torneo sabatino de fútbol 5 contra 5 en canchas sintéticas techadas. Participan jugadores de <strong className="text-white">35 años o más</strong>, con un máximo de 15 jugadores y hasta dos refuerzos de 30 años o más por equipo.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <Button as="a" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" icon={MessageCircle} size="lg">
@@ -45,7 +44,7 @@ export default function TorneoVeteranosPage() {
                 <div className="flex items-center gap-3 rounded-xl border border-line bg-surface/70 p-4"><Trophy className="text-primary" aria-hidden="true" /><div><p className="font-ui font-bold text-white">Premios y trofeos</p><p className="text-sm text-content-muted">Para equipos y jugadores</p></div></div>
               </div>
             </div>
-            <img src="/images/promotions/torneo-veteranos-35.jpg" alt="Convocatoria del Torneo Bodegol de Veteranos 35+, fútbol 5 vs 5 en Mérida" width="1600" height="900" className="w-full rounded-2xl border border-primary/30 shadow-card-lg" />
+            <img src="/images/promotions/torneo-veteranos-35.jpg" alt="Convocatoria del Torneo Bodegol de Veteranos 35+ sabatino, fútbol 5 vs 5 en Mérida" width="1404" height="1152" className="w-full rounded-2xl border border-primary/30 shadow-card-lg" />
           </div>
         </section>
 
@@ -60,8 +59,8 @@ export default function TorneoVeteranosPage() {
             </div>
             <div className="rounded-3xl border border-primary/25 bg-background p-7 sm:p-9">
               <p className="t-label text-primary">Registro de equipos</p>
-              <h2 className="mt-3 font-display text-4xl font-black uppercase text-white">$3,000 por equipo</h2>
-              <p className="mt-4 font-ui leading-relaxed text-content-secondary">Cupo sujeto a disponibilidad. Solicita requisitos, calendario y proceso de inscripción directamente por WhatsApp.</p>
+              <h2 className="mt-3 font-display text-4xl font-black uppercase text-white">Cupo limitado</h2>
+              <p className="mt-4 font-ui leading-relaxed text-content-secondary">Partidos sabatinos de 5 a 8 PM. Arbitraje de $300 por partido. Solicita el costo y proceso de inscripción directamente por WhatsApp.</p>
               <Button as="a" href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" icon={MessageCircle} size="lg" fullWidth className="mt-7">
                 Información para el torneo de veteranos
               </Button>
